@@ -1,0 +1,97 @@
+/*
+  Author:     Bradley Protano
+  Class:      466 Databases Section 1
+  Instructor: Georgia Brown
+  TA:         Koushik Gudla
+  Semester:   Fall 2017
+  Due:        11/20/2017
+
+  This page dictates the colors and style of
+  each page and form.
+*/
+
+/*
+.item-a {
+  grid-area: header;
+}
+
+.item-b {
+  grid-area: main;
+}
+
+.item-c {
+  grid-area: sidebar;
+}
+
+.item-d {
+  grid-area: footer;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header header header header header"
+    "sidebar main main main main main"
+    "sidebar footer footer footer footer footer";
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.container > div {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px 0;
+  font-size: 30;  
+}
+
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+h1, head, hr {
+  text-align: center;
+  background-color:AliceBlue;
+  color:MidnightBlue;
+  margin: 0;
+}
+
+h4, h6 {
+  text-align: right;
+  background-color:AliceBlue;
+  color:MidnightBlue;
+  margin: 0;
+}
+
+tr:nth-child(odd) {
+  background-color: PaleTurquoise;
+}
+
+p {
+  text-align: center;
+  background-color:AliceBlue;
+  color:MidnightBlue;
+  margin: 0;
+}
+
+body {
+  background-color:white;
+  color:MidnightBlue;
+  margin: 4 4 100px;
+  //padding: 25px;
+}
+
+footer {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+  background-color:AliceBlue;
+  color:MidnightBlue;
+  margin: 0;
+}
