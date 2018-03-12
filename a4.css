@@ -10,29 +10,43 @@
   each page and form.
 */
 
-/*
-.item-a {
-  grid-area: header;
+
+.customerBox {
+  grid-area: customer;
 }
 
-.item-b {
-  grid-area: main;
+.billingBox {
+  grid-area: billing;
 }
 
-.item-c {
-  grid-area: sidebar;
+.shippingBox {
+  grid-area: shipping;
 }
 
-.item-d {
-  grid-area: footer;
+.repBox {
+  grid-area: rep;
+}
+
+.commentBox {
+  grid-area: comment;
+}
+
+.cancelBox {
+  grid-area: cancel;
+}
+
+.submitBox {
+  grid-area: submit;
 }
 
 .container {
   display: grid;
   grid-template-areas:
-    "header header header header header header"
-    "sidebar main main main main main"
-    "sidebar footer footer footer footer footer";
+    "customer ."
+    "billing shipping"
+    "rep rep"
+    "comment comment"
+    "cancel submit";
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
@@ -41,11 +55,9 @@
 .container > div {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px 0;
-  font-size: 30;  
+  /*padding: 20px 0;*/  
 }
 
-*/
 html {
   position: relative;
   min-height: 100%;
@@ -59,7 +71,7 @@ h1, head, hr {
 }
 
 h4, h6 {
-  text-align: right;
+  text-align: left;
   background-color:AliceBlue;
   color:MidnightBlue;
   margin: 0;
@@ -80,7 +92,7 @@ body {
   background-color:white;
   color:MidnightBlue;
   margin: 4 4 100px;
-  //padding: 25px;
+  /*padding: 25px;*/
 }
 
 footer {
