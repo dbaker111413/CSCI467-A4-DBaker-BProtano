@@ -1,8 +1,16 @@
+
 /*
-item(item_id, description, uom, location_id, on_hand,price, barcode)
-customer(customer_id, name, rep_lname,rep_fname, email, phone, shipping_id, billing_id,
+
+  Author:     Bradley Protano + Daniel Baker
+  Class:      CSCI 467 Software Engineering
+  Instructor: Kaisone Rush
+  Semester:   Spring 2018
+  Due:        03/29/2018
+
+  item(item_id, description, uom, location_id, on_hand,price, barcode)
+  customer(customer_id, name, rep_lname,rep_fname, email, phone, shipping_id, billing_id,
 		username, password, comments)
-address(address_id, address_line1, address_line2, city, state, zip)
+  address(address_id, address_line1, address_line2, city, state, zip)
 */
 
 drop table if exists item;
