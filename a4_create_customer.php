@@ -42,10 +42,24 @@
   echo '  </div>';
 
 /* shipping address box */
+
+  // php variables to set the textbox programmatically
+  $shipAddress1 = "test";
+  $shipAddress2 = "";
+  $shipCity = "";
+  $shipState = "";
+  $shipZip = "";
+  echo ' <script>';
+  echo '   function setShipping(){';
+  echo '     document.getElementById("sAddress1").value="test3";';
+  echo '   }';
+  echo ' </script>';
   echo '  <div class="shippingBox">';
   echo '    <br>Shipping Address:<br><br>';
+  echo '    <label for="sCheckBox">Same as Billing?</label>';
+  echo "    <input type='checkbox' onclick='setShipping()' name='sCheckBox' value='billing' />";
   echo '    <label for="sAddress1">Address 1 </label>';
-  echo '    <input type="text" name="sAddress1" id="sAddress1"><br><br>';
+  echo "    <input type='text' name='sAddress1' id='sAddress1' value='$shipAddress1'><br><br>";
 
   echo '    <label for="sAddress2">Address 2 </label>';
   echo '    <input type="text" name="sAddress2" id="sAddress2"><br><br>';
@@ -108,6 +122,11 @@
 
 /**************************************************/
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // if the check box is clicked
+    if (isset($_POST['sCheckBox'])){
+      $shipAddress1 = $_POST['address1'];
+      echo 'test';
+    }
     if ($_POST['which'] == 'create') {
       $name = $_POST['name'];
       $address1 = $_POST['address1'];
