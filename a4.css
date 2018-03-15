@@ -10,7 +10,7 @@
   each page and form.
 */
 
-
+/* create customer form */
 .customerBox {
   grid-area: customer;
 }
@@ -55,7 +55,52 @@
 .container > div {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.8);
-  /*padding: 20px 0;*/  
+}
+
+/* customer confirm page */
+.customerInfo {
+  grid-area: info;
+}
+
+.customerBill {
+  grid-area: bill;
+}
+
+.customerShip {
+  grid-area: ship;
+}
+
+.customerRep {
+  grid-area: rep;
+}
+
+.customerComment {
+  grid-area: comment;
+}
+
+.customerBack {
+  grid-area: back;
+}
+
+.customerSubmit {
+  grid-area: submit;
+}
+.createCustomerConfirmContainer {
+  display: grid;
+  grid-template-areas:
+    "info ."
+    "bill ship"
+    "rep rep"
+    "comment comment"
+    "back submit";
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.createCustomerConfirmContainer > div {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 html {
