@@ -11,7 +11,7 @@
 
     // if 'which' is '0', that means the user does not want to create the item
     if (isset($_POST['which']) && $_POST['which'] == '0') {
-        exit;
+        //exit;
     }
     else {
         // otherwise, we create a new item and save it in the database
