@@ -13,9 +13,9 @@
   */
 
   $host = 'students';
-  $user = 'z';
-  $password = '';
-  $db = 'z';
+  $user = 'z1790145';
+  $password = '1996Apr23';
+  $db = 'z1790145';
   $conn = new PDO("mysql:host=$host;dbname=$db", $user, $password);
 
   try {
