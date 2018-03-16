@@ -8,7 +8,7 @@
         <br>Item Information: <br><br>
       <form name="create", id="create" action="a4_create_item.php" method="post">        
           <label for="itemDesc">Item Description: </label>
-          <input type="text" required title="Item Description required" name="itemDesc" id="itemDesc" value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
+          <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
       </div>
 
       <!-- item attributes box -->
@@ -37,7 +37,7 @@
         <!-- submit box -->
         <div class="submitBox">
           <br>
-          <input type="submit" name="submit" id="submit" value="Submit" onclick="show_confirm()">
+          <input type="submit" name="submit" id="submit" value="Submit" onSubmit="show_confirm()">
           <input type="hidden" name="which" id="which" value="0">
 	</form>
           <br><br>
