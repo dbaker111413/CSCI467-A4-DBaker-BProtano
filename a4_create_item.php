@@ -25,11 +25,10 @@
 	$i->price = $_POST['price'];
 
         // now save it to the database
-        $i->addToDatabase();
-
-        // if the code reaches this point, that means the insert was a success.
-	// clear the POST array so all of the input fields are reset
-	$_POST = array();
+        if($i->addToDatabase()){
+	  // on a successful insert, clear the post array
+	  $_POST = array();
+	}
     }
   }
 
@@ -40,5 +39,4 @@
   echo '<br>';
   $section = "Part 1";
   include ("html/a4_footer.html");
-
 ?>
