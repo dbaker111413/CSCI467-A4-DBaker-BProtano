@@ -114,7 +114,7 @@ li.dropdown {
     text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #d1d1d1}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -262,7 +262,8 @@ legend{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
+  font-weight: bold;
   margin: 4px 2px;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
