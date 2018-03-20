@@ -43,5 +43,28 @@ class item {
        return false;
      }
   }
+
+  /*
+  * Updates an existing item in the database
+  */
+  public function updateDatabase(){
+    // data is validated as part of the html definition
+    $updateSQL = 'update item set description=?, uom=?, location=?, on_hand=?, price=? where item_id=?';
+
+    // try executing the sql
+    try{
+      $smtm = $this->conn->prepare($updateSQL);
+      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price,
+                                 $this->itemNumber));
+      $message = "Item updated successfully!";
+      showAlert($message);
+      return true;
+    }
+    catch (PDOException $e){
+      $errorMessage = "Error, item could not be updated\n".$e->getMessage();
+      showAlert($errorMessage);
+      return false;
+    }
+  }
 }
 ?>

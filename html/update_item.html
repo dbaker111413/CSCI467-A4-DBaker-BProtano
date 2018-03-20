@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body>
+    <!-- container object for css -->
+    <div class="container">
+      <div class="itemNumBox">
+        <br>Item Information: <br><br>
+	<form name="create", id="create" action="a4_create_item.php" method="post" onsubmit="show_confirm()">             <label for="itemNum">Item Number: </label>
+          <select id="itemNum" name="itemNum">
+            <option value="0">Select Part Number</option>
+	    <option>'$dropDownArray'</option>
+	  </select><br><br>
+  
+          <label for="itemDesc">Item Description: </label>
+          <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
+      </div>
+
+      <!-- item attributes box -->
+      <div class="itemAttributesBox">
+        <br>Item Attributes: <br><br>
+        <label for="uom">Unit of Measurement: </label>
+        <input type="text" required title="Unit of Measurement required" name="uom" id="uom" value="<?php echo isset($_POST['uom']) ? $_POST['uom'] : ''?>"><br><br>
+  
+        <label for="warehouseLoc">Warehouse Location: </label>
+        <input type="text" required title="Warehouse Location required" name="warehouseLoc" id="warehouseLoc" value="<?php echo isset($_POST['warehouseLoc']) ? $_POST['warehouseLoc'] : ''?>"><br><br>
+  
+        <label for="qty">Initial Quantity On Hand: </label>
+        <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" value="<?php echo isset($_POST['qty']) ? $_POST['qty'] : ''?>"><br><br>
+  
+        <label for="price">Unit Price: </label>
+        <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="price" id="price" value="<?php echo isset($_POST['price']) ? $_POST['price'] : ''?>"><br><br>
+      </div>
+
+        <!-- cancel box -->
+        <div class="cancelBox">
+          <br>
+          <input type="reset" name="reset" id="reset" value="Cancel">
+          <br><br>
+        </div>
+	  
+        <!-- submit box -->
+        <div class="submitBox">
+          <br>
+          <input type="submit" name="submit" id="submit" value="Submit">
+          <input type="hidden" name="which" id="which" value="0">
+	</form>
+          <br><br>
+        </div>
+
+      <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
+      <script>
+	function show_confirm(){
+	  if(confirm("Are you sure you want to create this item?") == true) {
+            document.getElementById("which").value = "1";
+  	  }
+	  else{
+            document.getElementById("which").value = "0";
+	  }
+ 	}
+      </script>
+    </div>
+  </body>
+</html>

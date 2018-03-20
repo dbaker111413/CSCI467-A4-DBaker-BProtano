@@ -6,6 +6,8 @@
   require_once ("item.php");
   require_once ("globalFunctions.php");
 
+  $dropDownArray = array("test", "test2");
+
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -25,7 +27,7 @@
 	$i->price = $_POST['price'];
 
         // now save it to the database
-        if($i->addToDatabase()){
+        if($i->updateDatabase()){
 	  // on a successful insert, clear the post array
 	  $_POST = array();
 	}
@@ -33,10 +35,10 @@
   }
 
   // include any html files required for the layout
-  $page_title = "Create Item";
+  $page_title = "Update Item";
   include ("html/a4_header.html");
-  include ("html/create_item.html");
+  include ("html/update_item.html");
   echo '<br>';
-  $section = "Part 1";
+  $section = "Part 2";
   include ("html/a4_footer.html");
 ?>
