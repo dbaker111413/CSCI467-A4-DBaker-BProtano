@@ -123,7 +123,7 @@ li.dropdown {
 
 /* customer/item style*/
 
-#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, #customerRepGroup, #customerCommentGroup {
+#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, #customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup {
   margin: 8px;
   border: 1px solid silver;
   padding: 8px;
@@ -157,7 +157,20 @@ legend{
   float: left;
 }
 
-.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select {
+.itemNumBox label, .itemAttributesBox label {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 100%;
+  padding-top: .1em;
+  padding-right: .25em;
+  width: 12em;
+  text-align: right;
+  float: left;
+}
+
+
+.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input {
   margin: 0;
   padding: 0;
   display: inline-block;
@@ -247,7 +260,6 @@ legend{
     ". . . . . . . comment comment . . . . . . ."
     ". . . . . . . cancel  submit . . . . . . .";
   grid-gap: 2px;
-  /*background-color: #2196F3;*/
   padding: 5px;
 }
 
@@ -295,23 +307,29 @@ legend{
  margin-left: 25px;
 }
 
+.itemAttributesBox {
+  grid-area: attri;
+}
+
+.itemNumBox {
+  grid-area: num;
+}
 
 .containerCreateItem {
   display: grid;
   grid-template-areas:
-    "customer ."
-    "billing shipping"
-    "rep rep"
-    "comment comment"
-    "cancel submit";
-  grid-gap: 10px;
-  background-color: #2196F3;
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . num num . . ."
+    ". . . attri attri . . ."
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . cancel submit . . .";
+  grid-gap: 5px;
   padding: 10px;
 }
 
 .containerCreateItem > div {
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.8);
 }
 
 @media screen and (max-width: 500px) {
@@ -329,7 +347,7 @@ footer {
   text-align: center;
   left: 0;
   bottom: 0;
-  height: 100px;
+  height: 220px;
   width: 100%;
   font-size: 75%;
   background-color: #000022;
