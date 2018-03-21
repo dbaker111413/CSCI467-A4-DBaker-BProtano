@@ -9,7 +9,7 @@
 	<form name="create", id="create" action="a4_create_item.php" method="post" onsubmit="show_confirm()">             <label for="itemNum">Item Number: </label>
           <select id="itemNum" name="itemNum">
             <option value="0">Select Part Number</option>
-	    <option>'$dropDownArray'</option>
+	    <option><?php echo $dropDownArray ?></option>
 	  </select><br><br>
   
           <label for="itemDesc">Item Description: </label>
