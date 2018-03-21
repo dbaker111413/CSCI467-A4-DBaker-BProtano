@@ -101,7 +101,7 @@
 
 	<div class="zip">
           <label for="billZip">Zip </label>
-	  <input type="text" required title="Valid 6 digit zip code required" pattern="\d*" name="billZip" id="billZip" minlength="6" maxlength="6" size="7"
+	  <input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="billZip" id="billZip" minlength="5" maxlength="5" size="7"
 	         value="<?php echo isset($_POST['billZip']) ? $_POST['billZip'] : ''?>"><br>
 	</div>
           <div class="check">
@@ -198,7 +198,7 @@
 
 	<div class="zip">
         <label for="shipZip">Zip </label>
-	<input type="text" required title="Valid 6 digit zip code required" pattern="\d*" name="shipZip" id="shipZip" minlength="6" maxlength="6" size="7"
+	<input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
 	       value="<?php echo isset($_POST['shipZip']) ? $_POST['shipZip'] : ''?>"<br><br><br><br>
 	</div>
 
@@ -287,6 +287,12 @@
 	function show_confirm(){
 	  if(confirm("Are you sure you want to create this customer?") == true) {
             document.getElementById("which").value = "1";
+
+            document.getElementById("shipAddress1").disabled = false;
+            document.getElementById("shipAddress2").disabled = false;
+            document.getElementById("shipCity").disabled = false;
+            document.getElementById("shipZip").disabled = false;
+            document.getElementById("shipState").disabled = false;
   	  }
 	  else{
             document.getElementById("which").value = "0";
@@ -311,12 +317,12 @@
 
 	    document.getElementById("shipState").value = document.getElementById("billState").value;
 
-
             document.getElementById("shipAddress1").disabled = true;	
             document.getElementById("shipAddress2").disabled = true;	
             document.getElementById("shipCity").disabled = true;	
             document.getElementById("shipZip").disabled = true;	
-            document.getElementById("shipState").disabled = true;	
+            document.getElementById("shipState").disabled = true;
+
 	  } else {
             document.getElementById("shipAddress1").disabled = false;
             document.getElementById("shipAddress2").disabled = false;
@@ -329,3 +335,4 @@
     </div>
   </body>
 </html>
+
