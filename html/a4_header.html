@@ -10,20 +10,66 @@ Header for each page, includes links to each page
 
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="a4.css">
 <title><?php echo $page_title; ?></title>
+<div class="header">
+<!--  <div class="header-image">
+    <img src="http://students.cs.niu.edu/~z1772315/CSCI467-A4-DBaker-BProtano/logo_blue.png" alt="Master Parts" width="15%" >
+  </div>-->
+  
+  <div class="header-right">
+    <ul>
+    <li><a href="#home">Home</a></li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class=dropbtn">Items ▾</a>
+      <div class="dropdown-content">
+        <a href="a4_create_item.php">Create Item Record</a>
+        <a href="#">Update Item Record</a> 
+      </div>
+    </li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class=dropbtn">Customer  ▾</a>
+      <div class="dropdown-content">
+        <a href="create_customer.php">Create Customer Account</a>
+        <a href="#">Update Customer Account</a> 
+      </div>
+    </li>
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Orders  ▾</a>
+      <div class="dropdown-content">
+       <a href="#">Create Customer Order</a>
+       <a href="#">Update Customer Order</a>
+      </div>
+    </li>
+<!--    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Reports</a>
+      <div class="dropdown-content">
+       <a href="#">Generate Pick Report</a>
+       <a href="#">Generate Order Report</a>
+      </div>
+    </li>-->
+    <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Hello, Sales Staff ▾</a>
+      <div class="dropdown-content">
+       <a href="#">My Account</a>
+       <a href="#">Logout</a>
+      </div>
+    </li>
+  </ul>   
+</div>
 
-<h1><?php echo $page_title; ?></h1>
 
-<h4> <a href="a4_index.php">Horse Racing Home </a> </h4>
-<h4> <a href="a4_add_hrs.php">Add Horse (New!) </a> </h4>
-<h4> <a href="a4_add_race.php">Add Race (New!)</a> </h4>
-<h4> <a href="a4_rm_race.php">Remove Race (New!)</a> </h4>
-<h4> <a href="a4_r_select.php">Race Select </a> </h4>
-<h4><a href="a4_h_select.php">Horse Select</a></h4>
-<h6> <br><hr> </h6>
+<!--  <a href="#default" class="logo">CompanyLogo</a>
+  <div class="header-right">
+    <a class="active" href="a4_header.html">Home</a>
+    <a href="a4_create_item.php">Create Item </a>
+    <a href="create_customer.php">Create Customer </a>
+  </div>-->
+</div>
 </head>
 
 <!-- start of body text-->
 <body>
+
 
