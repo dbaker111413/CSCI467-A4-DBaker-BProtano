@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body>
+    <!-- container object for using css with header customer info box-->
+     
+    <div class="containerCreateOrder">
+      <div class="headerBox">
+      <fieldset name="orderInfoGroup" id="orderInfoGroup">
+      <legend>Header Information</legend>
+      <form name="create", id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
+
+        <label for="customerName">Customer Name </label>
+        <select required title="Customer company name or number required" name="customerName" id="customerName" autofocus 
+	       value="<?php echo isset($_POST['customerName']) ? $_POST['customerName'] : ''?>">
+	  <option value="na">Placeholder</option>     
+	</select><br><br>
+
+        <label for="customerName">Customer Number </label>
+
+      </fieldset>
+      </div>
+
+      <!-- billing attributes box -->
+      <div class="billingBox">
+	<fieldset name="customerBillingGroup" id="customerBillingGroup">
+        <legend>Billing Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	  <label for="billAddress1">Address 1 </label>
+	  <input type="text" required title="Address required" name="billAddress1" id="billAddress1" maxlength="25" size="38" 
+	         placeholder="Street and number, P.O. box, c/o."
+	         value="<?php echo isset($_POST['billAddress1']) ? $_POST['billAddress1'] : ''?>"><br><br>
+	</div>
+
+	<div class="add2">
+          <label for="billAddress2">Address 2 </label>
+	  <input type="text" optional name="billAddress2" id="billAddress2" maxlength="25" size="38"
+		 placeholder="Suite, unit, floor, building, etc. (optional)"
+	         value="<?php echo isset($_POST['billAddress2']) ? $_POST['billAddress2'] : ''?>"><br><br>
+	</div>
+
+	<div class="city">
+          <label for="billCity">City </label>
+          <input type="text" required title="City name required" name="billCity" id="billCity" maxlength="25" size="26"
+		      value="<?php echo isset($_POST['billCity']) ? $_POST['billCity'] : ''?>"><br><br>
+	</div>
+
+	<div class="state">
+	  <label for="billState">State </label>
+          <select name="billState" id="billState" 
+	          value="<?php echo isset($_POST['billState']) ? $_POST['billState'] : ''?>">
+	    <option value="WY">WY</option>     
+	  </select><br>
+	</div>
+
+	<div class="zip">
+          <label for="billZip">Zip </label>
+	  <input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="billZip" id="billZip" minlength="5" maxlength="5" size="7"
+	         value="<?php echo isset($_POST['billZip']) ? $_POST['billZip'] : ''?>"><br>
+	</div>
+
+	</div>
+	</fieldset>
+      </div>
+
+      <!-- shipping attributes box will only show if different than billing address -->
+      <div class="shippingBox">
+        <fieldset name="customerShippingGroup" id="customerShippingGroup">
+        <legend>Shipping Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	<label for="shipAddress1">Address 1 </label>
+	<input type="text" required title="Address required" name="shipAddress1" id="shipAddress1" maxlength="25" size="38"
+	       placeholder="Street and number, P.O. box, c/o." 
+	       value="<?php echo isset($_POST['shipAddress1']) ? $_POST['shipAddress1'] : ''?>"><br><br>
+	</div>
+
+	<div class="add2">
+        <label for="shipAddress2">Address 2 </label>
+	<input type="text" optional name="shipAddress2" id="shipAddress2" maxlength="25" size="38"
+	       placeholder="Suite, unit, floor, building, etc. (optional)"
+	       value="<?php echo isset($_POST['shipAddress2']) ? $_POST['shipAddress2'] : ''?>"><br><br>
+	</div>
+
+	<div class="city">
+	<label for="shipCity">City </label>
+	<input type="text" required title="City name required" name="shipCity" id="shipCity" maxlength="25" size="26"
+	       value="<?php echo isset($_POST['shipCity']) ? $_POST['shipCity'] : ''?>"><br><br>
+	</div>
+
+	<div class="state">
+	<label for="shipState">State </label>
+	<select name="shipState" id="shipState"
+	       value="<?php echo isset($_POST['shipState']) ? $_POST['shipState'] : ''?>"> 
+	    <option value="WY">WY</option>  
+	</select><br>
+	</div>
+
+	<div class="zip">
+        <label for="shipZip">Zip </label>
+	<input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
+	       value="<?php echo isset($_POST['shipZip']) ? $_POST['shipZip'] : ''?>"<br>
+	</div>
+
+	</div>
+        </fieldset>
+      </div>
+
+      <!-- detail lines expanding box -->
+      <div class="detailBox">
+        <fieldset name="detailGroup" id="detailGroup">
+        <legend>Detail Lines</legend>
+
+
+	</fieldset>
+      </div>
+
+      <!-- comment box 
+      <div class="commentBox">
+        <fieldset name="customerCommentGroup" id="customerCommentGroup">
+        <legend>Comments (optional)</legend>
+        <label for="comment"></label>
+        <textarea optional rows="4" cols="115"  maxlength="240" name="comment" id="comment" placeholder="Type comments and notes here, maximum of 240 characters."
+	          value="<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''?>"></textarea>
+        </fieldset>
+      </div> -->
+
+      <!-- cancel box -->
+      <div class="cancelBox">
+	<button class="button buttonReset" type="reset">Cancel</button>
+      </div>
+	  
+      <!-- submit box -->
+      <div class="submitBox">
+	<button class="button buttonSubmit" type="submit">Create Customer Order</button>
+        <input type="hidden" name="which" id="which" value="0">
+        </form>
+      </div>
+
+      <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
+      <script>
+	function show_confirm(){
+	  if(confirm("Are you sure you want to create this order?") == true) {
+            document.getElementById("which").value = "1";
+
+            document.getElementById("shipAddress1").disabled = false;
+            document.getElementById("shipAddress2").disabled = false;
+            document.getElementById("shipCity").disabled = false;
+            document.getElementById("shipZip").disabled = false;
+            document.getElementById("shipState").disabled = false;
+  	  }
+	  else{
+            document.getElementById("which").value = "0";
+	  }
+ 	}
+
+        function setShipping(){
+	  if(document.getElementById("shipAddress1").disabled == false){
+            document.getElementById("shipAddress1").value = document.getElementById("billAddress1").value;
+
+	    document.getElementById("shipAddress2").value = document.getElementById("billAddress2").value;
+
+	    document.getElementById("shipCity").value = document.getElementById("billCity").value;
+
+	    document.getElementById("shipZip").value = document.getElementById("billZip").value;
+
+	    document.getElementById("shipState").value = document.getElementById("billState").value;
+
+            document.getElementById("shipAddress1").disabled = true;	
+            document.getElementById("shipAddress2").disabled = true;	
+            document.getElementById("shipCity").disabled = true;	
+            document.getElementById("shipZip").disabled = true;	
+            document.getElementById("shipState").disabled = true;
+
+	  } else {
+            document.getElementById("shipAddress1").disabled = false;
+            document.getElementById("shipAddress2").disabled = false;
+            document.getElementById("shipCity").disabled = false;
+            document.getElementById("shipZip").disabled = false;
+            document.getElementById("shipState").disabled = false;
+	  } 
+	}
+      </script>
+    </div>
+  </body>
+</html>
+

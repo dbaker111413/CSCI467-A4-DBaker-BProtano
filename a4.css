@@ -126,7 +126,7 @@ li.dropdown {
 
 /* customer/item style*/
 
-#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, #customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup {
+#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, #customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup, #orderInfoGroup, #detailGroup {
   margin: 8px;
   border: 1px solid silver;
   padding: 8px;
@@ -149,7 +149,7 @@ legend{
   margin-right: -12px;
 }
 
-.customerBox label, .billingBox label, .shippingBox label {
+.customerBox label, .billingBox label, .shippingBox label, .headerBox label {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -157,7 +157,7 @@ legend{
   font-size: 100%;
   padding-top: .1em;
   padding-right: .25em;
-  width: 8em;
+  width: 9em;
   text-align: right;
   float: left;
 }
@@ -176,7 +176,7 @@ legend{
 }
 
 
-.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input {
+.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input, .headerBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -192,7 +192,7 @@ legend{
   font-size: 100%;
   padding-top: .1em;
   padding-right: .25em;
-  width: 8em;
+  width: 9em;
   text-align: right;
   float: left;
 }
@@ -203,7 +203,7 @@ legend{
   padding-left: .25em;
   font-size: 100%;
   text-align: right;
-  width: 8em;
+  width: 9em;
 }
 
 .mid input, .endy input, .ex input {
@@ -213,7 +213,7 @@ legend{
 }
 
 .lname { margin-left: 325px; }
-.email { margin-left: 380px; }
+.email { margin-left: 395px; }
 
 .fname input, .lname input, .area input, .email input {
   margin: 0;
@@ -227,11 +227,11 @@ legend{
 }
 
 .check {
-  margin-left: 113px;
+  margin-left: 144px;
 }
 
 .commentBox textarea {
-  margin-left: 130px;
+  margin-left: 144px;
 }
 
 .billingBox {
@@ -258,6 +258,26 @@ legend{
   grid-area: submit;
 }
 
+.headerBox {
+  grid-area: header;
+}
+
+.detailBox {
+  grid-area: detail;
+}
+
+.containerCreateOrder {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    ". . . . . . . header . .  . . . . . ."
+    ". . . . . . . billing shipping . . . . . . ."
+    ". . . . . . . detail detail . . . . . . ."
+    ". . . . . . . detail detail . . . . . . ."
+    ". . . . . . . cancel  submit . . . . . . .";
+  grid-gap: 0px;
+  padding: 5px;
+}
 
 .containerCreateCustomer {
   //margin-top: 35px;
