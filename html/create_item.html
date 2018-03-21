@@ -8,7 +8,7 @@
       <div class="itemNumBox">
       <fieldset name="itemInfoGroup" id="itemInfoGroup">
       <legend>Item Information</legend>
-      <form name="create", id="create" action="a4_create_item.php" method="post" onsubmit="show_confirm()">        
+      <form name="create", id="create" action="create_item.php" method="post" onsubmit="show_confirm()">        
           <label for="itemDesc">Item Description </label>
           <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" size="25"
                  value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>

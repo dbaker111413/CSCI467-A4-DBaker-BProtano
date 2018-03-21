@@ -1,7 +1,7 @@
 <?php
 
 // include necessary php files
-require_once("a4_conn.php");
+require_once("conn.php");
 require_once("globalFunctions.php");
 
 class item {

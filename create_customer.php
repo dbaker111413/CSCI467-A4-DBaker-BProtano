@@ -2,7 +2,7 @@
   /**
   * Include the necessary php files
   */
-  require_once ("a4_conn.php");
+  require_once ("conn.php");
   require_once ("customer.php");
   require_once ("globalFunctions.php");
 
@@ -47,9 +47,9 @@
 
   // include any html files required for the layout
   $page_title = "Create Customer";
-  include ("html/a4_header.html");
-  include ("html/customer.html");
+  include ("html/header.html");
+  include ("html/create_customer.html");
   echo '<br>';
   $section = "Part 1";
-  include ("html/a4_footer.html");
+  include ("html/footer.html");
 ?>

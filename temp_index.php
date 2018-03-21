@@ -16,8 +16,8 @@
   */
 
   $page_title = "Horse Racing Information";
-  include ("a4_header.html");
-  require ("a4_conn.php");
+  include ("html/header.html");
+  require ("conn.php");
 
   echo "<br>Horses and their lineage:<br>";
   $stmt = $conn->query('select name, sire, dam from horse');
@@ -65,5 +65,5 @@
 
   echo '<br>';
   $section = "Part 0";
-  include ("a4_footer.html");
+  include ("html/footer.html");
 ?>
