@@ -146,7 +146,7 @@ legend{
 
 .state { 
   float: left;
-  margin-right: -12px;
+  margin-right: -28px;
 }
 
 .customerBox label, .billingBox label, .shippingBox label, .headerBox label {
@@ -156,7 +156,7 @@ legend{
   display: inline-block;
   font-size: 100%;
   padding-top: .1em;
-  padding-right: .25em;
+  padding-right: .30em;
   width: 9em;
   text-align: right;
   float: left;
@@ -169,7 +169,7 @@ legend{
   display: inline-block;
   font-size: 100%;
   padding-top: .1em;
-  padding-right: .25em;
+  padding-right: .30em;
   width: 12em;
   text-align: right;
   float: left;
@@ -191,7 +191,7 @@ legend{
   display: inline-block;
   font-size: 100%;
   padding-top: .1em;
-  padding-right: .25em;
+  padding-right: .30em;
   width: 9em;
   text-align: right;
   float: left;
@@ -199,8 +199,8 @@ legend{
 
 .mid label, .endy label, .ex label {
   padding-top: .1em;
-  padding-right: .25em;
-  padding-left: .25em;
+  padding-right: .30em;
+  padding-left: .30em;
   font-size: 100%;
   text-align: right;
   width: 9em;
@@ -283,13 +283,14 @@ legend{
   //margin-top: 35px;
   display: grid;
   grid-template-areas:
-    ". . . . . . . customer . .  . . . . . ."
-    ". . . . . . . billing shipping . . . . . . ."
-    ". . . . . . . rep rep . . . . . . ."
-    ". . . . . . . comment comment . . . . . . ."
-    ". . . . . . . cancel  submit . . . . . . .";
+    ". . . . . . . . customer . . .  . . . . . ."
+    ". . . . . . . . billing shipping . . . . . . . ."
+    ". . . . . . . . rep rep . . . . . . . ."
+    ". . . . . . . . comment comment . . . . . . . ."
+    ". . . . . . . . cancel  submit . . . . . . . .";
+    ". . . . . . . . .  . . . . . . . . .";
   grid-gap: 0px;
-  padding: 5px;
+  padding: 0px;
 }
 
 .containerCreateCustomer > div {
@@ -306,7 +307,7 @@ legend{
   display: inline-block;
   font-size: 24px;
   font-weight: bold;
-  margin: 4px 2px;
+  margin: 4px 0px;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
@@ -321,7 +322,8 @@ legend{
  background-color: white;
  color: black;
  border: 2px solid #008CBA;
- margin-left: 200px;
+ margin-right: 9px;
+ float: right;
 }
 
 .buttonReset:hover {
@@ -333,7 +335,7 @@ legend{
  background-color: white;
  color: black;
  border: 2px solid black;
- margin-left: 25px;
+ margin-left: 9px;
 }
 
 .itemAttributesBox {
@@ -349,13 +351,13 @@ legend{
   margin-top: 20px;
   display: grid;
   grid-template-areas:
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . num num num . . ."
-    ". . . attri attri attri . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . cancel . submit . . .";
+    ". . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . num num . . . . . . . ."
+    ". . . . . . . . attri attri . . . . . . . ."
+    ". . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . . . . ."
+    ". . . . . . . . cancel submit . . . . . . . .";
   grid-gap: 0px;
   padding: 10px;
 }
