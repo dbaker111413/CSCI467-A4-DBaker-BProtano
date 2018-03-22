@@ -13,7 +13,23 @@
         <label for="customerName">Customer Name </label>
         <select required title="Customer company name or number required" name="customerName" id="customerName" autofocus 
 	       value="<?php echo isset($_POST['customerName']) ? $_POST['customerName'] : ''?>">
-	  <option value="na">Placeholder</option>     
+
+     
+
+  echo '<select name="dist">';
+  foreach ($conn->query($sql) as $row) {
+    echo '<option value="';
+    echo $row["distance"];
+    echo '">';
+    echo $row["distance"]; 
+    echo '</option>';
+  }
+  echo '</select>';
+
+
+
+
+	       <option value="na">Placeholder</option>     
 	</select><br><br>
 
         <label for="customerName">Customer Number </label>
