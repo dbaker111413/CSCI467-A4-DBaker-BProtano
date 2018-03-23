@@ -10,7 +10,7 @@
       <legend>Item Information</legend>
       <form name="create", id="create" action="create_item.php" method="post" onsubmit="show_confirm()">        
           <label for="itemDesc">Item Description </label>
-          <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" size="25"
+          <input type="text" required title="Item Description required" maxlength="100" name="itemDesc" id="itemDesc" size="38" autofocus
                  value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
       </fieldset>
       </div>
@@ -20,14 +20,14 @@
       <fieldset name="itemAttriGroup" id="itemAttriGroup">
       <legend>Item Attributes</legend>
         <label for="uom">Unit of Measurement </label>
-        <input type="text" required title="Unit of Measurement required" name="uom" id="uom" size="25"
+        <input type="text" required title="Unit of Measurement required" name="uom" id="uom" size="30" maxlength="25" 
                value="<?php echo isset($_POST['uom']) ? $_POST['uom'] : ''?>"><br><br>
   
         <label for="warehouseLoc">Warehouse Location </label>
-        <input type="text" required title="Warehouse Location required" name="warehouseLoc" id="warehouseLoc" size="25"
+        <input type="text" required title="Warehouse Location required" name="warehouseLoc" id="warehouseLoc" size="30" maxlength="25" 
                value="<?php echo isset($_POST['warehouseLoc']) ? $_POST['warehouseLoc'] : ''?>"><br><br>
   
-        <label for="qty">Initial Quantity On Hand </label>
+        <label for="qty">Quantity On Hand </label>
         <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" size="12"
                value="<?php echo isset($_POST['qty']) ? $_POST['qty'] : ''?>"><br><br>
   
@@ -44,7 +44,7 @@
 	  
       <!-- submit box -->
       <div class="submitBox">
-	<button class="button buttonSubmit" type="submit">Create Item Record</button>
+	<button class="button buttonSubmit" type="submit">Create Item</button>
         <input type="hidden" name="which" id="which" value="0">
         </form>
       </div>

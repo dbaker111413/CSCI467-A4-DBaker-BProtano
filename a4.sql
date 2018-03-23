@@ -16,6 +16,8 @@
 drop table if exists item;
 drop table if exists customer;
 drop table if exists address;
+drop table if exists order_header;
+drop table if exists detail;
 
 create table item
 	(item_id int NOT NULL auto_increment,
@@ -50,3 +52,23 @@ create table customer
 	password varchar (10),
 	comments varchar (280),
 	primary key (customer_id));
+
+create table order_header
+       (order_id int NOT NULL auto_increment,
+       order_date timestamp,
+       order_status varchar (25),
+       order_expected_date timestamp,
+       order_lines int,
+       customer_id int,
+       shipment_id int,
+       primary key (order_id),
+       foreign key (customer_id) references customer(customer_id));
+
+create table detail
+       (line_id int NOT NULL auto_increment,
+       order_id int,
+       item_id int,
+       line_qty int,
+       line_required_date timestamp,
+       primary key (line_id),
+       foreign key (order_id) references order_header(order_id));
