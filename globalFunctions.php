@@ -11,15 +11,19 @@ function showAlert($message){
  * column names that can access the elements, and a connection
  */
 function generateSelectOptions($queryString, $columnNames, $conn){
-  $optionString = ""; // initialize options string
-
+  // create an associative array with an index for each column name
+  $optionString = array(); // initialize options string
+  foreach($columnNames as $columnName){
+    $optionString[$columnName] = "";
+  }
+  
   try{
     /*
     * Iterate through each row and create an 'option' for each column in that row
     */
     foreach($conn->query($queryString) as $row){
       foreach($columnNames as $columnName){
-        $optionString .= "<option>".$row[$columnName]."</option>";
+        $optionString[$columnName] .= "<option>".$row[$columnName]."</option>";
       }
     }
   }
@@ -28,6 +32,12 @@ function generateSelectOptions($queryString, $columnNames, $conn){
     showAlert($errorMessage);
     return "";
   }
-  return $optionString;
+
+  // now that each optionString has been created, append them all together inorder
+  $returnString = "";
+  foreach($columnNames as $columnName){
+    $returnString .= $optionString[$columnName];
+  }
+  return $returnString;
 }
 ?>

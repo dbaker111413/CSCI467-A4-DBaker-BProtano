@@ -45,6 +45,46 @@ class item {
   }
 
   /*
+  * Uses the parameter, which is either an item_id or an item description,
+  * and gets the values for it from the database.
+  */
+  public function setItem($id){
+    $selectSQL = "";
+    // check if the input is numeric, which means it is an item_id
+    if(is_numeric($id)){
+      $selectSQL = "select * from item where item_num = ".$id;
+      showAlert("selecting ID");
+    }
+    else{
+      $selectSQL = "select * from item where description = '".$id."'";
+      showAlert("selecting description");
+    }
+
+    // attempt to run the query
+    try{
+      // there should only be one row
+      foreach($conn->query($selectSQL) as $row){
+        $this->itemNumber = $row["item_id"];
+	$this->itemDesc = $row["description"];
+        $this->uom = $row["uom"];
+        $this->warehouseLoc = $row["location"];
+        $this->qty = $row["on_hand"];
+        $this->price = $row["price"];
+      }
+    }
+    catch(PDOException $e){
+      // show a message and make sure all values are set to defaults
+      showAlert("Error! Could not read item from the database!".$e->getMessage());
+      $this->itemNumber = 0;
+      $this->itemDesc = "";
+      $this->uom = "";
+      $this->warehouseLoc = "";
+      $this->qty = "";
+      $this->price = "";
+    }
+  }
+
+  /*
   * Updates an existing item in the database
   */
   public function updateDatabase(){
