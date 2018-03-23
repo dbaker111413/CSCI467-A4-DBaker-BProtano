@@ -6,19 +6,25 @@
   require_once ("item.php");
   require_once ("globalFunctions.php");
 
-  $dropDownArray = array("test", "test2");
+  $dropDownArray = generateSelectOptions("select description, item_id from item",
+                                          array("description", "item_id"), $conn);
 
+  $i = new item($conn);
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // first, check if an item has been selected
+    if(isset($_POST['selectItem']) && $_POST['selectItem'] == '1'){
+      $i->setItem($_POST["itemNum"]);
+    }
 
     // if 'which' is '0', that means the user does not want to create the item
     if (isset($_POST['which']) && $_POST['which'] == '0') {
         //exit;
     }
     else {
-        // otherwise, we create a new item and save it in the database
-        $i = new item($conn);
-
+        // otherwise, we update the item and save it in the database
+ 
         // set values
 	$i->itemDesc = $_POST['itemDesc'];
 	$i->uom = $_POST['uom'];
