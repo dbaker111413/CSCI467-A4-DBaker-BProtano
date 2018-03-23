@@ -11,7 +11,7 @@
       <legend>Item Information</legend>
 	<form name="create", id="create" action="create_item.php" method="post" onsubmit="show_confirm()">
 	  <label for="itemNum">Item Number </label>
-          <select id="itemNum" name="itemNum" onchange="itemSelected()">
+          <select id="itemNum" name="itemNum" onchange="itemSelected(this, document.create.itemDesc)">
 	    "<?php echo $i->itemNumber != 0 ? '<option>'.$i->itemNumber.'</option>' : ''; ?>"
 	    <option>-- Select Part --</option>
             "<?php echo $dropDownArray; ?>"
@@ -67,11 +67,13 @@
 	  }
  	}
 	
-        <!-- sets a flag that let's the server know to read an item from the database -->
-        function itemSelected(){
+        <!-- sets a flag that let's the server know to read an item from the database and tabs to next field -->
+        function itemSelected(current, to){
 	  alert("Item Selected!");
 	  if(document.getElementById("itemNum").value != "-- Select Part --"){
             document.getElementById("selectItem").value = "1";
+            to.focus();
+	  }
         }
       </script>
     </div>

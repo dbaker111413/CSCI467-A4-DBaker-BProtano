@@ -46,7 +46,7 @@
   }
 
   // include any html files required for the layout
-  $page_title = "Create Order";
+  $page_title = "Create Customer Order";
   include ("html/header.html");
   include ("html/create_order.html");
   echo '<br>';

@@ -26,7 +26,7 @@
 	$i->warehouseLoc = $_POST['warehouseLoc'];
 	$i->qty = $_POST['qty'];
 	$i->price = $_POST['price'];
-	$i->vendor = $_POST['vendor_id'];
+	$i->vendor = $_POST['vendor'];
 
         // now save it to the database
         if($i->addToDatabase()){

@@ -17,10 +17,11 @@ Header for each page, includes links to each page
 <!--  <div class="header-image">
     <img src="http://students.cs.niu.edu/~z1772315/CSCI467-A4-DBaker-BProtano/logo_blue.png" alt="Master Parts" width="15%" >
   </div>-->
-  
+    <div class ="pageTitle"><?php echo $page_title; ?></div>
   <div class="header-right">
+
     <ul>
-    <li><a href="#home">Home</a></li>
+    <li class="dropdown"><a href="#home">Home</a></li>
     <li class="dropdown">
       <a href="javascript:void(0)" class=dropbtn">Items ▾</a>
       <div class="dropdown-content">
@@ -56,6 +57,7 @@ Header for each page, includes links to each page
        <a href="#">Logout</a>
       </div>
     </li>
+    <li></li>  
   </ul>   
 </div>
 

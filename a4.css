@@ -23,13 +23,15 @@ body {
   background-color: #000000;
   background-image: url("http://students.cs.niu.edu/~z1772315/CSCI467-A4-DBaker-BProtano/logo_blue.png");
   background-repeat: no-repeat;
-  background-size: 13%;
+  //background-size: 13%;
+  background-size: 13em 6em;
   background-position: left top;
   padding: 15px 5px;
 }
 
 .header a {
-  color: #E4E4E4;
+  color: #EAE8FF;
+  //color: #E4E4E4;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -39,9 +41,18 @@ body {
   border-radius: 4px;
 }
 
-.header a.logo {
-  font-size: 25px;
+.pageTitle {
+  font-family: Helvetica, sans-serif;
+  //color: #E4E4E4;
+  color: #EAE8FF;
+  //color: #FFFFFF;
+  font-size: 30px;
   font-weight: bold;
+  font-style: italic;
+  margin-left: 11em;
+  margin-top: 1.05em;
+  //line-height: 2.765em;
+  float: left;
 }
 /*
 .header a:hover {
@@ -76,10 +87,6 @@ ul {
     background-color: #000000;
 }
 
-li {
-    float: right;
-}
-
 li a, .dropbtn {
     display: inline-block;
     color: white;
@@ -98,6 +105,8 @@ li a:hover, .dropdown:hover .dropbtn {
 
 li.dropdown {
     display: inline-block;
+    margin-top: 1.25em;
+    float: right;
 }
 
 .dropdown-content {
@@ -176,7 +185,7 @@ legend{
 }
 
 
-.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input, .headerBox select {
+.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input, .headerBox select, .itemNumBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
