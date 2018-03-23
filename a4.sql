@@ -14,10 +14,19 @@
 */
 
 drop table if exists item;
+drop table if exists vendor;
+drop table if exists detail;
+drop table if exists order_header;
 drop table if exists customer;
 drop table if exists address;
-drop table if exists order_header;
-drop table if exists detail;
+
+create table vendor
+        (vendor_id int NOT NULL auto_increment,
+	name varchar(25),
+	primary key (vendor_id));
+
+insert into vendor (name)
+        values ('Mobius One');
 
 create table item
 	(item_id int NOT NULL auto_increment,
@@ -26,7 +35,9 @@ create table item
 	location varchar (25),
 	on_hand int,
 	price double,
-	primary key (item_id));
+	vendor_id int,
+	primary key (item_id),
+        foreign key (vendor_id) references vendor(vendor_id));
 
 create table customer
 	(customer_id int NOT NULL auto_increment,
