@@ -11,6 +11,7 @@ class item {
   public $warehouseLoc = "";
   public $qty = "";
   public $price = "";
+  public $vendor = 0;
   public $conn;
 
   /*
@@ -27,12 +28,12 @@ class item {
   **/
   public function addToDatabase(){
      // data is validated as part of the html definition
-     $insertSQL = 'insert into item ( description, uom, location, on_hand, price)
-	     		               values (?, ?, ?, ?, ?)';
+     $insertSQL = 'insert into item ( description, uom, location, on_hand, price, vendor_id)
+	     		               values (?, ?, ?, ?, ?, ?)';
  
      try {
        $stmt = $this->conn->prepare($insertSQL);
-       $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price));
+       $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, $this->vendor));
        $message = "Item added successfully!";
        showAlert($message);
        return true;
@@ -69,7 +70,8 @@ class item {
         $this->uom = $row["uom"];
         $this->warehouseLoc = $row["location"];
         $this->qty = $row["on_hand"];
-        $this->price = $row["price"];
+	$this->price = $row["price"];
+	$this->vendor = $row["vendor_id"];
       }
     }
     catch(PDOException $e){
@@ -81,6 +83,7 @@ class item {
       $this->warehouseLoc = "";
       $this->qty = "";
       $this->price = "";
+      $this->vendor = 0;
     }
   }
 
@@ -94,7 +97,7 @@ class item {
     // try executing the sql
     try{
       $smtm = $this->conn->prepare($updateSQL);
-      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price,
+      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, $this->vendor,
                                  $this->itemNumber));
       $message = "Item updated successfully!";
       showAlert($message);

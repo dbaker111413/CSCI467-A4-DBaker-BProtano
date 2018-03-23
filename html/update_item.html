@@ -10,14 +10,14 @@
       <fieldset name="itemInfoGroup" id="itemInfoGroup">
       <legend>Item Information</legend>
 	<form name="create", id="create" action="create_item.php" method="post" onsubmit="show_confirm()">
-	  <label for="itemNum">Item Number: </label>
+	  <label for="itemNum">Item Number </label>
           <select id="itemNum" name="itemNum" onchange="itemSelected()">
 	    "<?php echo $i->itemNumber != 0 ? '<option>'.$i->itemNumber.'</option>' : ''; ?>"
 	    <option>-- Select Part --</option>
             "<?php echo $dropDownArray; ?>"
 	  </select><br><br>
           <input type="hidden" name="selectItem" id="selectItem" value="0">
-          <label for="itemDesc">Item Description: </label>
+          <label for="itemDesc">Item Description </label>
           <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" value="<?php echo $i->itemDesc; ?>"><br><br>
       </fieldset>
       </div>
@@ -26,16 +26,16 @@
       <div class="itemAttributesBox">
       <fieldset name="itemAttriGroup" id="itemAttriGroup">
       <legend>Item Attributes</legend>
-        <label for="uom">Unit of Measurement: </label>
+        <label for="uom">Unit of Measurement </label>
         <input type="text" required title="Unit of Measurement required" name="uom" id="uom" value="<?php echo $i->uom; ?>"><br><br>
   
         <label for="warehouseLoc">Warehouse Location: </label>
         <input type="text" required title="Warehouse Location required" name="warehouseLoc" id="warehouseLoc" value="<?php echo $i->warehouseLoc; ?>"><br><br>
   
-        <label for="qty">Quantity On Hand: </label>
+        <label for="qty">Quantity On Hand </label>
         <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" value="<?php echo $i->qty; ?>"><br><br>
   
-        <label for="price">Unit Price: </label>
+        <label for="price">Unit Price </label>
         <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="price" id="price" value="<?php echo $i->price; ?>"><br><br>
       </fieldset>
       </div>
@@ -72,10 +72,6 @@
 	  alert("Item Selected!");
 	  if(document.getElementById("itemNum").value != "-- Select Part --"){
             document.getElementById("selectItem").value = "1";
-
-
-            "<?php echo $dropDownArray[$description]; ?>"
-	    document.getElementById("itemDesc").value = "<?php $dropDownArray[$description];?>";
         }
       </script>
     </div>

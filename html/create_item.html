@@ -12,6 +12,15 @@
           <label for="itemDesc">Item Description </label>
           <input type="text" required title="Item Description required" maxlength="100" name="itemDesc" id="itemDesc" size="38" autofocus
                  value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
+
+	  <label for="vendor">Preferred Vendor </label>
+          <select id="vendor" name="vendor" onchange="vendorSelected()">
+	    "<?php echo $i->vendor != 0 ? '<option>'.$i->vendor.'</option>' : ''; ?>"
+	    <option>-- Select Vendor --</option>
+            "<?php echo $dropDownArray; ?>"
+	  </select><br><br>
+          <input type="hidden" name="selectVendor" id="selectVendor" value="0">
+
       </fieldset>
       </div>
 
@@ -61,6 +70,14 @@
             document.getElementById("which").value = "0";
 	  }
  	}
+
+        <!-- sets a flag that let's the server know to read a vendor from the database -->
+        function vendorSelected(){
+	  alert("Vendor Selected!");
+	  if(document.getElementById("vendor").value != "-- Select Vendor --"){
+            document.getElementById("selectVendor").value = "1";
+	  }
+        }
       </script>
     </div>
   </body>

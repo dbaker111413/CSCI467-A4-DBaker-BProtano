@@ -6,6 +6,11 @@
   require_once ("item.php");
   require_once ("globalFunctions.php");
 
+
+  $dropDownArray = generateSelectOptions("select name from vendor",
+                                          array("name"), $conn);
+
+  $i = new item($conn);
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -15,14 +20,13 @@
     }
     else {
         // otherwise, we create a new item and save it in the database
-        $i = new item($conn);
-
         // set values
 	$i->itemDesc = $_POST['itemDesc'];
 	$i->uom = $_POST['uom'];
 	$i->warehouseLoc = $_POST['warehouseLoc'];
 	$i->qty = $_POST['qty'];
 	$i->price = $_POST['price'];
+	$i->vendor = $_POST['vendor_id'];
 
         // now save it to the database
         if($i->addToDatabase()){
