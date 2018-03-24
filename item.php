@@ -53,18 +53,16 @@ class item {
     $selectSQL = "";
     // check if the input is numeric, which means it is an item_id
     if(is_numeric($id)){
-      $selectSQL = "select * from item where item_num = ".$id;
-      showAlert("selecting ID");
+      $selectSQL = "select * from item where item_id = ".$id;
     }
     else{
       $selectSQL = "select * from item where description = '".$id."'";
-      showAlert("selecting description");
     }
 
     // attempt to run the query
     try{
       // there should only be one row
-      foreach($conn->query($selectSQL) as $row){
+      foreach($this->conn->query($selectSQL) as $row){
         $this->itemNumber = $row["item_id"];
 	$this->itemDesc = $row["description"];
         $this->uom = $row["uom"];
@@ -96,9 +94,9 @@ class item {
 
     // try executing the sql
     try{
-      $smtm = $this->conn->prepare($updateSQL);
-      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, $this->vendor,
-                                 $this->itemNumber));
+      $stmt = $this->conn->prepare($updateSQL);
+
+      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, /*$this->vendor,*/ $this->itemNumber));
       $message = "Item updated successfully!";
       showAlert($message);
       return true;

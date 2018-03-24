@@ -9,16 +9,20 @@
       <div class="itemNumBox">
       <fieldset name="itemInfoGroup" id="itemInfoGroup">
       <legend>Item Information</legend>
-	<form name="create", id="create" action="create_item.php" method="post" onsubmit="show_confirm()">
+      <form name="create", id="create" action="update_item.php" method="post" onsubmit="show_confirm()">
+	  <label for="itemDesc">Item Description </label>
+          <select name="itemDesc" id="itemDesc" onchange="itemDescSelected(this, document.create.uom)">
+            '<?php echo $i->itemDesc != "" ? "<option>".$i->itemDesc."</option>" : ""; ?>'
+	    <option>-- Select Description --</option>
+	    '<?php echo $descDropDownArray; ?>'
+	  </select><br><br>
 	  <label for="itemNum">Item Number </label>
-          <select id="itemNum" name="itemNum" onchange="itemSelected(this, document.create.itemDesc)">
-	    "<?php echo $i->itemNumber != 0 ? '<option>'.$i->itemNumber.'</option>' : ''; ?>"
-	    <option>-- Select Part --</option>
-            "<?php echo $dropDownArray; ?>"
+          <select id="itemNum" name="itemNum" onchange="itemNumSelected(this, document.create.uom)">
+	    '<?php echo $i->itemNumber != 0 ? "<option>".$i->itemNumber."</option>" : ""; ?>'
+	    <option>-- Select Part Number --</option>
+            '<?php echo $numDropDownArray; ?>'
 	  </select><br><br>
           <input type="hidden" name="selectItem" id="selectItem" value="0">
-          <label for="itemDesc">Item Description </label>
-          <input type="text" required title="Item Description required" maxlength="12" name="itemDesc" id="itemDesc" value="<?php echo $i->itemDesc; ?>"><br><br>
       </fieldset>
       </div>
 
@@ -58,7 +62,7 @@
       <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
       <script>
 	function show_confirm(){
-	  if(confirm("Are you sure you want to create this item?") == true) {
+	  if(confirm("Are you sure you want to update this item?") == true) {
             document.getElementById("which").value = "1";
 	    document.getElementById("selectItem").value = "0";
   	  }
@@ -68,10 +72,17 @@
  	}
 	
         <!-- sets a flag that let's the server know to read an item from the database and tabs to next field -->
-        function itemSelected(current, to){
-	  alert("Item Selected!");
-	  if(document.getElementById("itemNum").value != "-- Select Part --"){
+        function itemDescSelected(current, to){
+	  if(document.getElementById("itemDesc").value != "-- Select Description --"){
             document.getElementById("selectItem").value = "1";
+            document.getElementById("create").submit();
+            to.focus();
+	  }
+	}
+	function itemNumSelected(current, to){
+	  if(document.getElementById("itemNum").value != "-- Select Part Number--"){
+            document.getElementById("selectItem").value = "2";
+            document.getElementById("create").submit();
             to.focus();
 	  }
         }

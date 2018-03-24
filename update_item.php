@@ -6,16 +6,24 @@
   require_once ("item.php");
   require_once ("globalFunctions.php");
 
-  $dropDownArray = generateSelectOptions("select description, item_id from item",
-                                          array("description", "item_id"), $conn);
+  $descDropDownArray = generateSelectOptions("select description from item",
+                                          array("description"), $conn);
+  $numDropDownArray = generateSelectOptions("select item_id from item",
+                                          array("item_id"), $conn);
 
   $i = new item($conn);
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
     // first, check if an item has been selected
-    if(isset($_POST['selectItem']) && $_POST['selectItem'] == '1'){
-      $i->setItem($_POST["itemNum"]);
+    if(isset($_POST['selectItem'])) {
+      if($_POST['selectItem'] == '1'){
+        $i->setItem($_POST["itemDesc"]);
+      }
+      if($_POST['selectItem'] == '2'){
+        $i->setItem($_POST["itemNum"]);
+      }
     }
 
     // if 'which' is '0', that means the user does not want to create the item
@@ -24,8 +32,9 @@
     }
     else {
         // otherwise, we update the item and save it in the database
- 
+
         // set values
+	$i->itemNumber = $_POST['itemNum'];
 	$i->itemDesc = $_POST['itemDesc'];
 	$i->uom = $_POST['uom'];
 	$i->warehouseLoc = $_POST['warehouseLoc'];
