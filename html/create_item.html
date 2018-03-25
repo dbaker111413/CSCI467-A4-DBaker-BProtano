@@ -14,8 +14,8 @@
                  value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
 
 	  <label for="vendor">Preferred Vendor </label>
-          <select id="vendor" name="vendor" onchange="vendorSelected(this, document.create.uom)" value="<?php echo isset($_POST['vendor']) ? $_POST['vendor'] : ''?>">
-	    "<?php echo $i->vendor != 0 ? '<option>'.$i->vendor.'</option>' : ''; ?>"
+          <select id="vendor" name="vendor" onchange="vendorSelected(this, document.create.uom)" value='<?php echo isset($_POST["vendor"]) ? $_POST["vendor"] : ""?>'>
+	    '<?php echo $i->vendor != 0 ? "<option>".$i->vendor."</option>" : ""; ?>'
 	    <option>-- Select Vendor --</option>
             "<?php echo $dropDownArray; ?>"
 	  </select><br><br>

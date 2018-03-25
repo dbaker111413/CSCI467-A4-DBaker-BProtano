@@ -10,8 +10,11 @@
                                           array("description"), $conn);
   $numDropDownArray = generateSelectOptions("select item_id from item",
                                           array("item_id"), $conn);
-
+  $vendorDropDownArray = generateSelectOptions("select name from vendor",
+                                          array("name"), $conn);
+					  
   $i = new item($conn);
+  $vendorName = "";
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -20,9 +23,11 @@
     if(isset($_POST['selectItem'])) {
       if($_POST['selectItem'] == '1'){
         $i->setItem($_POST["itemDesc"]);
+        $vendorName = $i->getVendorName();
       }
       if($_POST['selectItem'] == '2'){
         $i->setItem($_POST["itemNum"]);
+        $vendorName = $i->getVendorName();	
       }
     }
 
@@ -40,6 +45,8 @@
 	$i->warehouseLoc = $_POST['warehouseLoc'];
 	$i->qty = $_POST['qty'];
 	$i->price = $_POST['price'];
+	$vendorName = $_POST['vendorName'];	
+	$i->setVendor($vendorName);
 
         // now save it to the database
         if($i->updateDatabase()){

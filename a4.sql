@@ -27,6 +27,12 @@ create table vendor
 
 insert into vendor (name)
         values ('Mobius One');
+insert into vendor (name)
+        values ('Mobius Two');
+insert into vendor (name)
+        values ('Mobius Three');
+insert into vendor (name)
+        values ('Not Mobius');
 
 create table item
 	(item_id int NOT NULL auto_increment,

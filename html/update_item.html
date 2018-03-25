@@ -23,6 +23,12 @@
             '<?php echo $numDropDownArray; ?>'
 	  </select><br><br>
           <input type="hidden" name="selectItem" id="selectItem" value="0">
+	  <label for="vendorName">Preferred Vendor</label>
+	  <select id="vendorName" name="vendorName">
+	    '<?php echo $i->vendor != 0 ? "<option>".$vendorName."</option>" : ""; ?>'
+	    <option>-- Select Preferred Vendor --</option>
+            '<?php echo $vendorDropDownArray; ?>'
+	  </select><br><br>
       </fieldset>
       </div>
 

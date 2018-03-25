@@ -43,6 +43,11 @@ class item {
        showAlert($errorMessage);
        return false;
      }
+     catch (Exception $e){
+       $errorMessage = "Error, item could not be added\n".$e->getMessage();
+       showAlert($errorMessage);
+       return false;
+     }
   }
 
   /*
@@ -86,17 +91,59 @@ class item {
   }
 
   /*
+  * uses the passed in vendor name to retrieve the vendor ID
+  */
+  public function setVendor($name){
+    $selectSQL = "select vendor_id from vendor where name='".$name."'";
+
+    try{
+      // there should only be one row
+      foreach($this->conn->query($selectSQL) as $row){
+        $this->vendor = $row["vendor_id"];
+      }
+    }
+    catch(PDOException $e){
+      showAlert("Error! Vendor could not be retrieved!");
+    }
+    catch(Exception $e){
+      showAlert("Error! Vendor could not be retrieved!");
+    }
+  }
+
+  /*
+  * Gets the name of the vendor from the current ID
+  */
+  public function getVendorName(){
+    $selectSQL = "select name from vendor where vendor_id=".$this->vendor;
+    $vendorName="";
+
+    try{
+      // there should only be one row
+      foreach($this->conn->query($selectSQL) as $row){
+        $vendorName = $row["name"];
+      }
+    }
+    catch(PDOException $e){
+      showAlert("Error! Vendor could not be retrieved!");
+    }
+    catch(Exception $e){
+      showAlert("Error! Vendor could not be retrieved!");
+    }
+    return $vendorName;
+  }
+
+  /*
   * Updates an existing item in the database
   */
   public function updateDatabase(){
     // data is validated as part of the html definition
-    $updateSQL = 'update item set description=?, uom=?, location=?, on_hand=?, price=? where item_id=?';
+    $updateSQL = 'update item set description=?, uom=?, location=?, on_hand=?, price=?, vendor_id=? where item_id=?';
 
     // try executing the sql
     try{
       $stmt = $this->conn->prepare($updateSQL);
 
-      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, /*$this->vendor,*/ $this->itemNumber));
+      $ok = $stmt->execute(array($this->itemDesc, $this->uom, $this->warehouseLoc, $this->qty, $this->price, $this->vendor, $this->itemNumber));
       $message = "Item updated successfully!";
       showAlert($message);
       return true;
@@ -104,6 +151,10 @@ class item {
     catch (PDOException $e){
       $errorMessage = "Error, item could not be updated\n".$e->getMessage();
       showAlert($errorMessage);
+      return false;
+    }
+    catch (Exception $e){
+      showAlert("Error, item could not be updated\n".$e->getMessage());
       return false;
     }
   }
