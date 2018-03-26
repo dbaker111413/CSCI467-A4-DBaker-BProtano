@@ -38,7 +38,7 @@ body {
   font-family: Helvetica, sans-serif;
   font-size: 18px;
   line-height: 30px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .pageTitle {
@@ -222,12 +222,24 @@ li.dropdown {
 
 /* customer/item style*/
 
-#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, #customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup, #orderInfoGroup, #detailGroup, #itemAddGroup {
+#customerInfoGroup, #customerBillingGroup, #customerShippingGroup, 
+#customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup,
+#orderInfoGroup, #detailGroup, #itemAddGroup, #pickTableGroup, #pickStaffGroup {
   margin: 8px;
   border: 1px solid silver;
   padding: 8px;
   Border-radius: 4px;
   background-color: #F2F2F2;
+}
+
+#blank {
+  margin: 8px;
+  border: 1px solid silver;
+  padding: 8px;
+  Border-radius: 0px;
+  //background-color: #eaf3fb;
+  background-color: #dfdfec;
+  //background-color: #e2e2e9;
 }
 
 legend{
@@ -245,7 +257,7 @@ legend{
   margin-right: -28px;
 }
 
-.customerBox label, .billingBox label, .shippingBox label, .headerBox label {
+.customerBox label, .billingBox label, .shippingBox label, .headerBox label, .pickStaffBox label {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -272,7 +284,8 @@ legend{
 }
 
 
-.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select, .itemNumBox input, .itemAttributesBox input, .headerBox select, .itemNumBox select {
+.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
+.itemNumBox input, .itemAttributesBox input, .headerBox select, .itemNumBox select, .pickStaffBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -385,6 +398,29 @@ legend{
     ". . . . . . . . comment comment . . . . . . . ."
     ". . . . . . . . cancel  submit . . . . . . . .";
     ". . . . . . . . .  . . . . . . . . .";
+  grid-gap: 0px;
+  padding: 0px;
+}
+
+.pickTableBox {
+  grid-area: table;
+}
+
+.pickStaffBox {
+  grid-area: staff;
+}
+
+.containerCreatePick {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    ". . . . . . . . . . . . . . staff . . . . . . . . .  . . . . . ."
+    ". . . . . . . . . . . . . . table table . . . . . . . .  . . . . . ."
+    ". . . . . . . . . . . . . . table table . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . table table . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . table table . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . cancel submit . . . . . . . . . . . . . .";
+    ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
   grid-gap: 0px;
   padding: 0px;
 }
