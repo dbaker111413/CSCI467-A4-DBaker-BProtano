@@ -6,12 +6,12 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.4/css/scroller.dataTables.min.css">
+<!--  <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.4/css/scroller.dataTables.min.css">-->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'
-  <script src="https://cdn.datatables.net/scroller/1.4.4/js/dataTables.scroller.min.js"></script>'
+  <!--  <script src="https://cdn.datatables.net/scroller/1.4.4/js/dataTables.scroller.min.js"></script>'-->
 
   <div class="containerCreatePick">
 
@@ -37,7 +37,11 @@
   <legend>Orders Released for Pick</legend>
   <fieldset name="blank" id="blank">
   <?php $sql = $conn->query(
-  "select o.order_id, c.name, o.order_status, o.order_expected_date, o.order_lines from order_header o, customer c where c.customer_id = o.customer_id group by o.order_id"); ?>
+  "select o.order_id, c.name, o.order_status, o.order_expected_date, o.order_lines 
+  from order_header o, customer c 
+  where c.customer_id = o.customer_id 
+  group by o.order_id 
+  order by o.order_expected_date"); ?>
 
   <table id="example" class="display" style="width:100%"><br>
   <thead>
@@ -100,10 +104,10 @@
     $(document).ready(function() {
       var table = $('#example').DataTable( {
          dom:        'Bfrtip',
-         deferRender:    true,
+       /*  deferRender:    true,
          scrollY:        200,
          scrollCollapse: true,
-         scroller:       true,
+         scroller:       true,*/
          select:      'multi',
          buttons: [
            {
