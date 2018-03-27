@@ -18,9 +18,9 @@
   <div class="pickStaffBox">
   <fieldset name="pickStaffGroup" id="pickStaffGroup">
   <legend>Designate Picker</legend>
-
+  <form class="create" name="create", id="create" action="pickOut.php" method="post" onsubmit="show_confirm">
   <label for="pickStaff">State </label>
-  <select name="pickStaff" id="shipStaff" >
+  <select name="pickStaff" id="pickStaff" >
 	  <!--  value="<?php echo isset($_POST['pickStaff']) ? $_POST['pickStaff'] : ''?>"> -->
     <option value="">-- Warehouse Staff Name --</option>
     <option value="Daniel Baker">Daniel Baker</option>
@@ -46,6 +46,7 @@
   <table id="example" class="display" style="width:100%"><br>
   <thead>
   <tr> 
+  <th></th>
   <th align="left">Order Number</th>
   <th align="left">Customer Name</th>
   <th align="left">Order Status</th>
@@ -57,6 +58,7 @@
 
   <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
+    echo '<td></td>';
     echo '<td align="left">';
     echo 'PB-AIP-';
     echo $row['order_id'];
@@ -92,23 +94,48 @@
 	  
   <!-- submit box -->
   <div class="submitBox">
-  <button class="button buttonSubmit" type="submit">Submit</button>
+  <button class="button buttonSubmit" name="buttonS" id="buttonS" type="submit">Submit</button>
   <input type="hidden" name="which" id="which" value="0">
+  <input type="hidden" name="rowIds" id="rowIds" value="0">
   </div>
   </form>
 
   </div>
 
   <script>
+   function show_confirm(){
+      
+     if(confirm("Produce Pick Report with these orders?") == true) {
+       document.getElementById("which").value = "1";
+
+
+     //var rowCount = table.rows( { selected: true } ).count().toString(); 
+     //var selectedRowIds = table.rows( { selected: true} ).data().toString();
+     //document.getElementById("rowIds").value = rowCount;
+     } 
+     else{
+     document.getElementById("which").value = "0";
+     }
+   }
   /*************** Table Styling from https://datatables.net/ ************/
     $(document).ready(function() {
       var table = $('#example').DataTable( {
+	 columnDefs: [ {
+           orderable: false,
+           className: 'select-checkbox',
+           targets:   0
+	 } ],
+         select: {  style:   'multi+shift',
+                    selector: 'td:first-child'
+                      
+         },
+         order: [[ 1, 'asc' ]],
          dom:        'Bfrtip',
        /*  deferRender:    true,
          scrollY:        200,
          scrollCollapse: true,
-         scroller:       true,*/
-         select:      'multi',
+         scroller:       true,
+         select:      'multi',*/
          buttons: [
            {
              text: 'Select all',
@@ -124,7 +151,28 @@
            } 
          ]
        });
-     });
+
+
+       $(".create").on( "submit", function() {
+          //$("#rowIds").attr("value", table.rows( { selected: true } ).count().toString()) 
+          $("#rowIds").attr("value", table.rows( { selected: true } ).data().toString());
+
+          console.log( $( this ).serializeArray() );
+
+
+     // = table.rows( { selected: true} ).data().toString();
+
+ /*        $.post("picker.php", $(this).serialize(), function(data){
+             alert("alert dumb shit, alert!");
+            
+         }).fail(function() {
+             alert( "Produce Pick Failed." );
+         });
+
+	 return false;*/
+       });
+
+  });
   </script>
 </body>
 </html>

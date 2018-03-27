@@ -6,6 +6,8 @@
   require_once ("item.php");
   require_once ("globalFunctions.php");
 
+
+
   // include any html files required for the layout
   $page_title = "Generate Pick Report";
   include ("html/header.html");
