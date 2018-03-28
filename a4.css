@@ -18,10 +18,71 @@
   //background-color: #000000;
   background-image: url("http://students.cs.niu.edu/~z1772315/CSCI467-A4-DBaker-BProtano/logo_bw.png");
   background-repeat: no-repeat;
-  //background-size: 13%;
-  background-size: 13em 6em;
+  //background-size: 5%;
+  background-size: 9.5em 6.5em;
   background-position: left top;
-  padding: 15px 5px;
+  padding: 25px 10px;
+}
+
+.oBa {
+  //float: right;
+  grid-area: bc; 
+}
+
+.reportTitle {
+  grid-area: rTitle;
+  font-family: Helvetica, sans-serif;
+  font-size: 2em;
+  margin-left: 18em;
+  line-height: 2em;
+}
+
+.break {
+  grid-area: hr;
+}
+
+.reportBox {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    "repoOrder . . . repoCust"
+    "rTab rTab rTab rTab rTab";
+  grid-gap: 8px;
+  padding: 5px;
+}
+
+.oNa { grid-area: no; }
+.oDa { grid-area: da; }
+.oLi { grid-area: li; }
+.duh {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    "no bc"
+    "da bc"
+    "li bc";
+  grid-gap: 0px;
+  padding: 0px;
+}
+
+.reportOrderBox {
+  grid-area: repoOrder;
+}
+
+.reportCustomerBox {
+  grid-area: repoCust;
+}
+
+.rTab {
+  grid-area: rTab;
+}
+
+.dateTime {
+  grid-area: time;
+  float: right;
+  display: inline-block;
+  margin-left: -50em;
+  text-align: right;
 }
 
 /* header style */
@@ -273,7 +334,7 @@ legend{
   margin-right: -28px;
 }
 
-.customerBox label, .billingBox label, .shippingBox label, .headerBox label, .pickStaffBox label {
+.customerBox label, .billingBox label, .shippingBox label, .headerBox label, .pickStaffBox label{
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -285,6 +346,37 @@ legend{
   text-align: right;
   float: left;
 }
+
+
+.reportBox label {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  //font-size: 90%;
+  padding-top: .1em;
+  padding-right: .30em;
+  width: 9em;
+  text-align: right;
+  float: left;
+}
+
+.reportBox span {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  //font-size: 90%;
+}
+
+.reportCustomerBox {
+  font-family: Helvetica, sans-serif;
+  margin-bottom: 0;
+  padding: 0;
+  //font-size: 110%;
+  text-align: center;
+  line-height: 1.65em;
+}
+
 
 .itemNumBox label, .itemAttributesBox label {
   font-family: Helvetica, sans-serif;
@@ -453,8 +545,6 @@ legend{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px;
-  font-weight: bold;
   margin: 4px 0px;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -470,6 +560,8 @@ legend{
  background-color: white;
  color: black;
  border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 600;
  margin-right: 9px;
  float: right;
 }
@@ -481,6 +573,8 @@ legend{
 
 .buttonReset {
  background-color: white;
+ font-size: 18px;
+ font-weight: 300;
  color: black;
  border: 2px solid black;
  margin-left: 9px;

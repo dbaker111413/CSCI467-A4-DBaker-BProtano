@@ -5,9 +5,23 @@
   require_once ("conn.php");
   require_once ("globalFunctions.php");
 
+  //grab selected ids with garbage
+  $rowArray =  explode(",", $_POST["rowIds"]);
 
-  $orderNum = "1";
-  
+  //remove garbage
+  $rowArray = array_slice ( $rowArray, 0, -108 );
+  $rowArray = array_slice ( $rowArray, 1 );
+
+  //grab every 6th item from the array (which are now the IDs)
+  $idArray = array();
+  $i = 0;
+  foreach ($rowArray as $value){
+    if ( $i++ % 6 == 0 ) {
+      $idArray[] = str_replace( "PB-AIP-", "", $value);
+    }
+  }
+
+  $orderNum = $idArray[0];
 
   $sql = $conn->query(
     "select o.order_id, o.order_date, c.name, c.customer_id, c.ship_address_line1, c.ship_address_line2, c.ship_city, 
@@ -36,9 +50,7 @@
     $expectedDate = $head['order_expected_date'];
     $lineCount = $head['order_lines'];
   }
-/*   echo "<pre>";
-    print_r($_POST);
-  echo "</pre>";
+
   // handles a post request to create an item when the submit button is clicked in item.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -46,8 +58,8 @@
     // if 'which' is '0', that means the user does not want to create the item
     if (isset($_POST['test'])) {
 
-        $tester = $_post['test'];
-        echo $tester; 
+        //$tester = $_post['test'];
+        //echo $tester; 
         //exit;
     }
     else {
@@ -57,22 +69,6 @@
         //$rowIds = (explode(',', $eventDate, 2));
     }
   }
- 
-
-  /*  $sqlRace = "select name from race where distance = '$dist' order by name";
-
-    echo '<table border="2"><br>';
-    echo '<tr><td align="center">'; //column headers for table
-    echo 'Race name';
-    echo '</td></tr>';
-
-    foreach ($conn->query($sqlRace) as $row) {
-      echo '<tr><td>';
-      echo $row['name'];
-      echo '</td></tr>';
-    }
-    echo '</table>';
-  }*/
 
   // include any html files required for the layout
   $page_title = "Generate Pick Report";

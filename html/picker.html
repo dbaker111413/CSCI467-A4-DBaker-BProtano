@@ -21,8 +21,7 @@
   <form class="create" name="create", id="create" action="pickOut.php" method="post" onsubmit="show_confirm">
   <label for="pickStaff">State </label>
   <select name="pickStaff" id="pickStaff" >
-	  <!--  value="<?php echo isset($_POST['pickStaff']) ? $_POST['pickStaff'] : ''?>"> -->
-    <option value="">-- Warehouse Staff Name --</option>
+    <option value="-- Warehouse Staff Name --">-- Warehouse Staff Name --</option>
     <option value="Daniel Baker">Daniel Baker</option>
     <option value="Bradley Protano">Bradley Protano</option>
   </select><br><br>
@@ -37,21 +36,21 @@
   <legend>Orders Released for Pick</legend>
   <fieldset name="blank" id="blank">
   <?php $sql = $conn->query(
-  "select o.order_id, c.name, o.order_status, o.order_expected_date, o.order_lines 
+  "select o.order_id, c.name, o.order_status, o.order_date, o.order_expected_date, o.order_lines 
   from order_header o, customer c 
-  where c.customer_id = o.customer_id 
+  where c.customer_id = o.customer_id and o.order_status = 'Released for pick'
   group by o.order_id 
   order by o.order_expected_date"); ?>
 
   <table id="example" class="display" style="width:100%"><br>
   <thead>
   <tr> 
-  <th></th>
+  <th align="left"></th>
   <th align="left">Order Number</th>
   <th align="left">Customer Name</th>
-  <th align="left">Order Status</th>
-  <th align="left">Order Expected by Date</th>
+  <th align="left">Expected by Date</th>
   <th align="right">Order Detail Lines</th>
+  <th align="left">Date Created</th>
   </tr>
   </thead>
   <tbody> 
@@ -68,16 +67,16 @@
     echo $row['name'];
     echo '</td>';
 
-    echo '<td>';
-    echo $row['order_status'];
-    echo '</td>';
-
     echo '<td align="right">';
     echo $row['order_expected_date'];
     echo '</td>';
 
     echo '<td align="right">';
     echo $row['order_lines'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo $row['order_date'];
     echo '</td>';
     echo '</tr>';
   } ?>
@@ -103,20 +102,6 @@
   </div>
 
   <script>
-   function show_confirm(){
-      
-     if(confirm("Produce Pick Report with these orders?") == true) {
-       document.getElementById("which").value = "1";
-
-
-     //var rowCount = table.rows( { selected: true } ).count().toString(); 
-     //var selectedRowIds = table.rows( { selected: true} ).data().toString();
-     //document.getElementById("rowIds").value = rowCount;
-     } 
-     else{
-     document.getElementById("which").value = "0";
-     }
-   }
   /*************** Table Styling from https://datatables.net/ ************/
     $(document).ready(function() {
       var table = $('#example').DataTable( {
@@ -154,22 +139,20 @@
 
 
        $(".create").on( "submit", function() {
-          //$("#rowIds").attr("value", table.rows( { selected: true } ).count().toString()) 
-          $("#rowIds").attr("value", table.rows( { selected: true } ).data().toString());
-
-          console.log( $( this ).serializeArray() );
-
-
-     // = table.rows( { selected: true} ).data().toString();
-
- /*        $.post("picker.php", $(this).serialize(), function(data){
-             alert("alert dumb shit, alert!");
-            
-         }).fail(function() {
-             alert( "Produce Pick Failed." );
-         });
-
-	 return false;*/
+         //verify user wants these orders for the report
+         if(confirm("Produce Pick Report with these orders?") == true) {
+           if(table.rows( { selected: true} ).count() > 0 && document.getElementById("pickStaff").value != "-- Warehouse Staff Name --"){
+             document.getElementById("rowIds").value = Object.values(table.rows( { selected: true} ).data());
+           }
+           else {
+             alert("Must select a picker and at least one customer order.");
+  	     return false;
+           }
+         } 
+         else{
+           //prevent refresh or exit of page
+  	   return false;
+         }
        });
 
   });

@@ -2,6 +2,27 @@
 <html lang="en">
   
 <body class="reportBody">
+<style>
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color: #fff;
+}
+table th {
+    background-color: #858585;
+    color: #EEEEEE;
+}
+
+</style>
+
 <!-- Barcodes courtesy of http://lindell.me/JsBarcode/ -->
 <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 <link rel="stylesheet" type="text/css" href="a4.css">
@@ -9,30 +30,40 @@
 
 
 
-  <span name="reportTitle">Pick Report</span>
+  <span class="reportTitle">Pick Report</span>
 
-  <?php echo date("Y/m/d"); ?>
+  <div class="dateTime">
+  <span><?php echo date("m/d/Y"); ?></span><br><br>
+  <span><?php echo date("G:i:s"); ?></span>
+  </div>
 
-  <hr>
-
-
-  <div class="reportBox"></div>
+  <br><hr>
+ 
+  <div class="reportBox">
 
   <div class="reportOrderBox">
   <fieldset name="reportOrderGroup">
   <legend>Order Infomation</legend>
+  <div class="duh">
+  <div class="oBa">
+  <svg class="bcode" id="orderBarcode"></svg>
+  </div>
 
+  <div class="oNa">
   <label for="custOrderNum">Order Number: </label>
-  <span name="custOrderNum"><?php echo $orderNum; ?></span><br>
+  <span name="custOrderNum"><?php echo $orderNum; ?></span>
+  </div>
 
-  <svg id="orderBarcode"></svg><br>
-
+  <div class="oDa">
   <label for="custOrderDate">Order Date: </label>
-  <span name="custOrderDate"><?php echo $orderDate; ?></span><br>
+  <span name="custOrderDate"><?php echo $orderDate; ?></span>
+  </div>
 
+  <div class="oLi">
   <label for="custOrderLines">Order Detail Lines:</label>
-  <span name="custOrderLines"><?php echo $lineCount; ?></span><br>
-
+  <span name="custOrderLines"><?php echo $lineCount; ?></span>
+  </div>
+  </div>
 
   </fieldset>
   </div>
@@ -40,7 +71,7 @@
   <div class="reportCustomerBox">
   <fieldset name="reportCustomerGroup">
   <legend>Customer Shipping Infomation</legend>
-
+  
   <span name="custName"><?php echo $custName; ?></span><br>
 
   <span name="custAdd1"><?php echo $add1.", "; ?></span>
@@ -53,11 +84,9 @@
   </fieldset>
   </div>
 
-  <div class="pickTableBox">
-  <table id="pickTable"><br>
+  <table class="rTab" id="pickTable"><br>
   <thead>
   <tr> 
-  <th></th>
   <th align="left">Part Number</th>
   <th align="left">Part Description</th>
   <th align="left">Part Location</th>
@@ -70,9 +99,8 @@
 
   <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
-    echo '<td></td>';
-    echo '<td align="left">';
-    echo 'PB-AIP-';
+    echo '<td>';
+    echo 'PR-';
     echo $row['item_id'];
     echo '</td>';
 
@@ -86,21 +114,21 @@
     echo '</td>';
 
     echo '<td>';
+    echo 'PB-AIP-';
     echo $row['customer_id'];
     echo '</td>';
 
-    echo '<td align="right">';
+    echo '<td>';
     echo $row['line_qty'];
     echo '</td>';
 
-    echo '<td align="right">';
+    echo '<td>';
     echo 'Dock 1A';
     echo '</td>';
     echo '</tr>';
   } ?>
   </tbody>
   </table>
-  </div>
 
   
   </div>	
@@ -108,8 +136,8 @@
   <script>
     var barcode = '<?php echo $orderNum."143588144"; ?>';
     JsBarcode("#orderBarcode", barcode, {
-      displayValue: false
-
+      displayValue: false,
+      height: 60
     });    
   </script>
 
