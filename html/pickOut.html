@@ -33,7 +33,11 @@ table th {
   <span class="reportTitle">Pick Report</span>
 
   <div class="dateTime">
-  <span><?php echo date("m/d/Y"); ?></span><br><br>
+  <label for="pickGuy">Picker: </label>
+  <span><?php echo $_POST['pickStaff']; ?></span><br>
+  <label for="date">Date: </label>
+  <span><?php echo date("m/d/Y"); ?></span><br>
+  <label for="time"> </label>
   <span><?php echo date("G:i:s"); ?></span>
   </div>
 
@@ -90,9 +94,10 @@ table th {
   <th align="left">Part Number</th>
   <th align="left">Part Description</th>
   <th align="left">Part Location</th>
-  <th align="left">Customer Order</th>
-  <th align="left">Qty</th>
-  <th align="left">Shipping Location</th>
+  <th align="center">Customer Order</th>
+  <th align="center">Qty</th>
+  <th align="center">Shipping Location</th>
+  <th align="center">Part Barcode</th>
   </tr>
   </thead>
   <tbody> 
@@ -113,17 +118,21 @@ table th {
     echo $row['location'];
     echo '</td>';
 
-    echo '<td>';
+    echo '<td align="center">';
     echo 'PB-AIP-';
     echo $row['customer_id'];
     echo '</td>';
 
-    echo '<td>';
+    echo '<td align="center">';
     echo $row['line_qty'];
     echo '</td>';
 
-    echo '<td>';
+    echo '<td align="center">';
     echo 'Dock 1A';
+    echo '</td>';
+
+    echo '<td align="center">';
+    echo '<svg class="code" id="arcode"></svg>';
     echo '</td>';
     echo '</tr>';
   } ?>
@@ -138,7 +147,15 @@ table th {
     JsBarcode("#orderBarcode", barcode, {
       displayValue: false,
       height: 60
-    });    
+    });   
+
+    var barcode = '<?php echo $orderNum."143588144"; ?>';
+    JsBarcode("#arcode", barcode, {
+      displayValue: false,
+      height: 35,
+      width: 1.5,
+      margin: 0
+    });   
   </script>
 
 

@@ -82,7 +82,7 @@
   float: right;
   display: inline-block;
   margin-left: -50em;
-  text-align: right;
+  //text-align: right;
 }
 
 /* header style */
@@ -348,7 +348,7 @@ legend{
 }
 
 
-.reportBox label {
+.reportBox label, .dateTime label  {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -366,6 +366,15 @@ legend{
   margin: 0;
   padding: 0;
   //font-size: 90%;
+}
+
+.dateTime span {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 90%;
+  line-height: 1.55em;
 }
 
 .reportCustomerBox {
