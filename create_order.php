@@ -20,7 +20,6 @@
     global $lineCounter;
     $outputLine = "";
 
-    showAlert("itemnum".$lineCounter);
     while(isset($_POST["itemnum".$lineCounter])){
       $outputLine .= generateSingleDetailLine();
       $lineCounter++;
@@ -37,7 +36,7 @@
 	    <td><label id="qty"'.$lineCounter.' name="qty"'.$lineCounter.'>0</label></td>
 	    <td><label id="uom"'.$lineCounter.' name="uom"'.$lineCounter.'>--</label></td>
 	    <td><label id="total"'.$lineCounter.' name="total"'.$lineCounter.'>$0.00</label></td>
-	    <td><button id="delete"'.$lineCounter.' name="delete"'.$lineCounter.' onclick="deleteLine()" value="0">DELETE</button></td>
+	    <td><button id="delete"'.$lineCounter.' name="delete"'.$lineCounter.' onclick="delete_line()" value="0">DELETE</button></td>
 	  </tr>';
   }
 
