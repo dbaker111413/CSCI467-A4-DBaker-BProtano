@@ -36,7 +36,7 @@
 	    <td><label id="qty"'.$lineCounter.' name="qty"'.$lineCounter.'>0</label></td>
 	    <td><label id="uom"'.$lineCounter.' name="uom"'.$lineCounter.'>--</label></td>
 	    <td><label id="total"'.$lineCounter.' name="total"'.$lineCounter.'>$0.00</label></td>
-	    <td><button id="delete"'.$lineCounter.' name="delete"'.$lineCounter.' onclick="delete_line()" value="0">DELETE</button></td>
+	    <td><button type="button" id="delete"'.$lineCounter.' name="delete"'.$lineCounter.' onclick="delete_line()" value="0">DELETE</button></td>
 	  </tr>';
   }
 
@@ -45,9 +45,12 @@
 
     $htmlDetailLines = generateDetailLines();
 
-    // TEMP
-    $htmlDetailLines .= generateSingleDetailLine();
-    $lineCounter++;
+    if(isset($_POST["add"]) && $_POST["add"] == "1"){
+      showAlert("generating new line item");
+      $htmlDetailLines .= generateSingleDetailLine();
+      $lineCounter++;
+    }
+
 
     if(isset($_POST['itemnum0'])){
       showAlert($_POST['itemnum0']);

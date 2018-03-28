@@ -5,7 +5,7 @@
     <!-- container object for using css with header customer info box-->
      
     <div class="containerCreateOrder">
-
+      <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
 <!--
       <tr>
 	    <td><select id="itemnum0" name="itemnum0"><option>PB3546&J</option></select></td>
@@ -50,7 +50,7 @@
 	    <td></td>
 	    <td></td>
 	    <td></td>
-	    <td><button onclick="add()">ADD</button>
+	    <td><button type="button" onclick="add_line()">ADD</button>
                 <input type="hidden" id="add" name="add" value="0">
 	    </td>
 	  </tr>
@@ -117,6 +117,11 @@
 
 	function delete_line(){
 	   alert("Clicked");
+	}
+
+	function add_line(){
+           document.getElementById("add").value = "1";
+	   document.getElementById("create").submit();
 	}
       </script>
 
