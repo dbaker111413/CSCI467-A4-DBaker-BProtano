@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body>
+  <!-- ************ Table Styling from https://datatables.net/ *************/ -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+<!--  <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.4/css/scroller.dataTables.min.css">-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'
+  <!--  <script src="https://cdn.datatables.net/scroller/1.4.4/js/dataTables.scroller.min.js"></script>'-->
+
+  <div class="containerCreatePick">
+
+  <div class="pickStaffBox">
+  <fieldset name="pickStaffGroup" id="pickStaffGroup">
+  <legend>Designate Picker</legend>
+  <form class="create" name="create", id="create" action="pickOut.php" method="post" onsubmit="show_confirm">
+  <label for="pickStaff">State </label>
+  <select name="pickStaff" id="pickStaff" >
+	  <!--  value="<?php echo isset($_POST['pickStaff']) ? $_POST['pickStaff'] : ''?>"> -->
+    <option value="">-- Warehouse Staff Name --</option>
+    <option value="Daniel Baker">Daniel Baker</option>
+    <option value="Bradley Protano">Bradley Protano</option>
+  </select><br><br>
+
+
+  </fieldset>
+  </div>
+
+
+  <div class="pickTableBox">
+  <fieldset name="pickTableGroup" id="pickTableGroup">
+  <legend>Orders Released for Pick</legend>
+  <fieldset name="blank" id="blank">
+  <?php $sql = $conn->query(
+  "select o.order_id, c.name, o.order_status, o.order_expected_date, o.order_lines 
+  from order_header o, customer c 
+  where c.customer_id = o.customer_id 
+  group by o.order_id 
+  order by o.order_expected_date"); ?>
+
+  <table id="example" class="display" style="width:100%"><br>
+  <thead>
+  <tr> 
+  <th></th>
+  <th align="left">Order Number</th>
+  <th align="left">Customer Name</th>
+  <th align="left">Order Status</th>
+  <th align="left">Order Expected by Date</th>
+  <th align="right">Order Detail Lines</th>
+  </tr>
+  </thead>
+  <tbody> 
+
+  <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+    echo '<tr>';
+    echo '<td></td>';
+    echo '<td align="left">';
+    echo 'PB-AIP-';
+    echo $row['order_id'];
+    echo '</td>';
+
+    echo '<td>';
+    echo $row['name'];
+    echo '</td>';
+
+    echo '<td>';
+    echo $row['order_status'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo $row['order_expected_date'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo $row['order_lines'];
+    echo '</td>';
+    echo '</tr>';
+  } ?>
+  </tbody>
+  </table>
+  </fieldset>
+  </fieldset>
+  </div>
+
+  <!-- cancel box -->
+  <div class="cancelBox">
+  <button class="button buttonReset" type="reset">Cancel</button>
+  </div>
+	  
+  <!-- submit box -->
+  <div class="submitBox">
+  <button class="button buttonSubmit" name="buttonS" id="buttonS" type="submit">Submit</button>
+  <input type="hidden" name="which" id="which" value="0">
+  <input type="hidden" name="rowIds" id="rowIds" value="0">
+  </div>
+  </form>
+
+  </div>
+
+  <script>
+   function show_confirm(){
+      
+     if(confirm("Produce Pick Report with these orders?") == true) {
+       document.getElementById("which").value = "1";
+
+
+     //var rowCount = table.rows( { selected: true } ).count().toString(); 
+     //var selectedRowIds = table.rows( { selected: true} ).data().toString();
+     //document.getElementById("rowIds").value = rowCount;
+     } 
+     else{
+     document.getElementById("which").value = "0";
+     }
+   }
+  /*************** Table Styling from https://datatables.net/ ************/
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+	 columnDefs: [ {
+           orderable: false,
+           className: 'select-checkbox',
+           targets:   0
+	 } ],
+         select: {  style:   'multi+shift',
+                    selector: 'td:first-child'
+                      
+         },
+         order: [[ 1, 'asc' ]],
+         dom:        'Bfrtip',
+       /*  deferRender:    true,
+         scrollY:        200,
+         scrollCollapse: true,
+         scroller:       true,
+         select:      'multi',*/
+         buttons: [
+           {
+             text: 'Select all',
+             action: function () {
+               table.rows().select();
+             }
+           },
+           {
+             text: 'Select none',
+             action: function () {
+               table.rows().deselect();
+             }
+           } 
+         ]
+       });
+
+
+       $(".create").on( "submit", function() {
+          //$("#rowIds").attr("value", table.rows( { selected: true } ).count().toString()) 
+          $("#rowIds").attr("value", table.rows( { selected: true } ).data().toString());
+
+          console.log( $( this ).serializeArray() );
+
+
+     // = table.rows( { selected: true} ).data().toString();
+
+ /*        $.post("picker.php", $(this).serialize(), function(data){
+             alert("alert dumb shit, alert!");
+            
+         }).fail(function() {
+             alert( "Produce Pick Failed." );
+         });
+
+	 return false;*/
+       });
+
+  });
+  </script>
+</body>
+</html>

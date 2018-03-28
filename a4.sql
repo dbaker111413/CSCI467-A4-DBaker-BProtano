@@ -70,16 +70,46 @@ create table customer
 	comments varchar (280),
 	primary key (customer_id));
 
+insert into customer (name)
+        values ('Belkan'),
+               ('Stonehenge'),
+               ('Yellow 13');
+
 create table order_header
        (order_id int NOT NULL auto_increment,
        order_date timestamp,
        order_status varchar (25),
-       order_expected_date timestamp,
+       order_expected_date varchar (10),
        order_lines int,
        customer_id int,
        shipment_id int,
        primary key (order_id),
        foreign key (customer_id) references customer(customer_id));
+
+insert into order_header (order_date, order_status, order_expected_date, order_lines, customer_id)
+        values (current_timestamp, 'Released for pick', '2018-01-23', 5, 1),
+               (current_timestamp, 'Released for pick', '2018-02-23', 2, 2),
+               (current_timestamp, 'Released for pick', '2018-03-23', 6, 3),
+               (current_timestamp, 'Released for pick', '2018-04-23', 3, 1),
+               (current_timestamp, 'Released for pick', '2018-05-23', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-06-23', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-07-23', 4, 3),
+               (current_timestamp, 'Released for pick', '2018-08-23', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-09-23', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-11-23', 4, 3),
+               (current_timestamp, 'Released for pick', '2018-12-23', 4, 3),
+               (current_timestamp, 'Released for pick', '2018-05-24', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-25', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-26', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-05-27', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-05-28', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-12', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-05-13', 4, 3),
+               (current_timestamp, 'Released for pick', '2018-05-14', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-15', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-17', 4, 2),
+               (current_timestamp, 'Released for pick', '2018-05-16', 4, 1),
+               (current_timestamp, 'Released for pick', '2018-06-23', 2, 3);
 
 create table detail
        (line_id int NOT NULL auto_increment,
