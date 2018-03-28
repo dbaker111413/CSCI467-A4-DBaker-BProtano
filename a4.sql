@@ -13,12 +13,11 @@
   address(address_id, address_line1, address_line2, city, state, zip)
 */
 
+drop table if exists detail;
 drop table if exists item;
 drop table if exists vendor;
-drop table if exists detail;
 drop table if exists order_header;
 drop table if exists customer;
-drop table if exists address;
 
 create table vendor
         (vendor_id int NOT NULL auto_increment,
@@ -38,6 +37,13 @@ create table item
 	vendor_id int,
 	primary key (item_id),
         foreign key (vendor_id) references vendor(vendor_id));
+
+insert into item (description, uom, location, on_hand, price, vendor_id)
+        values ('Metal Gear', 'box (4 pieces)', "Groznj grad", 12, 59.99, 1),
+               ('Soliton radar', 'box (1 piece)', "Shadow Moses", 4, 39.99, 1),
+               ('NVG solid eye', 'box (6 pieces)', "Camp Oemga", 16, 159.99, 1),
+               ('C. Box (The Orange)', 'box (1 per duh)', "Big Shell", 42, 10.99, 1),
+               ('Active Decoy', 'box (4 pieces)', "Mother Base", 30, 255.99, 1);
 
 create table customer
 	(customer_id int NOT NULL auto_increment,
@@ -64,9 +70,11 @@ create table customer
 	comments varchar (280),
 	primary key (customer_id));
 
+insert into customer (name, ship_address_line1, ship_address_line2, ship_city, ship_state, ship_zip)
+        values ('Outer Heaven', '014 Intrude ave.', 'Tower Building', 'Zanzibar', 'IL', '60115');
+
 insert into customer (name)
-        values ('Belkan'),
-               ('Stonehenge'),
+        values ('Stonehenge'),
                ('Yellow 13');
 
 create table order_header
@@ -103,13 +111,22 @@ insert into order_header (order_date, order_status, order_expected_date, order_l
                (current_timestamp, 'Released for pick', '2018-05-15', 4, 2),
                (current_timestamp, 'Released for pick', '2018-05-17', 4, 2),
                (current_timestamp, 'Released for pick', '2018-05-16', 4, 1),
-               (current_timestamp, 'Released for pick', '2018-06-23', 2, 3);
+               (current_timestamp, 'Released for pick', '2018-06-23', 2, 1);
 
 create table detail
        (line_id int NOT NULL auto_increment,
        order_id int,
        item_id int,
        line_qty int,
-       line_required_date timestamp,
        primary key (line_id),
        foreign key (order_id) references order_header(order_id));
+
+insert into detail (order_id, item_id, line_qty)
+        values (1, 1, 4),
+               (1, 2, 1),
+               (1, 3, 2),
+               (1, 4, 15),
+               (1, 5, 6),
+               (23, 3, 1),
+               (23, 4, 4),
+               (23, 5, 14);
