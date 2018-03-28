@@ -31,14 +31,14 @@
   // generates a single html detail line
   function generateSingleDetailLine(){
     global $lineCounter, $itemDropDownMenu;
-    return '<tr>
-	    <td><select id="itemnum'.$lineCounter.'" name="itemnum'.$lineCounter.'"><option>-- Select Item --</option>'.$itemDropDownMenu.'</select></td>
-	    <td><label id="price'.$lineCounter.'" name="price'.$lineCounter.'">$0.00</label></td>
-	    <td><label id="qty'.$lineCounter.'" name="qty'.$lineCounter.'">0</label></td>
-	    <td><label id="uom'.$lineCounter.'" name="uom'.$lineCounter.'">--</label></td>
-	    <td><label id="total'.$lineCounter.'" name="total'.$lineCounter.'">$0.00</label></td>
-	    <td><button type="button" id="delete'.$lineCounter.'" name="delete'.$lineCounter.'" onclick="delete_line()" value="0">DELETE</button></td>
-	  </tr>';
+    return "<tr>
+	    <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."'><option>-- Select Item --</option>".$itemDropDownMenu."</select></td>
+	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$0.00</label></td>
+	    <td><label id='qty".$lineCounter."' name='qty".$lineCounter."'>0</label></td>
+	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>--</label></td>
+	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$0.00</label></td>
+	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line()' value='0'>DELETE</button></td>
+	  </tr>";
   }
 
 
@@ -47,7 +47,6 @@
     $htmlDetailLines = generateDetailLines();
 
     if(isset($_POST["add"]) && $_POST["add"] == "1"){
-      showAlert("generating new line item");
       $htmlDetailLines .= generateSingleDetailLine();
       $lineCounter++;
     }
