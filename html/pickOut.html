@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<body class="reportBody">
+<!-- Barcodes courtesy of http://lindell.me/JsBarcode/ -->
+<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+<link rel="stylesheet" type="text/css" href="a4.css">
+
+
+
+
+  <span name="reportTitle">Pick Report</span>
+
+  <?php echo date("Y/m/d"); ?>
+
+  <hr>
+
+
+  <div class="reportBox"></div>
+
+  <div class="reportOrderBox">
+  <fieldset name="reportOrderGroup">
+  <legend>Order Infomation</legend>
+
+  <label for="custOrderNum">Order Number: </label>
+  <span name="custOrderNum"><?php echo $orderNum; ?></span><br>
+
+  <svg id="orderBarcode"></svg><br>
+
+  <label for="custOrderDate">Order Date: </label>
+  <span name="custOrderDate"><?php echo $orderDate; ?></span><br>
+
+  <label for="custOrderLines">Order Detail Lines:</label>
+  <span name="custOrderLines"><?php echo $lineCount; ?></span><br>
+
+
+  </fieldset>
+  </div>
+
+  <div class="reportCustomerBox">
+  <fieldset name="reportCustomerGroup">
+  <legend>Customer Shipping Infomation</legend>
+
+  <span name="custName"><?php echo $custName; ?></span><br>
+
+  <span name="custAdd1"><?php echo $add1.", "; ?></span>
+  <span name="custAdd2"><?php echo $add2; ?></span><br>
+
+  <span name="custCity"><?php echo $city.", "; ?></span>
+  <span name="custState"><?php echo $state.", "; ?></span>
+  <span name="custZip"><?php echo $zip; ?></span><br>
+
+  </fieldset>
+  </div>
+
+  <div class="pickTableBox">
+  <table id="pickTable"><br>
+  <thead>
+  <tr> 
+  <th></th>
+  <th align="left">Part Number</th>
+  <th align="left">Part Description</th>
+  <th align="left">Part Location</th>
+  <th align="left">Customer Order</th>
+  <th align="left">Qty</th>
+  <th align="left">Shipping Location</th>
+  </tr>
+  </thead>
+  <tbody> 
+
+  <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+    echo '<tr>';
+    echo '<td></td>';
+    echo '<td align="left">';
+    echo 'PB-AIP-';
+    echo $row['item_id'];
+    echo '</td>';
+
+
+    echo '<td>';
+    echo $row['description'];
+    echo '</td>';
+
+    echo '<td>';
+    echo $row['location'];
+    echo '</td>';
+
+    echo '<td>';
+    echo $row['customer_id'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo $row['line_qty'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo 'Dock 1A';
+    echo '</td>';
+    echo '</tr>';
+  } ?>
+  </tbody>
+  </table>
+  </div>
+
+  
+  </div>	
+
+  <script>
+    var barcode = '<?php echo $orderNum."143588144"; ?>';
+    JsBarcode("#orderBarcode", barcode, {
+      displayValue: false
+
+    });    
+  </script>
+
+
+</body>
+</html>
