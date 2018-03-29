@@ -658,6 +658,11 @@ legend{
 .reportBody {
   visibility: visible;
   display: block;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  float: none;
+  position: static;
 }
 }
 
