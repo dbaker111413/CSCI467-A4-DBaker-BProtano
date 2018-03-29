@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <body class="reportBody">
+<form method="post" action="#" id="printJS-form">  
 <style>
 table {
     border: 1px solid black;
@@ -34,7 +34,7 @@ table th {
 
   <div class="dateTime">
   <label for="pickGuy">Picker: </label>
-  <span><?php echo $_POST['pickStaff']; ?></span><br>
+  <span><?php echo $pickStaff; ?></span><br>
   <label for="date">Date: </label>
   <span><?php echo date("m/d/Y"); ?></span><br>
   <label for="time"> </label>
@@ -160,4 +160,5 @@ table th {
 
 
 </body>
+</form>
 </html>
