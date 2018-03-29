@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
   <body>
     <!-- container object for using css with header customer info box-->
      
@@ -42,7 +42,7 @@
 
         <table style="width:100%">
 
-	  <tr><th >Item</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th></tr>
+	  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th></tr>
           <?php echo $htmlDetailLines; ?>
 	  <tr>
 	    <td></td>
@@ -116,7 +116,25 @@
 	}
 
 	function delete_line(value){
-          document.getElementById("delete" + value).value = "1";
+          document.getElementById("hDelete" + value).value = "1";
+	  $("#row" + value).css("visibility", "collapse");
+	  document.getElementById("create").submit();
+	}
+
+	function itemDescSelected(value){
+	  var element = "itemSelected" + value;
+	  if(document.getElementById(element)value != "-- Select by Item Description --"){
+            document.getElementById(element).value = "1";
+	    document.getElementById("create").submit();
+	  }
+	}
+
+	function itemNumSelected(value){
+	  var element = "itemSelected" + value;
+	  if(document.getElementById(element)value != "-- Select by Item Number --"){
+            document.getElementById(element).value = "1";
+	    document.getElementById("create").submit();
+	  }
 	}
 
 	function add_line(){

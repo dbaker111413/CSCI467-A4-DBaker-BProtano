@@ -12,6 +12,7 @@
 
   // drop down menu for item numbers
   $itemDropDownMenu = generateSelectOptions("select item_id from item", array("item_id"), $conn);
+  $itemDDDMenu = generateSelectOptions("select description from item", array("description"), $conn);
 
   // generates and returns an html string for the line item table
   // it performs this by checking if itemnum[X] isset, if so then
@@ -29,20 +30,31 @@
 
   // generates a single html detail line
   function generateSingleDetailLine(){
-    global $lineCounter, $itemDropDownMenu;
-    return "<tr>
-	    <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."'><option>-- Select Item --</option>".$itemDropDownMenu."</select></td>
+    global $lineCounter, $itemDropDownMenu, $itemDDDMenu;
+    $deleteValue = '0';
+
+    if(isset($_POST["hDelete".$lineCounter])){
+      $deleteValue = $_POST["hDelete".$lineCounter];
+    }
+    showAlert("Line ".$lineCounter." delete value: ".$deleteValue);
+    return "<div class='row".$lineCounter."'><tr>
+	    <td><select id='itemdesc".$lineCounter."' name='itemdesc".$lineCounter."'><option>-- Select by Item Description --</option>".$itemDDDMenu." onchanged='itemDescSelected(".$lineCounter.")'</select></td>
+            <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."'><option>-- Select by Item Number --</option>".$itemDropDownMenu." onchanged='itemNumSelected(".$lineCounter.")'</select></td>
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$0.00</label></td>
 	    <td><input type='text' id='qty".$lineCounter."' name='qty".$lineCounter."'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>--</label></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$0.00</label></td>
-	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")' value='0'>DELETE</button></td>
-	  </tr>";
+	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
+                <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td>
+          <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
+	  </tr></div>";
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $htmlDetailLines = generateDetailLines();
+
+    
 
     if(isset($_POST["add"]) && $_POST["add"] == "1"){
       $htmlDetailLines .= generateSingleDetailLine();

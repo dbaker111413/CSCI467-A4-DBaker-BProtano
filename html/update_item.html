@@ -13,13 +13,13 @@
 	  <label for="itemDesc">Item Description </label>
           <select name="itemDesc" id="itemDesc" onchange="itemDescSelected(this, document.create.uom)">
             '<?php echo $i->itemDesc != "" ? "<option>".$i->itemDesc."</option>" : ""; ?>'
-	    <option>-- Select Description --</option>
+	    <option>-- Select by Part Description --</option>
 	    '<?php echo $descDropDownArray; ?>'
 	  </select><br><br>
 	  <label for="itemNum">Item Number </label>
           <select id="itemNum" name="itemNum" onchange="itemNumSelected(this, document.create.uom)">
 	    '<?php echo $i->itemNumber != 0 ? "<option>".$i->itemNumber."</option>" : ""; ?>'
-	    <option>-- Select Part Number --</option>
+	    <option>-- Select by Part Number --</option>
             '<?php echo $numDropDownArray; ?>'
 	  </select><br><br>
           <input type="hidden" name="selectItem" id="selectItem" value="0">
@@ -79,19 +79,21 @@
 	
         <!-- sets a flag that let's the server know to read an item from the database and tabs to next field -->
         function itemDescSelected(current, to){
-	  if(document.getElementById("itemDesc").value != "-- Select Description --"){
             document.getElementById("selectItem").value = "1";
             document.getElementById("create").submit();
             to.focus();
-	  }
 	}
 	function itemNumSelected(current, to){
-	  if(document.getElementById("itemNum").value != "-- Select Part Number--"){
             document.getElementById("selectItem").value = "2";
             document.getElementById("create").submit();
             to.focus();
-	  }
         }
+
+	function reset(){
+            document.getElementById("selectItem").value = "1";
+            document.getElementById("itemDesc").value = "";
+	    document.getElementById("create").submit();
+	}
       </script>
     </div>
   </body>
