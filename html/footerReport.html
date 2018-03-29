@@ -1,0 +1,124 @@
+</body>
+<div class="selectionHeader">
+
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<link rel="https://printjs-4de6.kxcdn.com/print.min.css" type="text/css" href="a4.css">
+
+<style>
+.selButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonPrint:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonPrint {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 400;
+ //margin-right: 9px;
+ float: right;
+}
+
+.buttonBack:hover {
+ background-color: #ff9933;
+ color: white;
+}
+
+.buttonBack {
+ background-color: white;
+ font-size: 18px;
+ font-weight: 300;
+ color: black;
+ border: 2px solid black;
+ float: left;
+ //margin-left: 9px;
+}
+
+
+#selDesc {
+    text-align: center;
+}
+
+.pagination {
+    //display: inline-block;
+}
+
+.pagination a.num {
+    color: black;
+    //float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.num.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a.num:hover:not(.active) {
+	background-color: #66c2ff; 
+        color: white;
+}
+</style>
+<div class="pagination">  
+
+  <a class="selButton buttonBack" href="picker.php" >&laquo Generate Pick Report</a>
+	  
+
+<?php
+  echo '<a class="num" href="pick-index.php?id=';
+  echo $idArray[0];
+  echo '&pickStaff=';
+  echo $pickStaff;
+  echo '&rowIds=';
+  echo $rowIds;
+  echo '" target="iframe_a">&laquo;</a>';
+
+  $i = 0;
+  $index = 0;
+
+  foreach($idArray as $value){
+    $i++;
+    echo '<a class="num" href="pick-index.php?id=';
+    echo $value;
+    echo '&pickStaff=';
+    echo $pickStaff;
+    echo '&rowIds=';
+    echo $rowIds;
+    echo '" target="iframe_a">';
+    echo $i;
+    echo '</a>';
+  }
+
+  echo '<a class="num" href="pick-index.php?id=';
+  echo $idArray[count($idArray)-1];
+  echo '&pickStaff=';
+  echo $pickStaff;
+  echo '&rowIds=';
+  echo $rowIds;
+  echo '" target="iframe_a">&raquo;</a>'; 
+?>
+
+  <!-- submit box -->
+  <a class="selButton buttonPrint" onclick="window.print();return false;">Print Current Report</a>
+  <br><br><br>
+</div>
+</div>	
+</html>
