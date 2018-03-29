@@ -5,167 +5,59 @@
     <!-- container object for using css with header customer info box-->
      
     <div class="containerCreateOrder">
-      <div class="headerBox">
-      <fieldset name="orderInfoGroup" id="orderInfoGroup">
-      <legend>Header Information</legend>
-      <form name="create", id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
-
-        <label for="customerName">Customer Name </label>
-        <select required title="Customer company name or number required" name="customerName" id="customerName" autofocus 
-	       value="<?php echo isset($_POST['customerName']) ? $_POST['customerName'] : ''?>">
-	       <option value="na">Placeholder</option>     
-	</select>
-
-        <input type="date" name="Required by Date"><br><br>
-
-        <label for="customerName">Customer Number </label>
-
-      </fieldset>
-      </div>
-
-      <!-- billing attributes box -->
-      <div class="billingBox">
-	<fieldset name="customerBillingGroup" id="customerBillingGroup">
-        <legend>Billing Address</legend>
-
-	<div class="addBox">
-	<div class="add1">
-	  <label for="billAddress1">Address 1 </label>
-	  <input type="text" required title="Address required" name="billAddress1" id="billAddress1" maxlength="25" size="38" 
-	         placeholder="Street and number, P.O. box, c/o."
-	         value="<?php echo isset($_POST['billAddress1']) ? $_POST['billAddress1'] : ''?>"><br><br>
-	</div>
-
-	<div class="add2">
-          <label for="billAddress2">Address 2 </label>
-	  <input type="text" optional name="billAddress2" id="billAddress2" maxlength="25" size="38"
-		 placeholder="Suite, unit, floor, building, etc. (optional)"
-	         value="<?php echo isset($_POST['billAddress2']) ? $_POST['billAddress2'] : ''?>"><br><br>
-	</div>
-
-	<div class="city">
-          <label for="billCity">City </label>
-          <input type="text" required title="City name required" name="billCity" id="billCity" maxlength="25" size="26"
-		      value="<?php echo isset($_POST['billCity']) ? $_POST['billCity'] : ''?>"><br><br>
-	</div>
-
-	<div class="state">
-	  <label for="billState">State </label>
-          <select name="billState" id="billState" 
-	          value="<?php echo isset($_POST['billState']) ? $_POST['billState'] : ''?>">
-	    <option value="WY">WY</option>     
-	  </select><br>
-	</div>
-
-	<div class="zip">
-          <label for="billZip">Zip </label>
-	  <input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="billZip" id="billZip" minlength="5" maxlength="5" size="7"
-	         value="<?php echo isset($_POST['billZip']) ? $_POST['billZip'] : ''?>"><br>
-	</div>
-
-	</div>
-	</fieldset>
-      </div>
-
-      <!-- shipping attributes box will only show if different than billing address -->
-      <div class="shippingBox">
-        <fieldset name="customerShippingGroup" id="customerShippingGroup">
-        <legend>Shipping Address</legend>
-
-	<div class="addBox">
-	<div class="add1">
-	<label for="shipAddress1">Address 1 </label>
-	<input type="text" required title="Address required" name="shipAddress1" id="shipAddress1" maxlength="25" size="38"
-	       placeholder="Street and number, P.O. box, c/o." 
-	       value="<?php echo isset($_POST['shipAddress1']) ? $_POST['shipAddress1'] : ''?>"><br><br>
-	</div>
-
-	<div class="add2">
-        <label for="shipAddress2">Address 2 </label>
-	<input type="text" optional name="shipAddress2" id="shipAddress2" maxlength="25" size="38"
-	       placeholder="Suite, unit, floor, building, etc. (optional)"
-	       value="<?php echo isset($_POST['shipAddress2']) ? $_POST['shipAddress2'] : ''?>"><br><br>
-	</div>
-
-	<div class="city">
-	<label for="shipCity">City </label>
-	<input type="text" required title="City name required" name="shipCity" id="shipCity" maxlength="25" size="26"
-	       value="<?php echo isset($_POST['shipCity']) ? $_POST['shipCity'] : ''?>"><br><br>
-	</div>
-
-	<div class="state">
-	<label for="shipState">State </label>
-	<select name="shipState" id="shipState"
-	       value="<?php echo isset($_POST['shipState']) ? $_POST['shipState'] : ''?>"> 
-	    <option value="WY">WY</option>  
-	</select><br>
-	</div>
-
-	<div class="zip">
-        <label for="shipZip">Zip </label>
-	<input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
-	       value="<?php echo isset($_POST['shipZip']) ? $_POST['shipZip'] : ''?>"<br>
-	</div>
-
-	</div>
-        </fieldset>
-      </div>
-
+      <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
+<!--
+      <tr>
+	    <td><select id="itemnum0" name="itemnum0"><option>PB3546&J</option></select></td>
+	    <td><label id="price0" name="price0">$1.11</label></td>
+	    <td><label id="qty0" name="qty0">300</label></td>
+	    <td><label id="uom0" name="uom0">lbs</label></td>
+	    <td><label id="total0" name="total0">calculated amount</label></td>
+	    <td><button id="delete0" name="delete0" onclick="deleteLine()" value="0">DELETE</button></td>
+	  </tr>
+	  <tr>
+	    <td><select id="itemnum1" name="itemnum1"><option>PB3546&J</option></select></td>
+	    <td><label id="price1" name="price1">$1.11</label></td>
+	    <td><label id="qty1" name="qty1">300</label></td>
+	    <td><label id="uom1" name="uom1">lbs</label></td>
+	    <td><label id="total1" name="total1">calculated amount</label></td>
+    	    <td><button id="delete1" name="delete1" onclick="deleteLine()" value="0">DELETE</button></td>
+	  </tr>
+	  <tr>
+	    <td><select id="itemnum2" name="itemnum2"><option>PB3546&J</option></select></td>
+	    <td><label id="price2" name="price2">$1.11</label></td>
+	    <td><label id="qty2" name="qty2">300</label></td>
+	    <td><label id="uom2" name="uom2">lbs</label></td>
+	    <td><label id="total2" name="total2">calculated amount</label></td>
+	    <td><button id="delete2" name="delete2" onclick="deleteLine()">DELETE</button>
+                <input type="hidden" id="del2" name="del2" value="0">
+	    </td>	 
+	  </tr>
+-->	  
+      
       <!-- detail lines expanding box -->
       <div class="detailBox">
         <fieldset name="detailGroup" id="detailGroup">
         <legend>Detail Lines</legend>
 
-   <ul id="myUL">
+        <table style="width:100%">
 
-   <li class="addLI">
+	  <tr><th >Item</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th></tr>
+          <?php echo $htmlDetailLines; ?>
+	  <tr>
+	    <td></td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
+	    <td><button type="button" onclick="add_line()">ADD</button>
+                <input type="hidden" id="add" name="add" value="0">
+	    </td>
+	  </tr>
+	</table>
 
-      <div class="itemAddBox">
-      <fieldset name="itemAddGroup" id="itemAddGroup">
-      <legend>Add Item</legend>
-
-	  <label for="itemDesc">Item Description </label>
-          <select name="itemDesc" id="itemDesc" onchange="itemDescSelected(this, document.create.uom)">
-            '<?php echo $i->itemDesc != "" ? "<option>".$i->itemDesc."</option>" : ""; ?>'
-	    <option>-- Select Description --</option>
-	    '<?php echo $descDropDownArray; ?>'
-	  </select>
-
-          <label for="uom">Unit of Measurement </label>
-          <input type="text" required title="Unit of Measurement required" name="uom" id="uom" size="15" value="<?php echo $i->uom; ?>">
-
-          <label for="price">Unit Price </label>
-	  <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="price" id="price" value="<?php echo $i->price; ?>"><br><br>
-
-	  <label for="itemNum">Item Number </label>
-          <select id="itemNum" name="itemNum" onchange="itemNumSelected(this, document.create.uom)">
-	    '<?php echo $i->itemNumber != 0 ? "<option>".$i->itemNumber."</option>" : ""; ?>'
-	    <option>-- Select Part Number --</option>
-            '<?php echo $numDropDownArray; ?>'
-	  </select>
-          <input type="hidden" name="selectItem" id="selectItem" value="0">
-
-          <label for="qty">Qty </label>
-          <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" value="<?php echo $i->qty; ?>">
-   
-	  <label for="price">Line Total </label>
-          <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="lineTotal" id="lineTotal" 
-	         value="<?php echo $i->price; ?>"><br><br>
-
-      </fieldset>
-      </div>
-  
-  
-    </li>
-
-
-  </ul>
-
-
-  <span onclick="newElement()" class="addBtn">Add</span>
 	</fieldset>
       </div>
-
 
       <!-- cancel box -->
       <div class="cancelBox">
@@ -222,200 +114,16 @@
             document.getElementById("shipState").disabled = false;
 	  } 
 	}
+
+	function delete_line(value){
+          document.getElementById("delete" + value).value = "1";
+	}
+
+	function add_line(){
+           document.getElementById("add").value = "1";
+	   document.getElementById("create").submit();
+	}
       </script>
-
-
-<script>
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-/* Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false); */
-var count = 0;
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-
-
-//labels and inputs
-
-  var labelItemDesc = document.createElement("LABEL");
-  var labelUOM = document.createElement("LABEL");
-  var labelPrice = document.createElement("LABEL");
-  var labelItemNum = document.createElement("LABEL");
-  var labelQty = document.createElement("LABEL");
-  var labelLineTot = document.createElement("LABEL");
-  var txtItemDesc = document.createTextNode("Item Description");
-  var txtUOM = document.createTextNode("Unit of Measurement");
-  var txtPrice = document.createTextNode("Unit Price");
-  var txtItemNum = document.createTextNode("Item Number");
-  var txtQty = document.createTextNode("Qty");
-  var txtLineTotal = document.createTextNode("Line Total");
-  labelItemDesc.appendChild(txtItemDesc);
-  labelUOM.appendChild(txtUOM);
-  labelPrice.appendChild(txtPrice);
-  labelItemNum.appendChild(txtItemNum);
-  labelQty.appendChild(txtQty);
-  labelLineTot.appendChild(txtLineTotal);
-  labelItemDesc.for = "itemDesc" + count;
-  labelUOM.for = "uom" + count;
-  labelPrice.for = "price" + count;
-  labelQty.for = "qty" + count;
-  labelItemNum.for = "itemNum" + count;
-  labelLineTot.for = "lineTot" + count;
-
-  var descSelect = document.createElement("SELECT");
-  descSelect.onchange="itemDescSelected(this, document.create.uom + count)"
-  /*var phpDescSelect = document.createTextNode("'<?php echo $i->itemDesc != "" ? "<option>".$i->itemDesc."</option>" : ""; ?>'");
-  descSelect.appendChild = phpDescSelect;*/
-  var optionDef = document.createElement("OPTION");
-  optionDef.text = "-- Select Description --";
-  descSelect.add(optionDef);
-  /*var phpDescSelect2 = document.createTextNode("'<?php echo $descDropDownArray; ?>'");
-  descSelect.appendChild = phpDescSelect2;*/
-
-  var uomInp = document.createElement("INPUT");
-  uomInp.type = "text";
-  uomInp.size = "15";
-  uomInp.id = "uom" + count;
-  uomInp.name = "uom" + count;
-  /* uomInp.value = "'<?php echo $i->uom; ?>'"; */
-
-  var priceInp = document.createElement("INPUT");
-  priceInp.type = "text";
-  priceInp.size = "15";
-  priceInp.pattern = "\d*.d\d\d";
-  priceInp.id = "price" + count;
-  priceInp.name = "price" + count;
-  /* priceInp.value = "'<?php echo $i->price; ?>'"; */
-
-  var numSelect = document.createElement("SELECT");
-  numSelect.onchange="itemNumSelected(this, document.create.uom + count)"
-  /*var phpNumSelect = document.createTextNode("'<?php echo $i->itemNum != 0 ? "<option>".$i->itemNum."</option>" : ""; ?>'");
-  numSelect.appendChild = phpNumSelect;*/
-  var optionDef2 = document.createElement("OPTION");
-  optionDef2.text = "-- Select Part Number --";
-  numSelect.add(optionDef2);
-  /*var phpNumSelect2 = document.createTextNode("'<?php echo $numDropDownArray; ?>'");
-  numSelect.appendChild = phpNumSelect2;*/
-
-  var hiddenInp = document.createElement("INPUT");
-  hiddenInp.type = "hidden";
-  hiddenInp.id = "selectItem" + count;
-  hiddenInp.name = "selectItem" + count;
-  hiddenInp.value = "0";
-
-  var qtyInp = document.createElement("INPUT");
-  qtyInp.type = "text";
-  qtyInp.size = "15";
-  qtyInp.pattern = "\d*";
-  qtyInp.id = "qty" + count;
-  qtyInp.name = "qty" + count;
-  /* qtyInp.value = "'<?php echo $i->qty; ?>'"; */
-
-  var lineTotInp = document.createElement("INPUT");
-  lineTotInp.type = "text";
-  lineTotInp.size = "15";
-  lineTotInp.pattern = "\d*.d\d\d";
-  lineTotInp.id = "lineTotal" + count;
-  lineTotInp.name = "lineTotal" + count;
-  /* lineTotInp.value = "'<?php echo $i->price; ?>'"; */
-
-//field and legend
-
-  var field = document.createElement("FIELDSET");
-  var legend = document.createElement("LEGEND");
-  txt2 = document.createTextNode("Item Attributes");
-  legend.appendChild(txt2)
-
-  var linebreak = document.createElement("br");
-
-  field.appendChild(legend);
-  field.appendChild(labelItemDesc);
-  field.appendChild(descSelect);
-  field.appendChild(labelUOM);
-  field.appendChild(uomInp);
-  field.appendChild(labelPrice);
-  field.appendChild(priceInp);
-  field.appendChild(linebreak);
-  field.appendChild(labelItemNum);
-  field.appendChild(numSelect);
-  field.appendChild(hiddenInp);
-  field.appendChild(labelQty);
-  field.appendChild(qtyInp);
-  field.appendChild(labelLineTot);
-  field.appendChild(lineTotInp);
-  linebreak = document.createElement("br");
-  field.appendChild(linebreak);
-
-  var div2 = document.createElement("DIV");
-  div2.className = "itemAddBox";
-
-  div2.appendChild(field);
-  
-
-
-
-//li connection
-
-  var li = document.createElement("li");
-  li.className = "addLI";
-
-  li.appendChild(div2);
-
-  document.getElementById("myUL").appendChild(li);
-
-/*        <label for="warehouseLoc">Warehouse Location </label>
-        <input type="text" required title="Warehouse Location required" name="warehouseLoc" id="warehouseLoc" size="30" maxlength="25" >
-               <br><br>
-  
-        <label for="qty">Quantity On Hand </label>
-        <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" size="12">
-               <br><br>
-  
-        <label for="price">Unit Price </label>
-        <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="price" id="price" size="12">
-               <br><br>
-
-*/
-
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
-</script>
 
 
     </div>

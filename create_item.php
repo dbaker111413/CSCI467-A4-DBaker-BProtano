@@ -26,12 +26,15 @@
 	$i->warehouseLoc = $_POST['warehouseLoc'];
 	$i->qty = $_POST['qty'];
 	$i->price = $_POST['price'];
-	$i->vendor = $_POST['vendor'];
+	$i->setVendor($_POST['vendor']);
 
         // now save it to the database
         if($i->addToDatabase()){
 	  // on a successful insert, clear the post array
 	  $_POST = array();
+
+          // remove vendor ID from current item object or it will show up in the form
+	  $i->vendor = 0;
 	}
     }
   }

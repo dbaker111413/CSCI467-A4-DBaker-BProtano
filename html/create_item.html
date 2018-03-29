@@ -14,8 +14,8 @@
                  value="<?php echo isset($_POST['itemDesc']) ? $_POST['itemDesc'] : ''?>"><br><br>
 
 	  <label for="vendor">Preferred Vendor </label>
-          <select id="vendor" name="vendor" onchange="vendorSelected(this, document.create.uom)" value="<?php echo isset($_POST['vendor']) ? $_POST['vendor'] : ''?>">
-	    "<?php echo $i->vendor != 0 ? '<option>'.$i->vendor.'</option>' : ''; ?>"
+          <select id="vendor" name="vendor" onchange="vendorSelected(this, document.create.uom)" value='<?php echo isset($_POST["vendor"]) ? $_POST["vendor"] : ""?>'>
+	    '<?php echo $i->vendor != 0 ? "<option>".$i->vendor."</option>" : ""; ?>'
 	    <option>-- Select Vendor --</option>
             "<?php echo $dropDownArray; ?>"
 	  </select><br><br>
@@ -40,7 +40,7 @@
         <input type="text" required title="Quantity required, must be a decimal value" pattern="\d*" name="qty" id="qty" size="12"
                value="<?php echo isset($_POST['qty']) ? $_POST['qty'] : ''?>"><br><br>
   
-        <label for="price">Unit Price </label>
+        <label for="price">Unit Price ($) </label>
         <input type="text" required title="Unit Price required, please use a number with 2 decimal places" pattern="\d*.\d\d" name="price" id="price" size="12"
                value="<?php echo isset($_POST['price']) ? $_POST['price'] : ''?>"><br><br>
       </fieldset>
