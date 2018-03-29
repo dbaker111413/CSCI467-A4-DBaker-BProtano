@@ -52,6 +52,7 @@
         if($i->updateDatabase()){
 	  // on a successful insert, clear the post array
 	  $_POST = array();
+	  $i = new item($conn);
 	}
     }
   }

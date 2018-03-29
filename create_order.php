@@ -19,7 +19,6 @@
   function generateDetailLines(){
     global $lineCounter;
     $outputLine = "";
-
     
     while(isset($_POST["itemnum".$lineCounter])){
       $outputLine .= generateSingleDetailLine();
@@ -34,13 +33,12 @@
     return "<tr>
 	    <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."'><option>-- Select Item --</option>".$itemDropDownMenu."</select></td>
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$0.00</label></td>
-	    <td><label id='qty".$lineCounter."' name='qty".$lineCounter."'>0</label></td>
+	    <td><input type='text' id='qty".$lineCounter."' name='qty".$lineCounter."'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>--</label></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$0.00</label></td>
-	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line()' value='0'>DELETE</button></td>
+	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")' value='0'>DELETE</button></td>
 	  </tr>";
   }
-
 
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -51,7 +49,6 @@
       $lineCounter++;
     }
   }
-
 
   // include any html files required for the layout
   $page_title = "Create Customer Order";

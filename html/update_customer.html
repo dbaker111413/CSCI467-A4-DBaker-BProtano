@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <body>
+    <!-- container object for css and customer info box-->
+     
+    <div class="containerCreateCustomer">
+      <div class="customerBox">
+      <fieldset name="customerInfoGroup" id="customerInfoGroup">
+      <legend>Customer Information</legend>
+      <form name="create", id="create" action="update_customer.php" method="post" onsubmit="show_confirm()">        
+        <label for="selectCustomer">Customer Name </label>
+	<select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.create.billAddress1)" autofocus>
+	  <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
+	  <option>-- Select Customer Name --</option>
+	  <?php echo $custDropDownArray; ?>
+	</select><br><br>
+	<input type="hidden" name="custSelected" id="custSelected" value="0">
+	<label for="selectCustomerNum">Customer Number </label>
+	<select name="selectCustomerNum" id="selectCustomerNum" onchange="cNumS(this, document.create.billAddress1)">
+	  <?php echo $c->customerNumber != "" ? "<option>".$c->customerNumber."</option>" : ""; ?>
+	  <option>-- Select Customer Number --</option>
+	  <?php echo $custNumDropDownArray; ?>
+	</select>
+        </fieldset>
+      </div>
+
+      <!-- billing attributes box -->
+      <div class="billingBox">
+	<fieldset name="customerBillingGroup" id="customerBillingGroup">
+        <legend>Billing Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	  <label for="billAddress1">Address 1 </label>
+	  <input type="text" required title="Address required" name="billAddress1" id="billAddress1" maxlength="25" size="38" 
+	         placeholder="Street and number, P.O. box, c/o."
+	         value="<?php echo $c->billAddress1; ?>"><br><br>
+	</div>
+
+	<div class="add2">
+          <label for="billAddress2">Address 2 </label>
+	  <input type="text" optional name="billAddress2" id="billAddress2" maxlength="25" size="38"
+		 placeholder="Suite, unit, floor, building, etc. (optional)"
+	         value="<?php echo $c->billAddress2; ?>"><br><br>
+	</div>
+
+	<div class="city">
+          <label for="billCity">City </label>
+          <input type="text" required title="City name required" name="billCity" id="billCity" maxlength="25" size="26"
+		      value="<?php echo $c->billCity; ?>"><br><br>
+	</div>
+
+	<div class="state">
+	  <label for="billState">State </label>
+          <select name="billState" id="billState" 
+	          value="<?php echo $c->billState != '' ? $c->billState : 'IL'?>">
+	    <option value="AL">AL</option>
+	    <option value="AK">AK</option>
+	    <option value="AZ">AZ</option>
+	    <option value="AR">AR</option>
+	    <option value="CA">CA</option>
+	    <option value="CO">CO</option>
+	    <option value="CT">CT</option>
+	    <option value="DE">DE</option>
+	    <option value="DC">DC</option>
+	    <option value="FL">FL</option>
+	    <option value="GA">GA</option>
+	    <option value="HI">HI</option>
+	    <option value="ID">ID</option>
+	    <option value="IL" selected>IL</option>
+	    <option value="IN">IN</option>
+	    <option value="IA">IA</option>
+	    <option value="KS">KS</option>
+	    <option value="KY">KY</option>
+	    <option value="LA">LA</option>
+	    <option value="ME">ME</option>
+	    <option value="MD">MD</option>
+	    <option value="MA">MA</option>
+	    <option value="MI">MI</option>
+	    <option value="MN">MN</option>
+	    <option value="MS">MS</option>
+	    <option value="MO">MO</option>
+	    <option value="MT">MT</option>
+	    <option value="NE">NE</option>
+	    <option value="NV">NV</option>
+	    <option value="NH">NH</option>
+	    <option value="NJ">NJ</option>
+	    <option value="NM">NM</option>
+  	    <option value="NY">NY</option>
+	    <option value="NC">NC</option>
+	    <option value="ND">ND</option>
+	    <option value="OH">OH</option>
+	    <option value="OK">OK</option>
+	    <option value="OR">OR</option>
+	    <option value="PA">PE</option>
+	    <option value="RI">RI</option>
+	    <option value="SC">SC</option>
+	    <option value="SD">SD</option>
+	    <option value="TN">TN</option>
+	    <option value="TX">TX</option>
+	    <option value="UT">UT</option>
+	    <option value="VT">VT</option>
+	    <option value="VA">VA</option>
+	    <option value="WA">WA</option>
+	    <option value="WV">WV</option>
+	    <option value="WI">WI</option>
+	    <option value="WY">WY</option>     
+	  </select><br>
+	</div>
+
+	<div class="zip">
+          <label for="billZip">Zip </label>
+	  <input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="billZip" id="billZip" minlength="5" maxlength="5" size="7"
+	         value="<?php echo $c->billZip; ?>"><br>
+	</div>
+          <div class="check">
+	    <br><input type="checkbox" name="billShipSame" id="billShipSame" value="false" onclick="setShipping()" > Shipping address same as billing address
+	  </div>
+
+	</div>
+	</fieldset>
+      </div>
+
+      <!-- shipping attributes box -->
+      <div class="shippingBox">
+        <fieldset name="customerShippingGroup" id="customerShippingGroup">
+        <legend>Shipping Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	<label for="shipAddress1">Address 1 </label>
+	<input type="text" required title="Address required" name="shipAddress1" id="shipAddress1" maxlength="25" size="38"
+	       placeholder="Street and number, P.O. box, c/o." 
+	       value="<?php echo $c->shipAddress1; ?>"><br><br>
+	</div>
+
+	<div class="add2">
+        <label for="shipAddress2">Address 2 </label>
+	<input type="text" optional name="shipAddress2" id="shipAddress2" maxlength="25" size="38"
+	       placeholder="Suite, unit, floor, building, etc. (optional)"
+	       value="<?php echo $c->shipAddress2; ?>"><br><br>
+	</div>
+
+	<div class="city">
+	<label for="shipCity">City </label>
+	<input type="text" required title="City name required" name="shipCity" id="shipCity" maxlength="25" size="26"
+	       value="<?php echo $c->shipCity; ?>"><br><br>
+	</div>
+
+	<div class="state">
+	<label for="shipState">State </label>
+	<select name="shipState" id="shipState"
+	       value="<?php echo $c->shipState != '' ? $c->shipState : 'IL'; ?>">
+ 	    <option value="AL">AL</option>
+	    <option value="AK">AK</option>
+	    <option value="AZ">AZ</option>
+	    <option value="AR">AR</option>
+	    <option value="CA">CA</option>
+	    <option value="CO">CO</option>
+	    <option value="CT">CT</option>
+	    <option value="DE">DE</option>
+	    <option value="DC">DC</option>
+	    <option value="FL">FL</option>
+	    <option value="GA">GA</option>
+	    <option value="HI">HI</option>
+	    <option value="ID">ID</option>
+	    <option value="IL" selected>IL</option>
+	    <option value="IN">IN</option>
+	    <option value="IA">IA</option>
+	    <option value="KS">KS</option>
+	    <option value="KY">KY</option>
+	    <option value="LA">LA</option>
+	    <option value="ME">ME</option>
+	    <option value="MD">MD</option>
+	    <option value="MA">MA</option>
+	    <option value="MI">MI</option>
+	    <option value="MN">MN</option>
+	    <option value="MS">MS</option>
+	    <option value="MO">MO</option>
+	    <option value="MT">MT</option>
+	    <option value="NE">NE</option>
+	    <option value="NV">NV</option>
+	    <option value="NH">NH</option>
+	    <option value="NJ">NJ</option>
+	    <option value="NM">NM</option>
+  	    <option value="NY">NY</option>
+	    <option value="NC">NC</option>
+	    <option value="ND">ND</option>
+	    <option value="OH">OH</option>
+	    <option value="OK">OK</option>
+	    <option value="OR">OR</option>
+	    <option value="PA">PE</option>
+	    <option value="RI">RI</option>
+	    <option value="SC">SC</option>
+	    <option value="SD">SD</option>
+	    <option value="TN">TN</option>
+	    <option value="TX">TX</option>
+	    <option value="UT">UT</option>
+	    <option value="VT">VT</option>
+	    <option value="VA">VA</option>
+	    <option value="WA">WA</option>
+	    <option value="WV">WV</option>
+	    <option value="WI">WI</option>
+	    <option value="WY">WY</option>  
+	</select><br>
+	</div>
+
+	<div class="zip">
+        <label for="shipZip">Zip </label>
+	<input type="text" required title="Valid 5 digit zip code required" pattern="\d*" name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
+	       value="<?php echo $c->shipZip; ?>"<br><br><br><br>
+	</div>
+
+	</div>
+        </fieldset>
+      </div>
+
+      <!-- represetative contact box -->
+      <div class="repBox">
+        <fieldset name="customerRepGroup" id="customerRepGroup">
+        <legend>Representative Contact Information</legend>
+
+	<div class="fname">
+        <label for="fname">First Name </label>
+        <input type="text" required title="Company representative's first name is required" maxlength="25" name="fname" id="fname" size="30"
+	       value="<?php echo $c->fname; ?>">
+        </div>
+
+	<div class="lname">
+        <label for="lname">Last Name </label>
+        <input type="text" required title="Company representative's last name is required" maxlength="25" name="lname" id="lname" size="30"
+	       value="<?php echo $c->lname; ?>"><br>
+        </div>
+
+	<div class="area">
+        <label for="areaCode">Phone ( </label>
+        <input type="text" required title="3 digit area code is required" minlength="3"  maxlength="3" name="areaCode" id="areaCode" pattern="\d*" oninput="autoTab(this, document.create.midDigits)" 
+	       placeholder="555"
+	       size="3" value="<?php echo $c->areaCode; ?>">
+        </div>
+
+	<div class="mid">
+        <label for="midDigits"> ) </label>
+        <input type="text" required title="3 digits are required" minlength="3"  maxlength="3" name="midDigits" id="midDigits" pattern="\d*" oninput="autoTab(this, document.create.endDigits)" 
+	       placeholder="555"
+	       size="3" value="<?php echo $c->midDigits; ?>">
+        </div>
+
+	<div class="endy">
+        <label for="endDigits"> - </label>
+        <input type="text" required title="4 digits are required" minlength="4"  maxlength="4" name="endDigits" id="endDigits" pattern="\d*" 
+	       placeholder="5555"
+	       size="4" value="<?php echo $c->endDigits; ?>">
+        </div>
+
+	<div class="ex">
+        <label for="ext"> ext. </label>
+        <input type="text" optional title="Up to 4 digits are required" minlength="1"  maxlength="4" name="ext" id="ext" pattern="\d*" 
+	       size="4" value="<?php echo $c->ext; ?>">
+        </div>
+
+	<div class="email">
+        <label for="email">Email </label>
+        <input type="text" required title="Valid email is required"  maxlength="25" name="email" id="email" size="30"
+	       placeholder="sample@email.com"
+               value="<?php echo $c->email; ?>">
+        </div>
+
+	</fieldset>
+      </div>
+
+      <!-- comment box -->
+      <div class="commentBox">
+        <fieldset name="customerCommentGroup" id="customerCommentGroup">
+        <legend>Comments (optional)</legend>
+        <label for="comment"></label>
+        <textarea optional rows="4" cols="115"  maxlength="240" name="comment" id="comment"
+		  placeholder="Type comments and notes here, maximum of 240 characters."><?php echo $c->comment; ?></textarea>
+        </fieldset>
+      </div>
+
+      <!-- cancel box -->
+      <div class="cancelBox">
+	<button class="button buttonReset" type="reset">Cancel</button>
+      </div>
+	  
+      <!-- submit box -->
+      <div class="submitBox">
+	<button class="button buttonSubmit" type="submit">Submit</button>
+        <input type="hidden" name="which" id="which" value="0">
+      </div>
+      </form>
+
+      <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
+      <script>
+	function show_confirm(){
+	  if(confirm("Are you sure you want to update this customer?") == true) {
+	    document.getElementById("custSelected").value = "0";
+            document.getElementById("which").value = "1";
+
+            document.getElementById("shipAddress1").disabled = false;
+            document.getElementById("shipAddress2").disabled = false;
+            document.getElementById("shipCity").disabled = false;
+            document.getElementById("shipZip").disabled = false;
+            document.getElementById("shipState").disabled = false;
+  	  }
+	  else{
+            document.getElementById("which").value = "0";
+	  }
+ 	}
+
+        function autoTab( current, to ){
+          if(current.getAttribute && current.value.length == current.getAttribute("maxlength")){
+            to.focus();
+          }
+        }
+
+        function setShipping(){
+	  if(document.getElementById("shipAddress1").disabled == false){
+            document.getElementById("shipAddress1").value = document.getElementById("billAddress1").value;
+
+	    document.getElementById("shipAddress2").value = document.getElementById("billAddress2").value;
+
+	    document.getElementById("shipCity").value = document.getElementById("billCity").value;
+
+	    document.getElementById("shipZip").value = document.getElementById("billZip").value;
+
+	    document.getElementById("shipState").value = document.getElementById("billState").value;
+
+            document.getElementById("shipAddress1").disabled = true;	
+            document.getElementById("shipAddress2").disabled = true;	
+            document.getElementById("shipCity").disabled = true;	
+            document.getElementById("shipZip").disabled = true;	
+            document.getElementById("shipState").disabled = true;
+
+	  } else {
+            document.getElementById("shipAddress1").disabled = false;
+            document.getElementById("shipAddress2").disabled = false;
+            document.getElementById("shipCity").disabled = false;
+            document.getElementById("shipZip").disabled = false;
+            document.getElementById("shipState").disabled = false;
+	  } 
+	}
+
+        function cs(current, to) {
+          if(document.getElementById("selectCustomer").value != "-- Select Customer --"){
+            document.getElementById("custSelected").value = "1";
+            document.getElementById("create").submit();
+            to.focus();
+	  }
+	}
+
+	function cNumS(current, to) {
+          if(document.getElementById("selectCustomerNum").value != "-- Select Customer Number --"){
+            document.getElementById("custSelected").value = "2";
+            document.getElementById("create").submit();
+            to.focus();
+	  }
+	}
+	
+      </script>
+    </div>
+  </body>
+</html>

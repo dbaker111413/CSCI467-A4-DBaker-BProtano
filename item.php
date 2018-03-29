@@ -24,7 +24,7 @@ class item {
 
   /*
   * inserts new item into database.
-  * returns true if successful, false otherwisex
+  * returns true if successful, false otherwise
   **/
   public function addToDatabase(){
      // data is validated as part of the html definition
