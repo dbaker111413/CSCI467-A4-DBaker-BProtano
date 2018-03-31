@@ -42,7 +42,7 @@
 
         <table style="width:100%">
 
-	  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th></tr>
+	  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Required Date</th><th>Total</th></tr>
           <?php echo $htmlDetailLines; ?>
 	  <tr>
 	    <td></td>
@@ -50,7 +50,9 @@
 	    <td></td>
 	    <td></td>
 	    <td></td>
-	    <td><button type="button" onclick="add_line()">ADD</button>
+	    <td></td>
+	    <td></td>	    
+	    <td><button type="button" onclick="add_line()">ADD LINE</button>
                 <input type="hidden" id="add" name="add" value="0">
 	    </td>
 	  </tr>
@@ -88,40 +90,14 @@
 	  }
  	}
 
-        function setShipping(){
-	  if(document.getElementById("shipAddress1").disabled == false){
-            document.getElementById("shipAddress1").value = document.getElementById("billAddress1").value;
-
-	    document.getElementById("shipAddress2").value = document.getElementById("billAddress2").value;
-
-	    document.getElementById("shipCity").value = document.getElementById("billCity").value;
-
-	    document.getElementById("shipZip").value = document.getElementById("billZip").value;
-
-	    document.getElementById("shipState").value = document.getElementById("billState").value;
-
-            document.getElementById("shipAddress1").disabled = true;	
-            document.getElementById("shipAddress2").disabled = true;	
-            document.getElementById("shipCity").disabled = true;	
-            document.getElementById("shipZip").disabled = true;	
-            document.getElementById("shipState").disabled = true;
-
-	  } else {
-            document.getElementById("shipAddress1").disabled = false;
-            document.getElementById("shipAddress2").disabled = false;
-            document.getElementById("shipCity").disabled = false;
-            document.getElementById("shipZip").disabled = false;
-            document.getElementById("shipState").disabled = false;
-	  } 
-	}
-
 	function delete_line(value){
           document.getElementById("hDelete" + value).value = "1";
 	  document.getElementById("create").submit();
 	}
 
 	function itemDescSelected(value){
-	  var element = "itemSelected" + value;
+          var element = "itemdesc" + value;
+	  alert(document.getElementById(element).value);
 	  if(document.getElementById(element).value != "-- Select by Item Description --"){
             document.getElementById(element).value = "1";
 	    document.getElementById("create").submit();
@@ -129,7 +105,8 @@
 	}
 
 	function itemNumSelected(value){
-	  var element = "itemSelected" + value;
+	  var element = "itemnum" + value;
+	  alert(document.getElementById(element).value);
 	  if(document.getElementById(element).value != "-- Select by Item Number --"){
             document.getElementById(element).value = "1";
 	    document.getElementById("create").submit();

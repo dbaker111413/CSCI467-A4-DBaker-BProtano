@@ -38,11 +38,12 @@
     }
     showAlert("Line ".$lineCounter." delete value: ".$deleteValue);
     return "<div class='row".$lineCounter."'><tr>
-	    <td><select id='itemdesc".$lineCounter."' name='itemdesc".$lineCounter."'><option>-- Select by Item Description --</option>".$itemDDDMenu." onchanged='itemDescSelected(".$lineCounter.")'</select></td>
-            <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."'><option>-- Select by Item Number --</option>".$itemDropDownMenu." onchanged='itemNumSelected(".$lineCounter.")'</select></td>
+	    <td><select id='itemdesc".$lineCounter."' name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'><option>-- Select by Item Description --</option>".$itemDDDMenu."</select></td>
+            <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."' onchange='itemNumSelected(".$lineCounter.")'><option>-- Select by Item Number --</option>".$itemDropDownMenu."</select></td>
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$0.00</label></td>
 	    <td><input type='text' id='qty".$lineCounter."' name='qty".$lineCounter."'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>--</label></td>
+            <td><input type='date' id='date".$lineCounter."' name='date".$lineCounter."'></input></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$0.00</label></td>
 	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td>
