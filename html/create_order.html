@@ -117,13 +117,12 @@
 
 	function delete_line(value){
           document.getElementById("hDelete" + value).value = "1";
-	  $("#row" + value).css("visibility", "collapse");
 	  document.getElementById("create").submit();
 	}
 
 	function itemDescSelected(value){
 	  var element = "itemSelected" + value;
-	  if(document.getElementById(element)value != "-- Select by Item Description --"){
+	  if(document.getElementById(element).value != "-- Select by Item Description --"){
             document.getElementById(element).value = "1";
 	    document.getElementById("create").submit();
 	  }
@@ -131,7 +130,7 @@
 
 	function itemNumSelected(value){
 	  var element = "itemSelected" + value;
-	  if(document.getElementById(element)value != "-- Select by Item Number --"){
+	  if(document.getElementById(element).value != "-- Select by Item Number --"){
             document.getElementById(element).value = "1";
 	    document.getElementById("create").submit();
 	  }
