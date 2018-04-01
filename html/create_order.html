@@ -8,43 +8,45 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <body>
     <!-- container object for using css with header customer info box-->
      
     <div class="containerCreateOrder">
+
+      <div class="headBox">
       <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
+         <fieldset name="customerInfoGroup" id="customerInfoGroup">
+         <legend>Order Information</legend>
+            <div class="orderCustBox">
 
-      <fieldset name="customerInfoGroup" id="customerInfoGroup">
-      <legend>Order Information</legend>
-      <div class="orderCustBox">
+	        <div class="exDate">
+	           <label for="expectedDate">Expected by Date </label>
+	           <input type="date" required title="Address required" name="expectedDate" id="expectedDate"  
+	             value="<?php  ?>">
+	        </div>
 
-	<div class="exDate">
-	  <label for="expectedDate">Expected by Date </label>
-	  <input type="date" required title="Address required" name="expectedDate" id="expectedDate"  
-	         value="<?php  ?>">
-	</div>
-
-      <div class="orderCustName">
-        <label for="selectCustomer">Customer Name </label>
-	<select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)" autofocus>
-	  <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
-	  <option>-- Search by Customer Name --</option>
-	  <?php echo $custDropDownArray; ?>
-	</select>
-      </div>
+                <div class="orderCustName">
+                  <label for="selectCustomer">Customer Name </label>
+	          <select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)" autofocus>
+	             <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
+	              <option>-- Search by Customer Name --</option>
+	              <?php echo $custDropDownArray; ?>
+	           </select>
+                </div>
 	
-	<input type="hidden" name="custSelected" id="custSelected" value="0">
-      <div class="orderCustNum">
-	<label for="selectCustomerNum">Customer Number </label>
-	<select name="selectCustomerNum" id="selectCustomerNum" onchange="cNumS(this, document.create.billAddress1)">
-	  <?php echo $c->customerNumber != "" ? "<option>".$c->customerNumber."</option>" : ""; ?>
-	  <option>-- Search by Customer Number --</option>
-	  <?php echo $custNumDropDownArray; ?>
-	</select>
+	        <input type="hidden" name="custSelected" id="custSelected" value="0">
+                <div class="orderCustNum">
+	          <label for="selectCustomerNum">Customer Number </label>
+	          <select name="selectCustomerNum" id="selectCustomerNum" onchange="cNumS(this, document.create.billAddress1)">
+	             <?php echo $c->customerNumber != "" ? "<option>".$c->customerNumber."</option>" : ""; ?>
+	              <option>-- Search by Customer Number --</option>
+	             <?php echo $custNumDropDownArray; ?>
+	          </select>
+                </div>
+            </div>
+          </fieldset>
       </div>
-      </div>
-        </fieldset>
 
       <!-- shipping and billing boxes -->
 
@@ -137,11 +139,7 @@
          <span name="grandTot"><?php ?></span>
        </div>
 
-
-
-
 	<fieldset name="blank" id="blank">
-
 
         <table id="detailTable" class="display" style="width:100%">
           <thead>
@@ -168,9 +166,10 @@
       <div class="submitBox">
 	<button class="button buttonSubmit" type="submit">Submit</button>
         <input type="hidden" name="which" id="which" value="0">
-        </form>
       </div>
 
+      </form>
+    </div>
       <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
       <script>
 	function show_confirm(){
@@ -259,7 +258,6 @@
       </script>
 
 
-    </div>
   </body>
 </html>
 

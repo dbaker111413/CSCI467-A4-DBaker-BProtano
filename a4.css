@@ -68,7 +68,6 @@
 }
 
 .orderCustBox {
-  grid-area: custO;
   display: grid;
   grid-template-areas:
     "custNa expDa"
@@ -81,19 +80,22 @@
   visibility: collapse;
 }
 
+.headBox {
+  grid-area: custO;
+}
+
 .detailBox {
   grid-area: det;
 }
 
 .containerCreateOrder {
-  //margin-top: 35px;
   display: grid;
   grid-template-areas:
-    ". . . . . . . custO custO .  . . . . . ."
-    ". . . . . . . billing shipping . . . . . . ."
-    ". . . . . . . det det . . . . . . ."
-    ". . . . . . . det det . . . . . . ."
-    ". . . . . . . cancel  submit . . . . . . .";
+    ". . . . . . . . custO cutO . .  . . . . . ."
+    ". . . . . . . . billing shipping . . . . . . . ."
+    ". . . . . . . . det det . . . . . . . ."
+    ". . . . . . . . det det . . . . . . . ."
+    ". . . . . . . . cancel  submit . . . . . . . .";
   grid-gap: 0px;
   padding: 5px;
 }
@@ -603,12 +605,6 @@ legend{
 .headerBox {
   grid-area: header;
 }
-
-.detailBox {
-  grid-area: detail;
-}
-
-
 
 .containerCreateCustomer {
   //margin-top: 35px;
