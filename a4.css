@@ -11,6 +11,9 @@
 
 
 /* report css */
+.dataTables_filter input { width: 30em }
+
+
 .selectionHeader {
   overflow: hidden;
   //background-color: #000000;
