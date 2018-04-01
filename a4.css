@@ -91,11 +91,34 @@
 .containerCreateOrder {
   display: grid;
   grid-template-areas:
-    ". . . . . . . . custO cutO . .  . . . . . ."
-    ". . . . . . . . billing shipping . . . . . . . ."
-    ". . . . . . . . det det . . . . . . . ."
-    ". . . . . . . . det det . . . . . . . ."
-    ". . . . . . . . cancel  submit . . . . . . . .";
+    "custO custO"
+    "billing shipping"
+    "det det"
+    "det det"
+    "cancel  submit";
+  grid-gap: 0px;
+  padding: 5px;
+}
+
+.orderShipCost {
+  grid-area: costs;
+}
+
+.orderGrandTot {
+  grid-area: totes;
+}
+
+.blank {
+  grid-area: deets;
+}
+
+.detailGroup {
+  display: grid;
+  grid-template-areas:
+    ". costs"
+    ". totes"
+    "deets deets"
+    "deets deets";
   grid-gap: 0px;
   padding: 5px;
 }
