@@ -37,14 +37,16 @@ class order {
                                               order_lines, customer_id) values (?, ?, ?, ?, ?)';
 
      // this gets the id of the newly created order
-     $selectSQL = 'select max(order_id) from order_header';
+     $selectSQL = 'select order_id from order_header order by order_id desc';
 
      try {
+       showAlert($this->customerNum);
        $stmt = $this->conn->prepare($insertSQL);
-       $ok = $stmt->execute(array($this->date, $this->status, $this->expectedDate, $this->lines, $this->customer_id));       
-       // get the order_id for the detail lines, there should only be one row
+       $ok = $stmt->execute(array($this->date, $this->status, $this->expectedDate, $this->lines, $this->customerNum));
+       // get the order_id for the detail lines, we only care about the first row
        foreach($this->conn->query($selectSQL) as $row){
          $this->orderNum = $row["order_id"];
+	 break;
        }
 
        // now set the order id and save each detail line

@@ -23,7 +23,7 @@
 	        <div class="exDate">
 	           <label for="expectedDate">Expected by Date </label>
 	           <input type="date" required title="Address required" name="expectedDate" id="expectedDate"  
-	             value="<?php  ?>">
+	             value="<?php echo isset($_POST['expectedDate']) ? $_POST['expectedDate'] : '' ?>">
 	        </div>
 
                 <div class="orderCustName">

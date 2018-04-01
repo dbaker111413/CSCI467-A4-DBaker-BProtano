@@ -127,7 +127,7 @@
       $order->date = date("Y-m-d");
       $order->status = "Created";  // required by business rule
       $order->expectedDate = $_POST['expectedDate'];
-      $order->customerNumber = $_POST['selectCustomerNum'];
+      $order->customerNum = $_POST['selectCustomerNum'];
 
       $details = array();
       // next create each detail line
