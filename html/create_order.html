@@ -12,10 +12,10 @@
   <body>
     <!-- container object for using css with header customer info box-->
      
+    <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
     <div class="containerCreateOrder">
 
       <div class="headBox">
-      <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
          <fieldset name="customerInfoGroup" id="customerInfoGroup">
          <legend>Order Information</legend>
             <div class="orderCustBox">
@@ -125,35 +125,35 @@
 
       <!-- detail lines expanding box -->
       <div class="detailBox">
-        <fieldset name="detailGroup" id="detailGroup">
+        <fieldset class="detailGroup" name="detailGroup" id="detailGroup">
         <legend>Detail Lines</legend>
 
       <!-- order totals -->
-       <div class="orderShipCost">
-         <label for="shippingCost">Shipping and Handling:</label>
-         <span name="shippingCost"><?php ?></span>
-       </div>
+           <div class="orderShipCost">
+             <label for="shippingCost">Shipping and Handling:</label>
+             <span name="shippingCost"><?php ?></span>
+           </div>
 
-       <div class="orderGrandTot">
-         <label for="grandTot">Grand Total:</label>
-         <span name="grandTot"><?php ?></span>
-       </div>
+           <div class="orderGrandTot">
+             <label for="grandTot">Grand Total:</label>
+             <span name="grandTot"><?php ?></span>
+           </div>
 
-	<fieldset name="blank" id="blank">
+	   <fieldset class="blank" name="blank" id="blank">
 
-        <table id="detailTable" class="display" style="width:100%">
-          <thead>
+              <table id="detailTable" class="display" style="width:100%">
+               <thead>
 		  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th><th></th></tr>
-          </thead>
-          <tbody>
+               </thead>
+              <tbody>
 
-          <?php echo $htmlDetailLines; ?>
-        </tbody>
-	</table>
+               <?php echo $htmlDetailLines; ?>
+              </tbody>
+	      </table>
 
-	    <button type="button" onclick="add_line()">ADD LINE</button>
+	      <button type="button" onclick="add_line()">ADD LINE</button>
               <input type="hidden" id="add" name="add" value="0">
-	  </fieldset>
+	    </fieldset>
 	</fieldset>
       </div>
 
@@ -168,8 +168,8 @@
         <input type="hidden" name="which" id="which" value="0">
       </div>
 
-      </form>
     </div>
+    </form>
       <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
       <script>
 	function show_confirm(){
