@@ -15,7 +15,7 @@
   // handles a post request to create an item when the submit button is clicked in customer.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // first, check if an item has been selected
+    // first, check if a customer has been selected
     if(isset($_POST['custSelected'])){
       if($_POST['custSelected'] == '1') {
         $c->setCustomer($_POST["selectCustomer"]);

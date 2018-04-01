@@ -16,6 +16,10 @@
   $itemDropDownMenu = generateSelectOptions("select item_id from item", array("item_id"), $conn);
   $itemDDDMenu = generateSelectOptions("select description from item", array("description"), $conn);
 
+  $customerNameDropDown = generateSelectOptions("select name from customer", array("name"), $conn);
+  $customerNumDropDown = generateSelectOptions("select customer_id from customer", array("customer_id"), $conn);
+  $c = new customer($conn);
+
   // generates and returns an html string for the line item table
   // it performs this by checking if itemnum[X] isset, if so then
   // that line exists; so an html line is appended to the string
@@ -95,6 +99,16 @@
   /*    <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> */
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    // first, check if a customer has been selected
+    if(isset($_POST['custSelected'])){
+      if($_POST['custSelected'] == '1') {
+        $c->setCustomer($_POST["selectCustomer"]);
+      }
+      else if($_POST['custSelected'] == '2') {
+        $c->setCustomer($_POST["selectCustomerNum"]);
+      }
+    }
+
     $htmlDetailLines = generateDetailLines();
 
     if(isset($_POST["add"]) && $_POST["add"] == "1"){
@@ -111,7 +125,7 @@
       $order->expectedDate = $_POST['expectedDate'];
       $order->customerNum = $_POST['selectCustomerNum'];
 
-      $details = new array();
+      $details = array();
       // next create each detail line
       for($i = 0; $i < count($items); $i++){
         $detail = new detail($conn);
@@ -125,7 +139,7 @@
         $items = array();
 	$_POST = array();
 	$lineCounter = 0;
-	htmlDetailLines = "";
+	$htmlDetailLines = "";
       }
     }
   }
