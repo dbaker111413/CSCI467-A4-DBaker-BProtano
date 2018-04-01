@@ -23,22 +23,9 @@ table th {
 
 </style>
 
-<!-- Barcodes courtesy of http://lindell.me/JsBarcode/ -->
-<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
-<link rel="stylesheet" type="text/css" href="a4.css">
-
-
-
-
-  <span class="reportTitle">Pick Report</span>
+  <span class="reportTitle">Customer Order</span>
 
   <div class="dateTime">
-  <label for="pickGuy">Picker: </label>
-  <span><?php if ($pickStaff == 'BradleyProtano') {
-	    echo 'Bradley Protano';
-	  }else { 
-	    echo 'Daniel Baker';
-	  }?></span><br>
   <label for="date">Date: </label>
   <span><?php echo date("m/d/Y"); ?></span><br>
   <label for="time"> </label>
@@ -53,13 +40,10 @@ table th {
   <fieldset name="reportOrderGroup">
   <legend>Order Infomation</legend>
   <div class="duh">
-  <div class="oBa">
-  <svg class="bcode" id="orderBarcode"></svg>
-  </div>
 
   <div class="oNa">
   <label for="custOrderNum">Order Number: </label>
-  <span name="custOrderNum">PB-AIP-<?php echo $orderNum; ?></span>
+  <span name="custOrderNum"><?php echo $orderNum; ?></span>
   </div>
 
   <div class="oDa">
@@ -67,9 +51,9 @@ table th {
   <span name="custOrderDate"><?php echo $orderDate; ?></span>
   </div>
 
-  <div class="eDa">
+  <div class="oDa">
   <label for="custOrderDate">Expected Date: </label>
-  <span name="custOrderDate"><?php echo $expectedDate; ?></span>
+  <span name="custOrderDate"><?php echo $orderDate; ?></span>
   </div>
 
   <div class="oLi">
@@ -82,8 +66,24 @@ table th {
   </div>
 
   <div class="reportCustomerBox">
-  <fieldset class="reportCustomerGroup">
+  <fieldset name="reportCustomerGroup">
   <legend>Customer Shipping Infomation</legend>
+  
+  <span name="custName"><?php echo $custName; ?></span><br>
+
+  <span name="custAdd1"><?php echo $add1s.", "; ?></span>
+  <span name="custAdd2"><?php echo $add2s; ?></span><br>
+
+  <span name="custCity"><?php echo $citys.", "; ?></span>
+  <span name="custState"><?php echo $states." "; ?></span>
+  <span name="custZip"><?php echo $zips; ?></span><br>
+
+  </fieldset>
+  </div>
+
+  <div class="reportBillingBox">
+  <fieldset name="reportBillingGroup">
+  <legend>Customer Billing Infomation</legend>
   
   <span name="custName"><?php echo $custName; ?></span><br>
 
@@ -106,7 +106,6 @@ table th {
   <th align="center">Customer Order</th>
   <th align="center">Qty</th>
   <th align="center">Shipping Location</th>
-  <th align="center">Part Barcode</th>
   </tr>
   </thead>
   <tbody> 
@@ -140,9 +139,6 @@ table th {
     echo 'Dock 1A';
     echo '</td>';
 
-    echo '<td align="center">';
-    echo '<svg class="code" id="arcode"></svg>';
-    echo '</td>';
     echo '</tr>';
   } ?>
   </tbody>
@@ -152,19 +148,6 @@ table th {
   </div>	
 
   <script>
-    var barcode = '<?php echo $orderNum."143588144"; ?>';
-    JsBarcode("#orderBarcode", barcode, {
-      displayValue: false,
-      height: 75
-    });   
-
-    var barcode = '<?php echo $orderNum."143588144"; ?>';
-    JsBarcode("#arcode", barcode, {
-      displayValue: false,
-      height: 35,
-      width: 1.5,
-      margin: 0
-    });   
   </script>
 
 

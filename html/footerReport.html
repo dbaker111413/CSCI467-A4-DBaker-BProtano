@@ -1,8 +1,8 @@
 </body>
 <div class="selectionHeader">
 
-<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-<link rel="https://printjs-4de6.kxcdn.com/print.min.css" type="text/css" href="a4.css">
+<!-- <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<link rel="https://printjs-4de6.kxcdn.com/print.min.css" type="text/css" href="a4.css"> -->
 
 <style>
 .selButton {
@@ -46,7 +46,7 @@
  font-size: 18px;
  font-weight: 300;
  color: black;
- border: 2px solid black;
+ border: 2px solid #c2c2d6;
  float: left;
  //margin-left: 9px;
 }
@@ -61,14 +61,14 @@
 }
 
 .pagination a.num {
-    color: black;
+    color: #c2c2d6;
     //float: left;
     padding: 8px 16px;
     text-decoration: none;
 }
 
 .pagination a.num.active {
-    background-color: #4CAF50;
+    background-color: #66c2ff;
     color: white;
 }
 
@@ -77,7 +77,7 @@
         color: white;
 }
 </style>
-<div class="pagination">  
+<div class="pagination" name="pagination">  
 
   <a class="selButton buttonBack" href="picker.php" >&laquo Generate Pick Report</a>
 	  
@@ -95,16 +95,20 @@
   $index = 0;
 
   foreach($idArray as $value){
-    $i++;
-    echo '<a class="num" href="pick-index.php?id=';
+    if ($i == 0) { 
+      echo '<a class="num active" href="pick-index.php?id=';
+    } else {
+      echo '<a class="num" href="pick-index.php?id=';
+    }
     echo $value;
     echo '&pickStaff=';
     echo $pickStaff;
     echo '&rowIds=';
     echo $rowIds;
     echo '" target="iframe_a">';
-    echo $i;
+    echo 'Order: '.$value;
     echo '</a>';
+    $i++;
   }
 
   echo '<a class="num" href="pick-index.php?id=';
@@ -121,4 +125,17 @@
   <br><br><br>
 </div>
 </div>	
+
+<script>
+// Add active class to the current button (highlight it)
+var btns = document.getElementsByClassName("num");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+  };
+</script>
+
 </html>

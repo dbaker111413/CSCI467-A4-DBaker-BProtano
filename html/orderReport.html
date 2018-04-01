@@ -1,6 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
+<style>
+.detButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonDetail:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonDetail {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 400;
+ margin-right: 9px;
+ float: right;
+}
+</style>
+
+
   <body>
   <!-- ************ Table Styling from https://datatables.net/ *************/ -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
@@ -15,126 +49,108 @@
 
   <div class="containerCreatePick">
 
-  <div class="pickStaffBox">
-  <fieldset name="pickStaffGroup" id="pickStaffGroup">
-  <legend>Designate Picker</legend>
-  <form class="create" name="create", id="create" action="pickOut.php" method="post">
-  <label for="pickStaff">State </label>
-  <select name="pickStaff" id="pickStaff" autofocus>
-    <option value="-- Warehouse Staff Name --">-- Warehouse Staff Name --</option>
-    <option value="BradleyProtano">Bradley Protano</option>
-    <option value="DanielBaker">Daniel Baker</option>
-  </select><br>
-
-
-  </fieldset>
-  </div>
-
 
   <div class="pickTableBox">
   <fieldset name="pickTableGroup" id="pickTableGroup">
-  <legend>Orders Released for Pick</legend>
+  <legend>Open Customer Orders</legend>
   <fieldset name="blank" id="blank">
   <?php $sql = $conn->query(
   "select o.order_id, c.name, o.order_status, o.order_date, o.order_expected_date, o.order_lines 
   from order_header o, customer c 
-  where c.customer_id = o.customer_id and o.order_status = 'Released for pick'
+  where c.customer_id = o.customer_id
   group by o.order_id 
   order by o.order_expected_date"); ?>
 
   <table id="example" class="display" style="width:100%"><br>
   <thead>
   <tr> 
-  <th align="left"></th>
   <th align="left">Order Number</th>
+  <th align="left">Order Status</th>
   <th align="left">Customer Name</th>
-  <th align="left">Expected by Date</th>
+  <th align="right">Expected by Date</th>
   <th align="right">Order Detail Lines</th>
-  <th align="left">Date Created</th>
+  <th align="center">Date Created</th>
+  <th align="center">Detail</th>
   </tr>
   </thead>
   <tbody> 
 
   <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
-    echo '<td></td>';
-    echo '<td align="left">';
+    echo '<td align="center">';
     echo 'PB-AIP-';
     echo $row['order_id'];
     echo '</td>';
 
     echo '<td>';
+    echo $row['order_status'];
+    echo '</td>';
+
+    echo '<td align="center">';
     echo $row['name'];
     echo '</td>';
 
-    echo '<td align="right">';
+    echo '<td align="center">';
     echo $row['order_expected_date'];
     echo '</td>';
 
-    echo '<td align="right">';
+    echo '<td align="center">';
     echo $row['order_lines'];
     echo '</td>';
 
     echo '<td align="right">';
     echo $row['order_date'];
     echo '</td>';
+
+    echo '<td>
+      <a class="detButton buttonDetail" onclick="window.print();return false;">View</a>
+    </td>';
     echo '</tr>';
   } ?>
   </tbody>
   </table>
   </fieldset>
   </fieldset>
+  <a class="detButton buttonDetail" onclick="window.print();return false;">Print Orders</a>
   </div>
 
-  <!-- cancel box -->
-  <div class="cancelBox">
-  <button class="button buttonReset" type="reset">Cancel</button>
-  </div>
-	  
-  <!-- submit box -->
-  <div class="submitBox">
-  <button class="button buttonSubmit" name="buttonS" id="buttonS" type="submit">Submit</button>
-  <input type="hidden" name="which" id="which" value="0">
-  <input type="hidden" name="rowIds" id="rowIds" value="0">
-  </div>
   </form>
 
   </div>
 
   <script>
   /*************** Table Styling from https://datatables.net/ ************/
+  $(document).ready(function() {
+      var table = $('#example').DataTable( {
+          //"scrollY": "200px",
+          "paging": false
+      } );
+ 
+      $('a.toggle-vis').on( 'click', function (e) {
+          e.preventDefault();
+ 
+          // Get the column API object
+          var column = table.column( $(this).attr('data-column') );
+ 
+          // Toggle the visibility
+          column.visible( ! column.visible() );
+      } );
+  } );
+
+/*
+
+
+
     $(document).ready(function() {
       var table = $('#example').DataTable( {
 	 columnDefs: [ {
            orderable: false,
-           className: 'select-checkbox',
+           className: 'details-control',
            targets:   0
 	 } ],
-         select: {  style:   'multi+shift',
-                    selector: 'td:first-child'
-                      
-         },
          order: [[ 1, 'asc' ]],
          dom:        'Bfrtip',
-       /*  deferRender:    true,
-         scrollY:        200,
-         scrollCollapse: true,
-         scroller:       true,
-         select:      'multi',*/
-         buttons: [
-           {
-             text: 'Select all',
-             action: function () {
-               table.rows().select();
-             }
-           },
-           {
-             text: 'Select none',
-             action: function () {
-               table.rows().deselect();
-             }
-           } 
-         ]
+         select:      'true',
        });
 
 
@@ -142,7 +158,6 @@
          //verify user wants these orders for the report
          if(confirm("Produce Pick Report with these orders?") == true) {
            if(table.rows( { selected: true} ).count() > 0 && document.getElementById("pickStaff").value != "-- Warehouse Staff Name --"){
-             document.getElementById("rowIds").value = Object.values(table.rows( { selected: true} ).data());
            }
            else {
              alert("Must select a picker and at least one customer order.");
@@ -155,7 +170,7 @@
          }
        });
 
-  });
+  });*/
   </script>
 </body>
 </html>

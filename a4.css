@@ -11,6 +11,9 @@
 
 
 /* report css */
+.dataTables_filter input { width: 30em }
+
+
 .selectionHeader {
   overflow: hidden;
   //background-color: #000000;
@@ -24,7 +27,7 @@
   //height: 150px;
   //width: 100%;
   //font-size: 75%;
-  //background-color: #000022;
+  background-color: #000022;
   //color: #c2c2d6;
   //margin: 0;
 }
@@ -42,6 +45,11 @@
   padding: 25px 10px;
 }
 
+.reportCustomerGroup {
+  padding-bottom: 1.5em;
+  margin-bottom: .65em;
+}
+
 .oBa {
   //float: right;
   grid-area: bc; 
@@ -51,7 +59,7 @@
   grid-area: rTitle;
   font-family: Helvetica, sans-serif;
   font-size: 2em;
-  margin-left: 18.4em;
+  margin-left: 18.3em;
   line-height: 2em;
   text-align: center;
 }
@@ -72,6 +80,7 @@
 
 .oNa { grid-area: no; }
 .oDa { grid-area: da; }
+.eDa { grid-area: eda; }
 .oLi { grid-area: li; }
 .duh {
   //margin-top: 35px;
@@ -79,8 +88,9 @@
   grid-template-areas:
     "no bc"
     "da bc"
+    "eda bc"
     "li bc";
-  grid-gap: 0px;
+  grid-gap: 6px;
   padding: 0px;
 }
 
@@ -98,9 +108,9 @@
 
 .dateTime {
   grid-area: time;
-  float: right;
+  //float: right;
   display: inline-block;
-  margin-left: -50em;
+  margin-left: 20em;
   //text-align: right;
 }
 
@@ -285,6 +295,7 @@ li a:hover, .dropdown:hover .dropbtn {
     color: black;
 }
 
+
 li.dropdown {
     display: inline-block;
     margin-top: 1.25em;
@@ -399,7 +410,6 @@ legend{
 .reportCustomerBox {
   font-family: Helvetica, sans-serif;
   margin-bottom: 0;
-  padding: 0;
   //font-size: 110%;
   text-align: center;
   line-height: 1.65em;
@@ -420,8 +430,8 @@ legend{
 }
 
 
-.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
-.itemNumBox input, .itemAttributesBox input, .headerBox select, .itemNumBox select, .pickStaffBox select {
+.customerBox input, .customerBox select, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
+.itemNumBox input, .itemAttributesBox input, .itemAttributesBox select, .headerBox select, .itemNumBox select, .pickStaffBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -658,6 +668,11 @@ legend{
 .reportBody {
   visibility: visible;
   display: block;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  float: none;
+  position: static;
 }
 }
 

@@ -13,22 +13,17 @@
 	  <label for="itemDesc">Item Description </label>
           <select name="itemDesc" id="itemDesc" onchange="itemDescSelected(this, document.create.uom)">
             '<?php echo $i->itemDesc != "" ? "<option>".$i->itemDesc."</option>" : ""; ?>'
-	    <option>-- Select by Part Description --</option>
+	    <option>-- Search by Part Description --</option>
 	    '<?php echo $descDropDownArray; ?>'
 	  </select><br><br>
 	  <label for="itemNum">Item Number </label>
           <select id="itemNum" name="itemNum" onchange="itemNumSelected(this, document.create.uom)">
 	    '<?php echo $i->itemNumber != 0 ? "<option>".$i->itemNumber."</option>" : ""; ?>'
-	    <option>-- Select by Part Number --</option>
+	    <option>-- Search by Part Number --</option>
             '<?php echo $numDropDownArray; ?>'
-	  </select><br><br>
+	  </select><br>
           <input type="hidden" name="selectItem" id="selectItem" value="0">
-	  <label for="vendorName">Preferred Vendor</label>
-	  <select id="vendorName" name="vendorName">
-	    '<?php echo $i->vendor != 0 ? "<option>".$vendorName."</option>" : ""; ?>'
-	    <option>-- Select Preferred Vendor --</option>
-            '<?php echo $vendorDropDownArray; ?>'
-	  </select><br><br>
+
       </fieldset>
       </div>
 
@@ -36,7 +31,15 @@
       <div class="itemAttributesBox">
       <fieldset name="itemAttriGroup" id="itemAttriGroup">
       <legend>Item Attributes</legend>
-        <label for="uom">Unit of Measurement </label>
+
+	<label for="vendorName">Preferred Vendor</label>
+	<select id="vendorName" name="vendorName">
+	  '<?php echo $i->vendor != 0 ? "<option>".$vendorName."</option>" : ""; ?>'
+	  <option>-- Select Preferred Vendor --</option>
+          '<?php echo $vendorDropDownArray; ?>'
+	</select><br><br>
+
+      <label for="uom">Unit of Measurement </label>
         <input type="text" required title="Unit of Measurement required" name="uom" id="uom" value="<?php echo $i->uom; ?>"><br><br>
   
         <label for="warehouseLoc">Warehouse Location </label>

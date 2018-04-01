@@ -12,14 +12,14 @@
         <label for="selectCustomer">Customer Name </label>
 	<select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.create.billAddress1)" autofocus>
 	  <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
-	  <option>-- Select by Customer Name --</option>
+	  <option>-- Search by Customer Name --</option>
 	  <?php echo $custDropDownArray; ?>
 	</select><br><br>
 	<input type="hidden" name="custSelected" id="custSelected" value="0">
 	<label for="selectCustomerNum">Customer Number </label>
 	<select name="selectCustomerNum" id="selectCustomerNum" onchange="cNumS(this, document.create.billAddress1)">
 	  <?php echo $c->customerNumber != "" ? "<option>".$c->customerNumber."</option>" : ""; ?>
-	  <option>-- Select by Customer Number --</option>
+	  <option>-- Search by Customer Number --</option>
 	  <?php echo $custNumDropDownArray; ?>
 	</select>
         </fieldset>
