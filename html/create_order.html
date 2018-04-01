@@ -57,28 +57,28 @@
 
 	<div class="addBox">
 	<div class="add1">
-	  <label for="billAddress1">Address 1: </label>
-	  <span name="billAddress1" id="billAddress1" size="38"><?php ?></span><br><br>
+	  <label for="billAddress1"><?php echo "Address 1: ".$c->billAddress1 ?></label>
+	  <span name="billAddress1" id="billAddress1" size="38"></span><br><br>
 	</div>
 
 	<div class="add2">
-          <label for="billAddress2">Address 2: </label>
-	  <span name="billAddress2" id="billAddress2" size="38"><?php ?></span><br><br>
+          <label for="billAddress2"><?php echo "Address 2: ".$c->billAddress2 ?></label>
+	  <span name="billAddress2" id="billAddress2" size="38"></span><br><br>
 	</div>
 
 	<div class="city">
-          <label for="billCity">City: </label>
-          <span name="billCity" id="billCity" size="26"><?php  ?></span><br><br>
+          <label for="billCity"><?php echo "City: ".$c->billCity ?></label>
+          <span name="billCity" id="billCity" size="26"></span><br><br>
 	</div>
 
 	<div class="state">
-	  <label for="billState">State: </label>
-          <span name="billState" id="billState"><?php ?></span><br>
+	  <label for="billState"><?php echo "State: ".$c->billState ?></label>
+          <span name="billState" id="billState"></span><br>
 	</div>
 
 	<div class="zip">
-          <label for="billZip">Zip: </label>
-	  <span name="billZip" id="billZip"  size="7"><?php ?></span><br>
+          <label for="billZip"><?php echo "Zip: ".$c->billZip ?></label>
+	  <span name="billZip" id="billZip"  size="7"></span><br>
 	</div>
     <!--   <div class="check">
 	    <br><input type="checkbox" name="billShipSame" id="billShipSame" value="false" onclick="setShipping()" > Shipping address same as billing address
@@ -95,28 +95,28 @@
 
 	<div class="addBox">
 	<div class="add1">
-	<label for="shipAddress1">Address 1:  </label>
-	<span name="shipAddress1" id="shipAddress1" size="38"><?php  ?></span><br><br>
+	<label for="shipAddress1"><?php echo "Address 1: ".$c->shipAddress1 ?></label>
+	<span name="shipAddress1" id="shipAddress1" size="38"></span><br><br>
 	</div>
 
 	<div class="add2">
-        <label for="shipAddress2">Address 2: </label>
-	<span name="shipAddress2" id="shipAddress2" size="38"><?php  ?></span><br><br>
+        <label for="shipAddress2"><?php echo "Address 2: ".$c->shipAddress2 ?></label>
+	<span name="shipAddress2" id="shipAddress2" size="38"></span><br><br>
 	</div>
 
 	<div class="city">
-	<label for="shipCity">City: </label>
-	<span name="shipCity" id="shipCity" size="26"><?php ?></span><br><br>
+	<label for="shipCity"><?php echo "City: ".$c->shipCity ?></label>
+	<span name="shipCity" id="shipCity" size="26"></span><br><br>
 	</div>
 
 	<div class="state">
-	<label for="shipState">State: </label>
-	<span name="shipState" id="shipState"><?php ?></span><br>
+	<label for="shipState"><?php echo "State: ".$c->shipState ?></label>
+	<span name="shipState" id="shipState"></span><br>
 	</div>
 
 	<div class="zip">
-        <label for="shipZip">Zip: </label>
-	<span name="shipZip" id="shipZip" size="7"><?php  ?></span><br>
+        <label for="shipZip"><?php echo "Zip: ".$c->shipZip ?></label>
+	<span name="shipZip" id="shipZip" size="7"></span><br>
 	</div>
 
 	</div>
@@ -236,6 +236,14 @@
         function cs(current, to) {
           if(document.getElementById("selectCustomer").value != "-- Select Customer --"){
             document.getElementById("custSelected").value = "1";
+            document.getElementById("create").submit();
+            to.focus();
+	  }
+	}
+	
+	function cNumS(current, to) {
+          if(document.getElementById("selectCustomer").value != "-- Select Customer --"){
+            document.getElementById("custSelected").value = "2";
             document.getElementById("create").submit();
             to.focus();
 	  }

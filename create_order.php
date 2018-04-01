@@ -6,6 +6,7 @@
   require_once ("order.php");
   require_once ("globalFunctions.php");
   require_once ("item.php");
+  require_once ("customer.php");
 
   // keeps track of how many lines there are
   $lineCounter = 0;
@@ -16,8 +17,8 @@
   $itemDropDownMenu = generateSelectOptions("select item_id from item", array("item_id"), $conn);
   $itemDDDMenu = generateSelectOptions("select description from item", array("description"), $conn);
 
-  $customerNameDropDown = generateSelectOptions("select name from customer", array("name"), $conn);
-  $customerNumDropDown = generateSelectOptions("select customer_id from customer", array("customer_id"), $conn);
+  $custDropDownArray = generateSelectOptions("select name from customer", array("name"), $conn);
+  $custNumDropDownArray = generateSelectOptions("select customer_id from customer", array("customer_id"), $conn);
   $c = new customer($conn);
 
   // generates and returns an html string for the line item table
