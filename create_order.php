@@ -7,7 +7,7 @@
   require_once ("globalFunctions.php");
   require_once ("item.php");
   require_once ("customer.php");
-
+  require_once ("detail.php");
   // keeps track of how many lines there are
   $lineCounter = 0;
   $htmlDetailLines = "";
@@ -108,6 +108,9 @@
       else if($_POST['custSelected'] == '2') {
         $c->setCustomer($_POST["selectCustomerNum"]);
       }
+      else if(isset($_POST['selectCustomerNum']) && $_POST['selectCustomerNum'] != "-- Search by Customer Number --"){
+        $c->setCustomer($_POST["selectCustomerNum"]);
+      }
     }
 
     $htmlDetailLines = generateDetailLines();
@@ -124,7 +127,7 @@
       $order->date = date("Y-m-d");
       $order->status = "Created";  // required by business rule
       $order->expectedDate = $_POST['expectedDate'];
-      $order->customerNum = $_POST['selectCustomerNum'];
+      $order->customerNumber = $_POST['selectCustomerNum'];
 
       $details = array();
       // next create each detail line
@@ -141,6 +144,7 @@
 	$_POST = array();
 	$lineCounter = 0;
 	$htmlDetailLines = "";
+	$c = new customer($conn);
       }
     }
   }

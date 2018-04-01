@@ -3,10 +3,10 @@
 require_once("globalFunctions.php");
 
 class detail {
-  $line_id = 0;
-  $order_id = 0;
-  $item_id = 0;
-  $line_qty = 0;
+  public $line_id = 0;
+  public $order_id = 0;
+  public $item_id = 0;
+  public $line_qty = 0;
 
   /*
   * Initialize class with connection string because it appears global variables
@@ -27,7 +27,7 @@ class detail {
  
      try {
        $stmt = $this->conn->prepare($insertSQL);
-       $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty);
+       $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty));
        return true;
      }
      catch (PDOException $e) {
