@@ -88,6 +88,17 @@ class item {
       $this->price = "";
       $this->vendor = 0;
     }
+    catch(Exception $e){
+      // show a message and make sure all values are set to defaults
+      showAlert("Error! Could not read item from the database!".$e->getMessage());
+      $this->itemNumber = 0;
+      $this->itemDesc = "";
+      $this->uom = "";
+      $this->warehouseLoc = "";
+      $this->qty = "";
+      $this->price = "";
+      $this->vendor = 0;
+    }
   }
 
   /*
