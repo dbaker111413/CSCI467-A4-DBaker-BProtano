@@ -97,18 +97,16 @@
 
 	function itemDescSelected(value){
           var element = "itemdesc" + value;
-	  alert(document.getElementById(element).value);
-	  if(document.getElementById(element).value != "-- Select by Item Description --"){
-            document.getElementById(element).value = "1";
+	  if(document.getElementById(element).value != "-- Search by Item Description --"){
+            document.getElementById("itemSelected" + value).value = "1";
 	    document.getElementById("create").submit();
 	  }
 	}
 
 	function itemNumSelected(value){
 	  var element = "itemnum" + value;
-	  alert(document.getElementById(element).value);
-	  if(document.getElementById(element).value != "-- Select by Item Number --"){
-            document.getElementById(element).value = "1";
+	  if(document.getElementById(element).value != "-- Search by Item Number --"){
+            document.getElementById("itemSelected" + value).value = "2";
 	    document.getElementById("create").submit();
 	  }
 	}
@@ -116,6 +114,12 @@
 	function add_line(){
            document.getElementById("add").value = "1";
 	   document.getElementById("create").submit();
+	}
+
+	function update_total(value){
+          var qty = document.getElementById("qty" + value).value;
+	  var cost = document.getElementById("price" + value).textContent.replace("$", "");
+	  document.getElementById("total" + value).textContent = "$" + (qty * cost);
 	}
       </script>
 
