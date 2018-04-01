@@ -1,63 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  <!-- ************ Table Styling from https://datatables.net/ *************/ -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+<!--  <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.4/css/scroller.dataTables.min.css">-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'
   <body>
     <!-- container object for using css with header customer info box-->
      
     <div class="containerCreateOrder">
       <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
-<!--
-      <tr>
-	    <td><select id="itemnum0" name="itemnum0"><option>PB3546&J</option></select></td>
-	    <td><label id="price0" name="price0">$1.11</label></td>
-	    <td><label id="qty0" name="qty0">300</label></td>
-	    <td><label id="uom0" name="uom0">lbs</label></td>
-	    <td><label id="total0" name="total0">calculated amount</label></td>
-	    <td><button id="delete0" name="delete0" onclick="deleteLine()" value="0">DELETE</button></td>
-	  </tr>
-	  <tr>
-	    <td><select id="itemnum1" name="itemnum1"><option>PB3546&J</option></select></td>
-	    <td><label id="price1" name="price1">$1.11</label></td>
-	    <td><label id="qty1" name="qty1">300</label></td>
-	    <td><label id="uom1" name="uom1">lbs</label></td>
-	    <td><label id="total1" name="total1">calculated amount</label></td>
-    	    <td><button id="delete1" name="delete1" onclick="deleteLine()" value="0">DELETE</button></td>
-	  </tr>
-	  <tr>
-	    <td><select id="itemnum2" name="itemnum2"><option>PB3546&J</option></select></td>
-	    <td><label id="price2" name="price2">$1.11</label></td>
-	    <td><label id="qty2" name="qty2">300</label></td>
-	    <td><label id="uom2" name="uom2">lbs</label></td>
-	    <td><label id="total2" name="total2">calculated amount</label></td>
-	    <td><button id="delete2" name="delete2" onclick="deleteLine()">DELETE</button>
-                <input type="hidden" id="del2" name="del2" value="0">
-	    </td>	 
-	  </tr>
--->	  
-      
+
+      <fieldset name="customerInfoGroup" id="customerInfoGroup">
+      <legend>Order Information</legend>
+      <div class="orderCustBox">
+
+	<div class="exDate">
+	  <label for="expectedDate">Expected by Date </label>
+	  <input type="date" required title="Address required" name="expectedDate" id="expectedDate"  
+	         value="<?php  ?>">
+	</div>
+
+      <div class="orderCustName">
+        <label for="selectCustomer">Customer Name </label>
+	<select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)" autofocus>
+	  <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
+	  <option>-- Search by Customer Name --</option>
+	  <?php echo $custDropDownArray; ?>
+	</select>
+      </div>
+	
+	<input type="hidden" name="custSelected" id="custSelected" value="0">
+      <div class="orderCustNum">
+	<label for="selectCustomerNum">Customer Number </label>
+	<select name="selectCustomerNum" id="selectCustomerNum" onchange="cNumS(this, document.create.billAddress1)">
+	  <?php echo $c->customerNumber != "" ? "<option>".$c->customerNumber."</option>" : ""; ?>
+	  <option>-- Search by Customer Number --</option>
+	  <?php echo $custNumDropDownArray; ?>
+	</select>
+      </div>
+      </div>
+        </fieldset>
+
+      <!-- shipping and billing boxes -->
+
+      <!-- billing attributes box -->
+      <div class="billingBox">
+	<fieldset name="customerBillingGroup" id="customerBillingGroup">
+        <legend>Billing Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	  <label for="billAddress1">Address 1: </label>
+	  <span name="billAddress1" id="billAddress1" size="38"><?php ?></span><br><br>
+	</div>
+
+	<div class="add2">
+          <label for="billAddress2">Address 2: </label>
+	  <span name="billAddress2" id="billAddress2" size="38"><?php ?></span><br><br>
+	</div>
+
+	<div class="city">
+          <label for="billCity">City: </label>
+          <span name="billCity" id="billCity" size="26"><?php  ?></span><br><br>
+	</div>
+
+	<div class="state">
+	  <label for="billState">State: </label>
+          <span name="billState" id="billState"><?php ?></span><br>
+	</div>
+
+	<div class="zip">
+          <label for="billZip">Zip: </label>
+	  <span name="billZip" id="billZip"  size="7"><?php ?></span><br>
+	</div>
+    <!--   <div class="check">
+	    <br><input type="checkbox" name="billShipSame" id="billShipSame" value="false" onclick="setShipping()" > Shipping address same as billing address
+	  </div> -->
+
+	</div>
+	</fieldset>
+      </div>
+
+      <!-- shipping attributes box -->
+      <div class="shippingBox">
+        <fieldset name="customerShippingGroup" id="customerShippingGroup">
+        <legend>Shipping Address</legend>
+
+	<div class="addBox">
+	<div class="add1">
+	<label for="shipAddress1">Address 1:  </label>
+	<span name="shipAddress1" id="shipAddress1" size="38"><?php  ?></span><br><br>
+	</div>
+
+	<div class="add2">
+        <label for="shipAddress2">Address 2: </label>
+	<span name="shipAddress2" id="shipAddress2" size="38"><?php  ?></span><br><br>
+	</div>
+
+	<div class="city">
+	<label for="shipCity">City: </label>
+	<span name="shipCity" id="shipCity" size="26"><?php ?></span><br><br>
+	</div>
+
+	<div class="state">
+	<label for="shipState">State: </label>
+	<span name="shipState" id="shipState"><?php ?></span><br>
+	</div>
+
+	<div class="zip">
+        <label for="shipZip">Zip: </label>
+	<span name="shipZip" id="shipZip" size="7"><?php  ?></span><br>
+	</div>
+
+	</div>
+        </fieldset>
+      </div>
+
       <!-- detail lines expanding box -->
       <div class="detailBox">
         <fieldset name="detailGroup" id="detailGroup">
         <legend>Detail Lines</legend>
 
-        <table style="width:100%">
+      <!-- order totals -->
+       <div class="orderShipCost">
+         <label for="shippingCost">Shipping and Handling:</label>
+         <span name="shippingCost"><?php ?></span>
+       </div>
 
-	  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Required Date</th><th>Total</th></tr>
+       <div class="orderGrandTot">
+         <label for="grandTot">Grand Total:</label>
+         <span name="grandTot"><?php ?></span>
+       </div>
+
+
+
+
+	<fieldset name="blank" id="blank">
+
+
+        <table id="detailTable" class="display" style="width:100%">
+          <thead>
+		  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th><th></th></tr>
+          </thead>
+          <tbody>
+
           <?php echo $htmlDetailLines; ?>
-	  <tr>
-	    <td></td>
-	    <td></td>
-	    <td></td>
-	    <td></td>
-	    <td></td>
-	    <td></td>
-	    <td></td>	    
-	    <td><button type="button" onclick="add_line()">ADD LINE</button>
-                <input type="hidden" id="add" name="add" value="0">
-	    </td>
-	  </tr>
+        </tbody>
 	</table>
 
+	    <button type="button" onclick="add_line()">ADD LINE</button>
+              <input type="hidden" id="add" name="add" value="0">
+	  </fieldset>
 	</fieldset>
       </div>
 
@@ -89,16 +187,26 @@
             document.getElementById("which").value = "0";
 	  }
  	}
-
+ 
 	function delete_line(value){
           document.getElementById("hDelete" + value).value = "1";
 	  document.getElementById("create").submit();
+         // var delObj = document.getElementById("row" + value).children.length;
+         // alert(delObj);
+          //delObj.className = "rowDeleted";
+          document.getElementById("hDelete + value").value = "1";
+	  document.getElementById("create").submit();
 	}
+
+        function hideDeletedLines(){
+          //document.querySelectorAll("[hDelete='1']").className = "rowDeleted";
+        }
 
 	function itemDescSelected(value){
           var element = "itemdesc" + value;
 	  if(document.getElementById(element).value != "-- Search by Item Description --"){
             document.getElementById("itemSelected" + value).value = "1";
+	    autoTab(document.getElementById(element), document.getElementById("qty" + value));
 	    document.getElementById("create").submit();
 	  }
 	}
@@ -121,6 +229,33 @@
 	  var cost = document.getElementById("price" + value).textContent.replace("$", "");
 	  document.getElementById("total" + value).textContent = "$" + (qty * cost);
 	}
+
+        function autoTab( current, to ){
+          to.focus();
+        }
+
+        function cs(current, to) {
+          if(document.getElementById("selectCustomer").value != "-- Select Customer --"){
+            document.getElementById("custSelected").value = "1";
+            document.getElementById("create").submit();
+            to.focus();
+	  }
+	}
+
+	  <?php if($lineCounter == 0){
+	   echo 'add_line();';}
+	   echo 'hideDeletedLines();'; ?>
+
+      $(document).ready(function() {
+        var table = $('#detailTable').DataTable({
+	  "paging": false,
+          "bLengthChange": false,
+          "ordering": false,
+          "info":     false
+	});
+
+      } );
+
       </script>
 
 
