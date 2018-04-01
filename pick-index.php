@@ -31,7 +31,6 @@
 
     $orderNum = $idArray[0];
   } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $rowIds =  $_GET["rowIds"];
     $orderNum =  $_GET["id"];
     $pickStaff =  $_GET["pickStaff"];
   }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+.detButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonDetail:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonDetail {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 400;
+ margin-right: 9px;
+ float: right;
+}
+</style>
+
+
+  <body>
+  <!-- ************ Table Styling from https://datatables.net/ *************/ -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+<!--  <link rel="stylesheet" href="https://cdn.datatables.net/scroller/1.4.4/css/scroller.dataTables.min.css">-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>'
+  <!--  <script src="https://cdn.datatables.net/scroller/1.4.4/js/dataTables.scroller.min.js"></script>'-->
+
+  <div class="containerCreatePick">
+
+
+  <div class="pickTableBox">
+  <fieldset name="pickTableGroup" id="pickTableGroup">
+  <legend>Open Customer Orders</legend>
+  <fieldset name="blank" id="blank">
+  <?php $sql = $conn->query(
+  "select o.order_id, c.name, o.order_status, o.order_date, o.order_expected_date, o.order_lines 
+  from order_header o, customer c 
+  where c.customer_id = o.customer_id
+  group by o.order_id 
+  order by o.order_expected_date"); ?>
+
+  <table id="example" class="display" style="width:100%"><br>
+  <thead>
+  <tr> 
+  <th align="left">Order Number</th>
+  <th align="left">Order Status</th>
+  <th align="left">Customer Name</th>
+  <th align="right">Expected by Date</th>
+  <th align="right">Order Detail Lines</th>
+  <th align="center">Date Created</th>
+  <th align="center">Detail</th>
+  </tr>
+  </thead>
+  <tbody> 
+
+  <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+    echo '<tr>';
+    echo '<td align="center">';
+    echo 'PB-AIP-';
+    echo $row['order_id'];
+    echo '</td>';
+
+    echo '<td>';
+    echo $row['order_status'];
+    echo '</td>';
+
+    echo '<td align="center">';
+    echo $row['name'];
+    echo '</td>';
+
+    echo '<td align="center">';
+    echo $row['order_expected_date'];
+    echo '</td>';
+
+    echo '<td align="center">';
+    echo $row['order_lines'];
+    echo '</td>';
+
+    echo '<td align="right">';
+    echo $row['order_date'];
+    echo '</td>';
+
+    echo '<td>
+      <a class="detButton buttonDetail" onclick="window.print();return false;">View</a>
+    </td>';
+    echo '</tr>';
+  } ?>
+  </tbody>
+  </table>
+  </fieldset>
+  </fieldset>
+  <a class="detButton buttonDetail" onclick="window.print();return false;">Print Orders</a>
+  </div>
+
+  </form>
+
+  </div>
+
+  <script>
+  /*************** Table Styling from https://datatables.net/ ************/
+  $(document).ready(function() {
+      var table = $('#example').DataTable( {
+          //"scrollY": "200px",
+          "paging": false
+      } );
+ 
+      $('a.toggle-vis').on( 'click', function (e) {
+          e.preventDefault();
+ 
+          // Get the column API object
+          var column = table.column( $(this).attr('data-column') );
+ 
+          // Toggle the visibility
+          column.visible( ! column.visible() );
+      } );
+  } );
+
+/*
+
+
+
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+	 columnDefs: [ {
+           orderable: false,
+           className: 'details-control',
+           targets:   0
+	 } ],
+         order: [[ 1, 'asc' ]],
+         dom:        'Bfrtip',
+         select:      'true',
+       });
+
+
+       $(".create").on( "submit", function() {
+         //verify user wants these orders for the report
+         if(confirm("Produce Pick Report with these orders?") == true) {
+           if(table.rows( { selected: true} ).count() > 0 && document.getElementById("pickStaff").value != "-- Warehouse Staff Name --"){
+           }
+           else {
+             alert("Must select a picker and at least one customer order.");
+  	     return false;
+           }
+         } 
+         else{
+           //prevent refresh or exit of page
+  	   return false;
+         }
+       });
+
+  });*/
+  </script>
+</body>
+</html>
