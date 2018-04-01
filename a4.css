@@ -9,6 +9,94 @@
   each page and form.
 */
 
+/* detail lines cust order */
+
+.orderCustName label, .orderCustNum label, .orderShipCost label, .orderGrandTot label {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 100%;
+  padding-top: .1em;
+  padding-right: .30em;
+  width: 9em;
+  text-align: right;
+  float: left;
+}
+
+.exDate label{
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-right: .30em;
+  padding-top: .29em;
+  display: inline-block;
+  font-size: 100%;
+  width: 9em;
+  text-align: right;
+  float: left;
+}
+
+
+.exDate input, .orderShipCost span, .orderGrandTot span {
+  font-family: Helvetica, sans-serif;
+  display: inline-block;
+  font-size: 100%;
+}
+
+.orderCustBox select, .customerBox select {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  text-align-last: center;
+  width: 17em;
+  display: inline-block;
+  font-size: 100%;
+}
+
+.orderCustName {
+  grid-area: custNa;
+}
+
+.orderCustNum {
+  grid-area: custNu;
+}
+
+.exDate {
+  grid-area: expDa;
+  margin-left: 19.8em;
+  //float: right;
+}
+
+.orderCustBox {
+  grid-area: custO;
+  display: grid;
+  grid-template-areas:
+    "custNa expDa"
+    "custNu .";
+  grid-gap: 6px;
+  padding: 0px;
+}
+
+.deleted {
+  visibility: collapse;
+}
+
+.detailBox {
+  grid-area: det;
+}
+
+.containerCreateOrder {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    ". . . . . . . custO custO .  . . . . . ."
+    ". . . . . . . billing shipping . . . . . . ."
+    ". . . . . . . det det . . . . . . ."
+    ". . . . . . . det det . . . . . . ."
+    ". . . . . . . cancel  submit . . . . . . .";
+  grid-gap: 0px;
+  padding: 5px;
+}
 
 /* report css */
 .dataTables_filter input { width: 30em }
@@ -364,7 +452,7 @@ legend{
   margin-right: -28px;
 }
 
-.customerBox label, .billingBox label, .shippingBox label, .headerBox label, .pickStaffBox label{
+.customerBox label, .billingBox label, .shippingBox label, .headerBox label, .pickStaffBox label {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -430,11 +518,10 @@ legend{
 }
 
 
-.customerBox input, .customerBox select, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
+.customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
 .itemNumBox input, .itemAttributesBox input, .itemAttributesBox select, .headerBox select, .itemNumBox select, .pickStaffBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
-  padding: 0;
   display: inline-block;
   font-size: 100%;
 }
@@ -521,18 +608,7 @@ legend{
   grid-area: detail;
 }
 
-.containerCreateOrder {
-  //margin-top: 35px;
-  display: grid;
-  grid-template-areas:
-    ". . . . . . . header header .  . . . . . ."
-    ". . . . . . . billing shipping . . . . . . ."
-    ". . . . . . . detail detail . . . . . . ."
-    ". . . . . . . detail detail . . . . . . ."
-    ". . . . . . . cancel  submit . . . . . . .";
-  grid-gap: 0px;
-  padding: 5px;
-}
+
 
 .containerCreateCustomer {
   //margin-top: 35px;
