@@ -22,7 +22,7 @@ class detail {
   **/
   public function addToDatabase(){
      // data is validated as part of the html definition
-     $insertSQL = 'insert into item ( order_id, item_id, line_qty)
+     $insertSQL = 'insert into detail ( order_id, item_id, line_qty)
 	     		               values (?, ?, ?)';
  
      try {

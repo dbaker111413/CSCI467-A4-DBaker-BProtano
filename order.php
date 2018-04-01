@@ -40,7 +40,6 @@ class order {
      $selectSQL = 'select order_id from order_header order by order_id desc';
 
      try {
-       showAlert($this->customerNum);
        $stmt = $this->conn->prepare($insertSQL);
        $ok = $stmt->execute(array($this->date, $this->status, $this->expectedDate, $this->lines, $this->customerNum));
        // get the order_id for the detail lines, we only care about the first row
