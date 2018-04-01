@@ -24,19 +24,35 @@ class order {
 
 
   /*
-  * inserts new customer into database.
-  * returns true if successful, false otherwisex
+  * inserts new customer into database. An array of detail lines are passed in to be saved with the order
+  * returns true if successful, false otherwise
   **/
-  public function addToDatabase(){
+  public function addToDatabase($detail_lines){
+
+     // Set $lines to the count of $detail_lines
+     $lines = count($detail_lines);
+     
      // data is validated as part of the html definition
-     $insertSQL = 'insert into order_header ( order_date, order_status, order_expected_date, order_lines, customer_id,
-	     		                  values (?, ?, ?, ?, ?)';
-  
+     $insertSQL = 'insert into order_header ( order_date, order_status, order_expected_date,
+                                              order_lines, customer_id) values (?, ?, ?, ?, ?)';
+
+     // this gets the id of the newly created order
+     $selectSQL = 'select max(order_id) from order_header';
+
      try {
        $stmt = $this->conn->prepare($insertSQL);
-       $ok = $stmt->execute(array($this->date, $this->status, $this->expectedDate, $this->lines, $this->customer_id));
+       $ok = $stmt->execute(array($this->date, $this->status, $this->expectedDate, $this->lines, $this->customer_id));       
+       // get the order_id for the detail lines, there should only be one row
+       foreach($this->conn->query($selectSQL) as $row){
+         $this->orderNum = $row["order_id"];
+       }
 
-
+       // now set the order id and save each detail line
+       foreach($detail_lines as $line){
+         $line->order_id = $this->orderNum;
+	 $line->addToDatabase();
+       }
+      
        $message = "Customer Order created successfully!";
        showAlert($message);
        return true;

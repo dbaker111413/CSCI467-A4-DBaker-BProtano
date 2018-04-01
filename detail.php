@@ -7,7 +7,6 @@ class detail {
   $order_id = 0;
   $item_id = 0;
   $line_qty = 0;
-  $line_required_date = "12/31/2018";
 
   /*
   * Initialize class with connection string because it appears global variables
@@ -23,12 +22,12 @@ class detail {
   **/
   public function addToDatabase(){
      // data is validated as part of the html definition
-     $insertSQL = 'insert into item ( order_id, item_id, line_qty, line_required_date)
-	     		               values (?, ?, ?, ?)';
+     $insertSQL = 'insert into item ( order_id, item_id, line_qty)
+	     		               values (?, ?, ?)';
  
      try {
        $stmt = $this->conn->prepare($insertSQL);
-       $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty, $this->line_required_date));
+       $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty);
        return true;
      }
      catch (PDOException $e) {
@@ -60,7 +59,6 @@ class detail {
     	$this->order_id = $row["order_id"];
     	$this->item_id = $row["item_id"];
     	$this->line_qty = $row["line_qty"];
-    	$this->line_required_date = $row["line_required_date"];
       }
     }
     catch(PDOException $e){
@@ -69,7 +67,6 @@ class detail {
       $this->order_id = $row["order_id"];
       $this->item_id = $row["item_id"];
       $this->line_qty = $row["line_qty"];
-      $this->line_required_date = $row["line_required_date"];
     }
   }
 
@@ -78,13 +75,13 @@ class detail {
   */
   public function updateDatabase(){
     // data is validated as part of the html definition
-    $updateSQL = 'update detail set order_id=?, item_id=?, line_qty=?, line_required_date=? where line_id=?';
+    $updateSQL = 'update detail set order_id=?, item_id=?, line_qty=? where line_id=?';
 
     // try executing the sql
     try{
       $stmt = $this->conn->prepare($updateSQL);
 
-      $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty, $this->line_required_date, $this->line_id));
+      $ok = $stmt->execute(array($this->order_id, $this->item_id, $this->line_qty, $this->line_id));
       return true;
     }
     catch (PDOException $e){

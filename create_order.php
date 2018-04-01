@@ -97,11 +97,36 @@
 
     $htmlDetailLines = generateDetailLines();
 
-    
-
     if(isset($_POST["add"]) && $_POST["add"] == "1"){
       $htmlDetailLines .= generateSingleDetailLine(new item($conn));
       $lineCounter++;
+    }
+
+    // save the order and detail lines in the database when the user submits
+    if(isset($_POST["which"]) && $_POST["which"] == "1"){
+      // first, create and save the order header. We need to order ID before we can save the detail lines
+      $order = new order($conn);
+      $order->date = date("Y-m-d");
+      $order->status = "Created";  // required by business rule
+      $order->expectedDate = $_POST['expectedDate'];
+      $order->customerNum = $_POST['selectCustomerNum'];
+
+      $details = new array();
+      // next create each detail line
+      for($i = 0; $i < count($items); $i++){
+        $detail = new detail($conn);
+	$detail->item_id = $items[$i]->itemNumber;
+	$detail->line_qty = $_POST["qty".$i];
+	array_push($details, $detail);
+      }
+      // now save the order with all the detail lines
+      if($order->addToDatabase($details)){
+        // empty the item array, the post array, and clear the detail lines
+        $items = array();
+	$_POST = array();
+	$lineCounter = 0;
+	htmlDetailLines = "";
+      }
     }
   }
 
