@@ -179,7 +179,7 @@ table th {
     echo '</td>';
 
     echo '<td align="center">';
-    echo $row['price'];
+    echo (round($row['price'],2));
     echo '</td>';
 
     echo '<td align="center">';
@@ -187,15 +187,15 @@ table th {
     echo '</td>';
 
     echo '<td align="center">';
-    echo $row['line_qty'] * $row['price'];
+    echo (round($row['line_qty'] * $row['price'],2));
     echo '</td>';
 
     $total += $row['line_qty'] * $row['price'];
 
     echo '</tr>';
   } 
-    $shipHand = $total * .1; 
-    $gTotal = $total + $shipHand;
+    $shipHand = (round($total * .1,2)); 
+    $gTotal = (round($total + $shipHand,2));
   ?>
   </tbody>
   </table>
