@@ -54,7 +54,7 @@ class order {
 	 $line->addToDatabase();
        }
       
-       $message = "Customer Order created successfully!";
+       $message = "Customer Order created successfully! Customer confirmation email sent.";
        showAlert($message);
        return true;
      }

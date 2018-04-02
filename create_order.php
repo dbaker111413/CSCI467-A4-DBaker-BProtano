@@ -82,7 +82,7 @@
 	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".$total."</label></td>
-	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
+	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
 	  </tr>";
@@ -131,7 +131,7 @@
     if(isset($_POST["which"]) && $_POST["which"] == "1"){
       // first, create and save the order header. We need to order ID before we can save the detail lines
       $order = new order($conn);
-      $order->date = date("Y-m-d");
+      $order->date = date("Y-m-d H:i:s");
       $order->status = "Created";  // required by business rule
       $order->expectedDate = $_POST['expectedDate'];
       $order->customerNum = $_POST['selectCustomerNum'];

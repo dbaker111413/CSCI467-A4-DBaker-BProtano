@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="a4.css">
 <body class="reportBody">
 <form method="post" action="#" id="printJS-form">  
 <style>
@@ -34,19 +35,19 @@ table th {
 
   <br><hr>
  
-  <div class="reportBox">
+  <div class="reportBox2">
 
   <div class="reportOrderBox">
   <fieldset name="reportOrderGroup">
   <legend>Order Infomation</legend>
-  <div class="duh">
+  <div class="duh2">
 
   <div class="oNa">
   <label for="custOrderNum">Order Number: </label>
   <span name="custOrderNum"><?php echo $orderNum; ?></span>
   </div>
 
-  <div class="oNa">
+  <div class="oSta">
   <label for="custOrderStatus">Order Status: </label>
   <span name="custOrderStatus"><?php echo $orderStatus; ?></span>
   </div>
@@ -56,7 +57,7 @@ table th {
   <span name="custOrderDate"><?php echo $orderDate; ?></span>
   </div>
 
-  <div class="oDa">
+  <div class="oEda">
   <label for="custOrderDate">Expected Date: </label>
   <span name="custOrderDate"><?php echo $expectedDate; ?></span>
   </div>
@@ -70,18 +71,16 @@ table th {
   </fieldset>
   </div>
 
-  <div class="reportCustomerBox">
-  <fieldset name="reportCustomerGroup">
-  <legend>Customer Shipping Infomation:</legend>
-  
-  <span name="custName"><?php echo $custName; ?></span><br>
+  <div class="reportCustomerNamoBox">
+  <fieldset name="reportCustomerNamoGroup">
+  <legend>Customer Infomation:</legend>
 
-  <span name="custAdd1"><?php echo $add1s.", "; ?></span>
-  <span name="custAdd2"><?php echo $add2s; ?></span><br>
+  <label for="custONo">Customer Number:</label>
+  <span name="custONo"><?php echo $custNum; ?></span> <br><br>
 
-  <span name="custCity"><?php echo $citys.", "; ?></span>
-  <span name="custState"><?php echo $states." "; ?></span>
-  <span name="custZip"><?php echo $zips; ?></span><br>
+  <label for="custName">Customer Name:</label>
+  <span name="custName"><?php echo $custName; ?></span>
+
 
   </fieldset>
   </div>
@@ -90,7 +89,7 @@ table th {
   <fieldset name="reportBillingGroup">
   <legend>Customer Billing Infomation:</legend>
   
-  <span name="custName"><?php echo $custName; ?></span><br>
+  <!--  <span name="custName"><?php echo $custName; ?></span><br> -->
 
   <span name="custAdd1"><?php echo $add1.", "; ?></span>
   <span name="custAdd2"><?php echo $add2; ?></span><br>
@@ -102,21 +101,43 @@ table th {
   </fieldset>
   </div>
 
+
+  <div class="reportCustomerBox">
+  <fieldset name="reportCustomerGroup">
+  <legend>Customer Shipping Infomation:</legend>
+  
+  <!--  <span name="custName"><?php echo $custName; ?></span><br> -->
+
+  <span name="custAdd1"><?php echo $add1s.", "; ?></span>
+  <span name="custAdd2"><?php echo $add2s; ?></span><br>
+
+  <span name="custCity"><?php echo $citys.", "; ?></span>
+  <span name="custState"><?php echo $states." "; ?></span>
+  <span name="custZip"><?php echo $zips; ?></span><br>
+
+  </fieldset>
+  </div>
+
+
   <div class="reportRepBox">
   <fieldset name="reportRepGroup">
   <legend>Customer Contact Infomation:</legend>
-  
+ 
+  <div class="fNamo"> 
   <label for="custFname">First Name: </label>
-  <span name="custFname"><?php echo $fname; ?></span><br>
+  <span name="custFname"><?php echo $fname; ?></span>
+  </div>
 
+  <div class="fNamo"> 
   <label for="custLnamw">Last Name: </label>
   <span name="custLname"><?php echo $lname; ?></span>
+  </div>
 
-  <label for="custPhone">Phone: ( </label>
-  <span name="custPhone"><?php echo $phoneArea." ) "; ?></span><br>
-  <span name="custPhone"><?php echo $phoneMid." - "; ?></span><br>
-  <span name="custPhone"><?php echo $phoneEnd." ext. "; ?></span><br>
-  <span name="custPhone"><?php echo $phoneExt; ?></span><br>
+  <label for="custPhone">Phone: </label>
+  <span name="custPhone"><?php echo " ( ".$phoneArea." ) "; ?></span>
+  <span name="custPhone"><?php echo $phoneMid." - "; ?></span>
+  <span name="custPhone"><?php echo $phoneEnd; ?></span><br>
+<!--  <span name="custPhone"><?php echo $phoneExt; ?></span><br>-->
 
   <label for="custEmail">Email: </label>
   <span name="custEmail"><?php echo $email; ?></span>
@@ -132,9 +153,6 @@ table th {
 
   </fieldset>
   </div>
-
-
-
 
   <table class="rTab" id="pickTable"><br>
   <thead>
@@ -205,10 +223,10 @@ table th {
   <legend>Order Totals:</legend>
   
   <label for="reportShipCost">Shipping and Handling: </label>
-  <span name="reportShipCost"><?php echo "$".$shipHand; ?></span><br>
+  <span name="reportShipCost"><?php echo "$".$shipHand; ?></span><br><br>
 
   <label for="reportGrandTot">Grand Total: </label>
-  <span name="reportGrandTot"><?php echo "$".$gTotal; ?></span><br>
+  <span name="reportGrandTot"><?php echo "$".$gTotal; ?></span>
 
   </fieldset>
   </div>

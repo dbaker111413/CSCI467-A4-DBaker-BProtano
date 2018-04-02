@@ -32,6 +32,7 @@
   while($head = $sqlHead->fetch(PDO::FETCH_ASSOC)) {
     $orderDate = $head['order_date'];
     $orderStatus = $head['order_status'];
+    $custNum = $head['customer_id'];
     $custName = $head['name'];
     $add1 = $head['address_line1'];
     $add2 = $head['address_line2'];
