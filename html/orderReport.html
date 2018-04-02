@@ -102,9 +102,9 @@
     echo $row['order_date'];
     echo '</td>';
 
-    echo '<td>
-      <a class="detButton buttonDetail" onclick="window.print();return false;">View</a>
-    </td>';
+    echo '<td><a class="detButton buttonDetail"  onclick="window.open(\'orderOut.php?id=';
+    echo $row['order_id'];		    
+    echo '\', \'Detail Report\', \'height=1000,width=800\');return false;">View</a></td>';
     echo '</tr>';
   } ?>
   </tbody>
