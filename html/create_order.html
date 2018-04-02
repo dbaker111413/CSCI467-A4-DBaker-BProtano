@@ -10,6 +10,39 @@
   <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
   <body>
+<style>
+.detButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonDetail:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonDetail {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 400;
+ margin-right: 9px;
+ float: right;
+}
+</style>
+
     <!-- container object for using css with header customer info box-->
      
     <form name="create" id="create" action="create_order.php" method="post" onsubmit="show_confirm()">
@@ -75,7 +108,7 @@
 		      value="<?php echo $c->billCity; ?>"><br><br>
 	</div>
 
-	<div class="state">
+	<div class="state2">
 	  <label for="billState">State </label> 
           <input type="text" disabled name="billState" id="billState" size="6" value="<?php echo $c->billState; ?>"><br>
 <!--          <select name="billState" id="billState" 
@@ -170,7 +203,7 @@
 	       value="<?php echo $c->shipCity; ?>"><br><br>
 	</div>
 
-	<div class="state">
+	<div class="state2">
 	<label for="shipState">State </label>
         <input type="text" name="shipState" id="shipState" disabled size="6" value="<?php echo $c->shipState; ?>"><br>
 <!--	<select name="shipState" id="shipState"
@@ -286,7 +319,12 @@
       <div class="cancelBox">
 	<button class="button buttonReset" type="reset">Cancel</button>
       </div>
-	  
+
+
+      <div class="printBox">
+      <a class="detButton buttonDetail" onclick="window.print();return false;">Print</a>
+      </div>
+
       <!-- submit box -->
       <div class="submitBox">
 	<button class="button buttonSubmit" type="submit">Submit</button>
