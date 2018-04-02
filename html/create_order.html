@@ -282,9 +282,13 @@
              <label for="shippingCost", value=<?php echo $shippingCost ?>><?php echo "Shipping and Handling: $".round($shippingCost,2) ?></label>
              <span name="shippingCost"></span>
            </div>
-
+	   
+           <div class="orderSubTot">
+	     <label for="subTot", value=<?php echo $subTotal ?>><?php echo "Sub Total: $".round($subTotal,2) ?></label>
+	     <span name="subTot"></span>
+	   </div>
            <div class="orderGrandTot">
-             <label for="grandTot" value=<?php echo $shippingCost ?>><?php echo "Grand Total: $".round($totalCost + $shippingCost,2) ?></label>
+             <label for="grandTot" value=<?php echo $shippingCost ?>><?php echo "Grand Total: $".round($totalCost,2) ?></label>
              <span name="grandTot"></span>
            </div>
          </fieldset>
