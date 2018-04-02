@@ -11,6 +11,7 @@
   // keeps track of how many lines there are
   $lineCounter = 0;
   $shippingCost = 0.0;
+  $subTotal = 0.0;
   $totalCost = 0.0;
   $htmlDetailLines = "";
   $items = array();
@@ -27,7 +28,7 @@
   // it performs this by checking if itemnum[X] isset, if so then
   // that line exists; so an html line is appended to the string
   function generateDetailLines(){
-    global $lineCounter, $conn, $items, $totalCost, $shippingCost;
+    global $lineCounter, $conn, $items, $totalCost, $shippingCost, $subTotal;
     $outputLine = "";
     
     while(isset($_POST["itemnum".$lineCounter])){
@@ -48,13 +49,14 @@
     }
 
     // shipping cost is 10% of total
-    $shippingCost = $totalCost * 0.1;
+    $shippingCost = $subTotal * 0.1;
+    $totalCost = $subTotal + $shippingCost;
     return $outputLine;	
   }
 
   // generates a single html detail line
   function generateSingleDetailLine($i){
-    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost;
+    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost, $subTotal;
     $deleteValue = '0';
 
     if(isset($_POST["hDelete".$lineCounter])){
@@ -69,7 +71,9 @@
     $total = $price * $qty;
     $date = isset($_POST["date".$lineCounter]) && $_POST["date".$lineCounter] != "mm/dd/yyyy" ? $_POST["date".$lineCounter] : date("Y-m-d"); 
 
-    $totalCost += $total;
+    if($deleteValue == 0){
+      $subTotal += $total;
+    }
 
     $delCheck = isset($_POST["hDelete".$lineCounter]) && $_POST["hDelete".$lineCounter] != 0 ? $_POST["hDelete".$lineCounter] : 0; 
     if ($delCheck == 0) {
@@ -81,7 +85,7 @@
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$".$price."</label></td>
 	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
-	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".$total."</label></td>
+	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
 	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
@@ -95,7 +99,7 @@
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$".$price."</label></td>
 	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
-	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".$total."</label></td>
+	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
 	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
