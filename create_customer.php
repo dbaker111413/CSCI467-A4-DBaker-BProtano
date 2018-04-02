@@ -28,6 +28,7 @@
 	$i->shipAddress2 = $_POST['shipAddress2'];
 	$i->shipCity = $_POST['shipCity'];
 	$i->shipState = $_POST['shipState'];
+	$i->shipZip = $_POST['shipZip'];
 	$i->fname = $_POST['fname'];
 	$i->lname = $_POST['lname'];
 	$i->areaCode = $_POST['areaCode'];
