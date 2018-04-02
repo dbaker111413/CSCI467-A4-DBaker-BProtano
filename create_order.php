@@ -124,7 +124,7 @@
     if(isset($_POST["which"]) && $_POST["which"] == "1"){
       // first, create and save the order header. We need to order ID before we can save the detail lines
       $order = new order($conn);
-      $order->date = date("Y-m-d");
+      $order->date = date("Y-m-d H:i:s");
       $order->status = "Created";  // required by business rule
       $order->expectedDate = $_POST['expectedDate'];
       $order->customerNum = $_POST['selectCustomerNum'];

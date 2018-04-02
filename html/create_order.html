@@ -22,7 +22,7 @@
 
 	        <div class="exDate">
 	           <label for="expectedDate">Expected by Date </label>
-	           <input type="date" required title="Address required" name="expectedDate" id="expectedDate"  
+	           <input type="date" required title="Date required" name="expectedDate" id="expectedDate"  
 	             value="<?php echo isset($_POST['expectedDate']) ? $_POST['expectedDate'] : '' ?>">
 	        </div>
 
@@ -174,13 +174,13 @@
       <script>
 	function show_confirm(){
 	  if(confirm("Are you sure you want to create this order?") == true) {
-            document.getElementById("which").value = "1";
-
-            document.getElementById("shipAddress1").disabled = false;
-            document.getElementById("shipAddress2").disabled = false;
-            document.getElementById("shipCity").disabled = false;
-            document.getElementById("shipZip").disabled = false;
-            document.getElementById("shipState").disabled = false;
+            if (document.getElementById("selectCustomer").value != "-- Search by Customer Name --" 
+                 && document.getElementById("selectCustomerNum").value != "-- Search by Customer Number --"){
+              document.getElementById("which").value = "1"; 
+            }else {
+              alert("Must select a customer before creating Customer Order");
+              return false;
+            }
   	  }
 	  else{
             document.getElementById("which").value = "0";

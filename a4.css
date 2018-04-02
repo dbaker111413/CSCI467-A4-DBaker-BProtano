@@ -124,6 +124,74 @@
 }
 
 /* report css */
+.oNa { grid-area: no; }
+.oDa { grid-area: da; }
+.eDa { grid-area: eda; }
+.oLi { grid-area: li; }
+
+.oSta { grid-area: sta; }
+.oEda { grid-area: oeda; }
+.duh2 {
+  //margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    "no da"
+    "sta oeda "
+    "li  .";
+  grid-gap: 6px;
+  padding: 0px;
+}
+
+.reportOrderBox {
+  grid-area: repoOrder;
+}
+
+.reportCustomerBox {
+  grid-area: repoCust;
+}
+
+.reportBillingBox {
+  grid-area: repoBill;
+  font-family: Helvetica, sans-serif;
+  margin-bottom: 0;
+  //font-size: 110%;
+  text-align: center;
+  line-height: 1.65em;
+}
+
+.reportRepBox {
+  grid-area: repoRep;
+}
+
+.reportCommentBox {
+  grid-area: repoComm;
+}
+
+.reportTotBox {
+  grid-area: repoTot;
+}
+
+.rTab {
+  grid-area: rTab;
+}
+
+.reportCustomerNamoBox {
+  grid-area: repoNamo;
+}
+
+.reportBox2 {
+  display: grid;
+  grid-template-areas:
+    "repoOrder repoOrder . . repoNamo"
+    "repoBill repoCust . . repoRep"
+    "repoComm repoComm repoComm repoComm repoComm"
+    ". . . repoTot repoTot"
+    "rTab rTab rTab rTab rTab";
+  grid-gap: 8px;
+  padding: 5px;
+}
+
+
 .dataTables_filter input { width: 30em }
 
 
@@ -191,10 +259,7 @@
   padding: 5px;
 }
 
-.oNa { grid-area: no; }
-.oDa { grid-area: da; }
-.eDa { grid-area: eda; }
-.oLi { grid-area: li; }
+
 .duh {
   //margin-top: 35px;
   display: grid;
@@ -207,17 +272,7 @@
   padding: 0px;
 }
 
-.reportOrderBox {
-  grid-area: repoOrder;
-}
 
-.reportCustomerBox {
-  grid-area: repoCust;
-}
-
-.rTab {
-  grid-area: rTab;
-}
 
 .dateTime {
   grid-area: time;
@@ -491,7 +546,7 @@ legend{
 }
 
 
-.reportBox label, .dateTime label  {
+.reportBox label, .dateTime label, .reportBox2 label  {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -504,7 +559,20 @@ legend{
   float: left;
 }
 
-.reportBox span {
+.reportBox2 label  {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  //font-size: 90%;
+  //padding-top: .1em;
+  padding-right: .30em;
+  width: 9em;
+  text-align: right;
+  float: left;
+}
+
+.reportBox span, .reportBox2 span {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
