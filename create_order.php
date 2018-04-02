@@ -132,6 +132,9 @@
       $details = array();
       // next create each detail line
       for($i = 0; $i < count($items); $i++){
+        if(isset($_POST["hDelete".$i]) && $_POST["hDelete".$i] != "0"){
+          continue;
+        }
         $detail = new detail($conn);
 	$detail->item_id = $items[$i]->itemNumber;
 	$detail->line_qty = $_POST["qty".$i];
