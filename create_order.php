@@ -10,6 +10,8 @@
   require_once ("detail.php");
   // keeps track of how many lines there are
   $lineCounter = 0;
+  $shippingCost = 0.0;
+  $totalCost = 0.0;
   $htmlDetailLines = "";
   $items = array();
 
@@ -25,7 +27,7 @@
   // it performs this by checking if itemnum[X] isset, if so then
   // that line exists; so an html line is appended to the string
   function generateDetailLines(){
-    global $lineCounter, $conn, $items;
+    global $lineCounter, $conn, $items, $totalCost, $shippingCost;
     $outputLine = "";
     
     while(isset($_POST["itemnum".$lineCounter])){
@@ -44,12 +46,15 @@
       $outputLine .= generateSingleDetailLine($i);
       $lineCounter++;
     }
+
+    // shipping cost is 10% of total
+    $shippingCost = $totalCost * 0.1;
     return $outputLine;	
   }
 
   // generates a single html detail line
   function generateSingleDetailLine($i){
-    global $lineCounter, $itemDropDownMenu, $itemDDDMenu;
+    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost;
     $deleteValue = '0';
 
     if(isset($_POST["hDelete".$lineCounter])){
@@ -60,9 +65,11 @@
     $itemNum = $i->itemNumber != "" ? "<option>".$i->itemNumber."</option>" : "";
     $uom = $i->uom != "" ? $i->uom : "--";
     $price = $i->price != "" ? $i->price : 0.00;
-    $qty = isset($_POST["qty".$lineCounter]) ? $_POST["qty".$lineCounter] : 0;
+    $qty = isset($_POST["qty".$lineCounter]) ? $_POST["qty".$lineCounter] : 1;
     $total = $price * $qty;
     $date = isset($_POST["date".$lineCounter]) && $_POST["date".$lineCounter] != "mm/dd/yyyy" ? $_POST["date".$lineCounter] : date("Y-m-d"); 
+
+    $totalCost += $total;
 
     $delCheck = isset($_POST["hDelete".$lineCounter]) && $_POST["hDelete".$lineCounter] != 0 ? $_POST["hDelete".$lineCounter] : 0; 
     if ($delCheck == 0) {
