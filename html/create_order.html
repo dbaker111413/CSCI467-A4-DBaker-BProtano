@@ -130,13 +130,13 @@
 
       <!-- order totals -->
            <div class="orderShipCost">
-             <label for="shippingCost">Shipping and Handling:</label>
-             <span name="shippingCost"><?php ?></span>
+             <label for="shippingCost", value=<?php echo $shippingCost ?>><?php echo "Shipping and Handling: $".round($shippingCost,2) ?></label>
+             <span name="shippingCost"></span>
            </div>
 
            <div class="orderGrandTot">
-             <label for="grandTot">Grand Total:</label>
-             <span name="grandTot"><?php ?></span>
+             <label for="grandTot" value=<?php echo $shippingCost ?>><?php echo "Grand Total: $".round($totalCost + $shippingCost,2) ?></label>
+             <span name="grandTot"></span>
            </div>
 
 	   <fieldset class="blank" name="blank" id="blank">
@@ -225,8 +225,15 @@
 
 	function update_total(value){
           var qty = document.getElementById("qty" + value).value;
+	  if(qty == 0){
+            document.getElementById("hDelete" + value).value = "1";
+	  }
+	  else{
+            document.getElementById("hDelete" + value).value = "0";
+	  }
 	  var cost = document.getElementById("price" + value).textContent.replace("$", "");
 	  document.getElementById("total" + value).textContent = "$" + (qty * cost);
+	  document.getElementById("create").submit();
 	}
 
         function autoTab( current, to ){

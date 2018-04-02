@@ -121,7 +121,7 @@ class customer {
 				  $this->endDigits, $this->ext, $this->email, $this->comment));
 
 
-       $message = "Customer added successfully!";
+       $message = "A default user name and password were sent to ".$this->email;
        showAlert($message);
        return true;
      }
