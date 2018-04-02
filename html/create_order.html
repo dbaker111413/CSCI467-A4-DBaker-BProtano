@@ -28,7 +28,7 @@
 
                 <div class="orderCustName">
                   <label for="selectCustomer">Customer Name </label>
-	          <select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)" autofocus>
+	          <select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)">
 	             <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
 	              <option>-- Search by Customer Name --</option>
 	              <?php echo $custDropDownArray; ?>
@@ -52,83 +52,199 @@
 
       <!-- billing attributes box -->
       <div class="billingBox">
+
 	<fieldset name="customerBillingGroup" id="customerBillingGroup">
         <legend>Billing Address</legend>
 
 	<div class="addBox">
 	<div class="add1">
-	  <label for="billAddress1"><?php echo "Address 1: ".$c->billAddress1 ?></label>
-	  <span name="billAddress1" id="billAddress1" size="38"></span><br><br>
+	  <label for="billAddress1">Address 1 </label>
+	  <input type="text" disabled name="billAddress1" id="billAddress1" maxlength="25" size="38" 
+	         value="<?php echo $c->billAddress1; ?>"><br><br>
 	</div>
 
 	<div class="add2">
-          <label for="billAddress2"><?php echo "Address 2: ".$c->billAddress2 ?></label>
-	  <span name="billAddress2" id="billAddress2" size="38"></span><br><br>
+          <label for="billAddress2">Address 2 </label>
+	  <input type="text" disabled name="billAddress2" id="billAddress2" maxlength="25" size="38"
+	         value="<?php echo $c->billAddress2; ?>"><br><br>
 	</div>
 
 	<div class="city">
-          <label for="billCity"><?php echo "City: ".$c->billCity ?></label>
-          <span name="billCity" id="billCity" size="26"></span><br><br>
+          <label for="billCity">City </label>
+          <input type="text" disabled name="billCity" id="billCity" maxlength="25" size="26"
+		      value="<?php echo $c->billCity; ?>"><br><br>
 	</div>
 
 	<div class="state">
-	  <label for="billState"><?php echo "State: ".$c->billState ?></label>
-          <span name="billState" id="billState"></span><br>
+	  <label for="billState">State </label> 
+          <input type="text" disabled name="billState" id="billState" size="6" value="<?php echo $c->billState; ?>"><br>
+<!--          <select name="billState" id="billState" 
+	          value="<?php echo $c->billState != '' ? $c->billState : 'IL'?>">
+	    <option value="AL">AL</option>
+	    <option value="AK">AK</option>
+	    <option value="AZ">AZ</option>
+	    <option value="AR">AR</option>
+	    <option value="CA">CA</option>
+	    <option value="CO">CO</option>
+	    <option value="CT">CT</option>
+	    <option value="DE">DE</option>
+	    <option value="DC">DC</option>
+	    <option value="FL">FL</option>
+	    <option value="GA">GA</option>
+	    <option value="HI">HI</option>
+	    <option value="ID">ID</option>
+	    <option value="IL" selected>IL</option>
+	    <option value="IN">IN</option>
+	    <option value="IA">IA</option>
+	    <option value="KS">KS</option>
+	    <option value="KY">KY</option>
+	    <option value="LA">LA</option>
+	    <option value="ME">ME</option>
+	    <option value="MD">MD</option>
+	    <option value="MA">MA</option>
+	    <option value="MI">MI</option>
+	    <option value="MN">MN</option>
+	    <option value="MS">MS</option>
+	    <option value="MO">MO</option>
+	    <option value="MT">MT</option>
+	    <option value="NE">NE</option>
+	    <option value="NV">NV</option>
+	    <option value="NH">NH</option>
+	    <option value="NJ">NJ</option>
+	    <option value="NM">NM</option>
+  	    <option value="NY">NY</option>
+	    <option value="NC">NC</option>
+	    <option value="ND">ND</option>
+	    <option value="OH">OH</option>
+	    <option value="OK">OK</option>
+	    <option value="OR">OR</option>
+	    <option value="PA">PE</option>
+	    <option value="RI">RI</option>
+	    <option value="SC">SC</option>
+	    <option value="SD">SD</option>
+	    <option value="TN">TN</option>
+	    <option value="TX">TX</option>
+	    <option value="UT">UT</option>
+	    <option value="VT">VT</option>
+	    <option value="VA">VA</option>
+	    <option value="WA">WA</option>
+	    <option value="WV">WV</option>
+	    <option value="WI">WI</option>
+	    <option value="WY">WY</option>     
+	  </select><br>-->
 	</div>
 
 	<div class="zip">
-          <label for="billZip"><?php echo "Zip: ".$c->billZip ?></label>
-	  <span name="billZip" id="billZip"  size="7"></span><br>
+          <label for="billZip">Zip </label>
+	  <input type="text" disabled name="billZip" id="billZip" minlength="5" maxlength="5" size="7"
+	         value="<?php echo $c->billZip; ?>"><br>
 	</div>
-    <!--   <div class="check">
-	    <br><input type="checkbox" name="billShipSame" id="billShipSame" value="false" onclick="setShipping()" > Shipping address same as billing address
-	  </div> -->
 
 	</div>
 	</fieldset>
+
       </div>
 
       <!-- shipping attributes box -->
       <div class="shippingBox">
+
         <fieldset name="customerShippingGroup" id="customerShippingGroup">
         <legend>Shipping Address</legend>
 
 	<div class="addBox">
 	<div class="add1">
-	<label for="shipAddress1"><?php echo "Address 1: ".$c->shipAddress1 ?></label>
-	<span name="shipAddress1" id="shipAddress1" size="38"></span><br><br>
+	<label for="shipAddress1">Address 1 </label>
+	<input type="text" disabled name="shipAddress1" id="shipAddress1" maxlength="25" size="38"
+	       value="<?php echo $c->shipAddress1; ?>"><br><br>
 	</div>
 
 	<div class="add2">
-        <label for="shipAddress2"><?php echo "Address 2: ".$c->shipAddress2 ?></label>
-	<span name="shipAddress2" id="shipAddress2" size="38"></span><br><br>
+        <label for="shipAddress2">Address 2 </label>
+	<input type="text" disabled name="shipAddress2" id="shipAddress2" maxlength="25" size="38"
+	       value="<?php echo $c->shipAddress2; ?>"><br><br>
 	</div>
 
 	<div class="city">
-	<label for="shipCity"><?php echo "City: ".$c->shipCity ?></label>
-	<span name="shipCity" id="shipCity" size="26"></span><br><br>
+	<label for="shipCity">City </label>
+	<input type="text" disabled name="shipCity" id="shipCity" maxlength="25" size="26"
+	       value="<?php echo $c->shipCity; ?>"><br><br>
 	</div>
 
 	<div class="state">
-	<label for="shipState"><?php echo "State: ".$c->shipState ?></label>
-	<span name="shipState" id="shipState"></span><br>
+	<label for="shipState">State </label>
+        <input type="text" name="shipState" id="shipState" disabled size="6" value="<?php echo $c->shipState; ?>"><br>
+<!--	<select name="shipState" id="shipState"
+	       value="<?php echo $c->shipState != '' ? $c->shipState : 'IL'; ?>">
+ 	    <option value="AL">AL</option>
+	    <option value="AK">AK</option>
+	    <option value="AZ">AZ</option>
+	    <option value="AR">AR</option>
+	    <option value="CA">CA</option>
+	    <option value="CO">CO</option>
+	    <option value="CT">CT</option>
+	    <option value="DE">DE</option>
+	    <option value="DC">DC</option>
+	    <option value="FL">FL</option>
+	    <option value="GA">GA</option>
+	    <option value="HI">HI</option>
+	    <option value="ID">ID</option>
+	    <option value="IL" selected>IL</option>
+	    <option value="IN">IN</option>
+	    <option value="IA">IA</option>
+	    <option value="KS">KS</option>
+	    <option value="KY">KY</option>
+	    <option value="LA">LA</option>
+	    <option value="ME">ME</option>
+	    <option value="MD">MD</option>
+	    <option value="MA">MA</option>
+	    <option value="MI">MI</option>
+	    <option value="MN">MN</option>
+	    <option value="MS">MS</option>
+	    <option value="MO">MO</option>
+	    <option value="MT">MT</option>
+	    <option value="NE">NE</option>
+	    <option value="NV">NV</option>
+	    <option value="NH">NH</option>
+	    <option value="NJ">NJ</option>
+	    <option value="NM">NM</option>
+  	    <option value="NY">NY</option>
+	    <option value="NC">NC</option>
+	    <option value="ND">ND</option>
+	    <option value="OH">OH</option>
+	    <option value="OK">OK</option>
+	    <option value="OR">OR</option>
+	    <option value="PA">PE</option>
+	    <option value="RI">RI</option>
+	    <option value="SC">SC</option>
+	    <option value="SD">SD</option>
+	    <option value="TN">TN</option>
+	    <option value="TX">TX</option>
+	    <option value="UT">UT</option>
+	    <option value="VT">VT</option>
+	    <option value="VA">VA</option>
+	    <option value="WA">WA</option>
+	    <option value="WV">WV</option>
+	    <option value="WI">WI</option>
+	    <option value="WY">WY</option>  
+	</select><br>-->
 	</div>
 
 	<div class="zip">
-        <label for="shipZip"><?php echo "Zip: ".$c->shipZip ?></label>
-	<span name="shipZip" id="shipZip" size="7"></span><br>
+        <label for="shipZip">Zip </label>
+	<input type="text" disabled  name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
+	       value="<?php echo $c->shipZip; ?>"<br><br>
 	</div>
 
 	</div>
         </fieldset>
+
+ 
       </div>
 
-      <!-- detail lines expanding box -->
-      <div class="detailBox">
-        <fieldset class="detailGroup" name="detailGroup" id="detailGroup">
-        <legend>Detail Lines</legend>
-
       <!-- order totals -->
+      <div class="totesBox">
+        <fieldset class="totesGroup">
+        <legend>Totals</legend>
            <div class="orderShipCost">
              <label for="shippingCost", value=<?php echo $shippingCost ?>><?php echo "Shipping and Handling: $".round($shippingCost,2) ?></label>
              <span name="shippingCost"></span>
@@ -138,21 +254,30 @@
              <label for="grandTot" value=<?php echo $shippingCost ?>><?php echo "Grand Total: $".round($totalCost + $shippingCost,2) ?></label>
              <span name="grandTot"></span>
            </div>
+         </fieldset>
+       </div>
+
+      <!-- detail lines expanding box -->
+      <div class="detailBox">
+        <fieldset class="detailGroup" name="detailGroup" id="detailGroup">
+        <legend>Detail Lines</legend>
+
 
 	   <fieldset class="blank" name="blank" id="blank">
 
               <table id="detailTable" class="display" style="width:100%">
                <thead>
-		  <tr><th >Item Description</th><th>Item Number</th><th>Unit Price</th><th>Quantity</th><th>Unit of Measurement</th><th>Total</th><th></th></tr>
+		  <tr><th align="left">Item Description</th><th align="left">Item Number</th><th align="right">Unit Price</th><th align="center" >Quantity</th><th  align="center">Unit of Measurement</th><th  align="right">Total </th><th  align="center">Add/Remove Line</th></tr>
                </thead>
               <tbody>
 
                <?php echo $htmlDetailLines; ?>
               </tbody>
 	      </table>
-
-	      <button type="button" onclick="add_line()">ADD LINE</button>
+              <div class="addButton">
+	      <button class="button buttonAdd" type="button" onclick="add_line()">ADD LINE</button>
               <input type="hidden" id="add" name="add" value="0">
+	      </div>
 	    </fieldset>
 	</fieldset>
       </div>
@@ -264,6 +389,7 @@
         var table = $('#detailTable').DataTable({
 	  "paging": false,
           "bLengthChange": false,
+	  "bFilter": false,
           "ordering": false,
           "info":     false
 	});

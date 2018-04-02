@@ -9,9 +9,20 @@
   each page and form.
 */
 
-/* detail lines cust order */
+/* create cust order */
 
-.orderCustName label, .orderCustNum label, .orderShipCost label, .orderGrandTot label {
+.blank {
+  grid-area: deets;
+}
+
+
+.detailGroup {
+  grid-template-areas:
+  grid-gap: 6px;
+  padding: 0px;
+}
+
+.orderCustName label, .orderCustNum label {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -47,11 +58,20 @@
 .orderCustBox select, .customerBox select {
   font-family: Helvetica, sans-serif;
   margin: 0;
-  text-align-last: center;
+  //text-align-last: center;
   width: 17em;
   display: inline-block;
   font-size: 100%;
 }
+
+.detailBox select, .detailBox input {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  display: inline-block;
+  //font-size: 100%;
+}
+
+
 
 .orderCustName {
   grid-area: custNa;
@@ -63,7 +83,7 @@
 
 .exDate {
   grid-area: expDa;
-  margin-left: 19.8em;
+  margin-left: 17.2em;
   //float: right;
 }
 
@@ -88,14 +108,19 @@
   grid-area: det;
 }
 
+.totesBox {
+  grid-area: totes;
+}
+
 .containerCreateOrder {
   display: grid;
   grid-template-areas:
-    "custO custO"
-    "billing shipping"
-    "det det"
-    "det det"
-    "cancel  submit";
+    ". . . . . . . . custO custO custO custO . . . . . . . ."
+    ". . . . . . . . billing billing shipping shipping . . . . . . . ."
+    ". . . . . . . . . . totes totes . . . . . . . ."
+    ". . . . . . . . det det det det . . . . . . . ."
+    ". . . . . . . . det det det det . . . . . . . ."
+    ". . . . . . . . cancel . .  submit . . . . . . . .";
   grid-gap: 0px;
   padding: 5px;
 }
@@ -105,23 +130,10 @@
 }
 
 .orderGrandTot {
-  grid-area: totes;
 }
 
-.blank {
-  grid-area: deets;
-}
 
-.detailGroup {
-  display: grid;
-  grid-template-areas:
-    ". costs"
-    ". totes"
-    "deets deets"
-    "deets deets";
-  grid-gap: 0px;
-  padding: 5px;
-}
+
 
 /* report css */
 .oNa { grid-area: no; }
@@ -184,8 +196,8 @@
   grid-template-areas:
     "repoOrder repoOrder . . repoNamo"
     "repoBill repoCust . . repoRep"
-    "repoComm repoComm repoComm repoComm repoComm"
-    ". . . repoTot repoTot"
+    "repoComm repoComm . . repoTot"
+    ". . . . ."
     "rTab rTab rTab rTab rTab";
   grid-gap: 8px;
   padding: 5px;
@@ -498,7 +510,7 @@ li.dropdown {
 
 #customerInfoGroup, #customerBillingGroup, #customerShippingGroup, 
 #customerRepGroup, #customerCommentGroup, #itemInfoGroup, #itemAttriGroup,
-#orderInfoGroup, #detailGroup, #itemAddGroup, #pickTableGroup, #pickStaffGroup {
+#orderInfoGroup, #detailGroup, #itemAddGroup, #pickTableGroup, #pickStaffGroup, .totesGroup {
   margin: 8px;
   border: 1px solid silver;
   padding: 8px;
@@ -572,6 +584,19 @@ legend{
   float: left;
 }
 
+.detailBox label  {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  //font-size: 90%;
+  //padding-top: .1em;
+  padding-right: .30em;
+  width: 9em;
+  text-align: right;
+  float: left;
+}
+
 .reportBox span, .reportBox2 span {
   font-family: Helvetica, sans-serif;
   margin: 0;
@@ -609,6 +634,33 @@ legend{
   text-align: right;
   float: left;
 }
+
+.reportTotBox label {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: 100%;
+  //padding-top: .1em;
+  padding-right: .40em;
+  width: 12em;
+  text-align: right;
+  float: left;
+}
+
+.orderShipCost label, .orderGrandTot label  {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  //font-size: 100%;
+  //padding-top: .1em;
+  //padding-right: .40em;
+  width: 15em;
+  text-align: right;
+  float: left;
+}
+
 
 
 .customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
@@ -767,6 +819,22 @@ legend{
  float: right;
 }
 
+.buttonAdd {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 14px;
+ font-weight: 400;
+ margin-right: 9px;
+ float: right;
+}
+
+.buttonAdd:hover {
+ background-color: #008CBA;
+ color: white;
+}
+
+
 .buttonReset:hover {
  background-color: #F44336;
  color: white;
@@ -779,6 +847,20 @@ legend{
  color: black;
  border: 2px solid black;
  margin-left: 9px;
+}
+
+.buttonDelete {
+ background-color: white;
+ font-size: 12px;
+ font-weight: 300;
+ color: black;
+ border: 2px solid black;
+ margin-left: 9px;
+}
+
+.buttonDelete:hover {
+ background-color: #F44336;
+ color: white;
 }
 
 .itemAttributesBox {
