@@ -8,7 +8,7 @@
 
  
   // include any html files required for the layout
-  $page_title = "Home";
+  $page_title = "AIP Home";
   include ("html/header.html");
   include ("html/index.html");
   echo '<br>';
