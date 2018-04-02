@@ -30,8 +30,8 @@ class order {
   public function addToDatabase($detail_lines){
 
      // Set $lines to the count of $detail_lines
-     $lines = count($detail_lines);
-     
+     $this->lines = count($detail_lines);
+
      // data is validated as part of the html definition
      $insertSQL = 'insert into order_header ( order_date, order_status, order_expected_date,
                                               order_lines, customer_id) values (?, ?, ?, ?, ?)';
