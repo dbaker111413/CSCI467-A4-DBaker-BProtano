@@ -49,7 +49,7 @@
 }
 
 
-.exDate input, .orderShipCost span, .orderGrandTot span {
+.exDate input, .orderShipCost span, .orderGrandTot span, .orderSubTot span {
   font-family: Helvetica, sans-serif;
   display: inline-block;
   font-size: 100%;
@@ -64,12 +64,13 @@
   font-size: 100%;
 }
 
+/*
 .detailBox select, .detailBox input {
   font-family: Helvetica, sans-serif;
   margin: 0;
   display: inline-block;
   //font-size: 100%;
-}
+}*/
 
 
 
@@ -659,7 +660,7 @@ legend{
   float: left;
 }
 
-.orderShipCost label, .orderGrandTot label  {
+.orderShipCost label, .orderGrandTot label, .orderSubTot label  {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -836,7 +837,7 @@ legend{
  border: 2px solid #008CBA;
  font-size: 14px;
  font-weight: 400;
- margin-right: 2.7em;
+ margin-right: .5em;
  float: right;
 }
 
