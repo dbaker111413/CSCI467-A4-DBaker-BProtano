@@ -43,8 +43,8 @@
 
 	<div class="state">
 	  <label for="billState">State </label>
-          <select name="billState" id="billState" 
-	          value="<?php echo isset($_POST['billState']) ? $_POST['billState'] : ''?>">
+          <select name="billState" id="billState">
+	    <?php echo isset($_POST['billState']) ? "<option>".$_POST['billState']."</option>" : 'IL'?>
 	    <option value="AL">AL</option>
 	    <option value="AK">AK</option>
 	    <option value="AZ">AZ</option>
@@ -58,7 +58,7 @@
 	    <option value="GA">GA</option>
 	    <option value="HI">HI</option>
 	    <option value="ID">ID</option>
-	    <option value="IL" selected>IL</option>
+	    <option value="IL">IL</option>
 	    <option value="IN">IN</option>
 	    <option value="IA">IA</option>
 	    <option value="KS">KS</option>
@@ -140,8 +140,8 @@
 
 	<div class="state">
 	<label for="shipState">State </label>
-	<select name="shipState" id="shipState"
-	       value="<?php echo isset($_POST['shipState']) ? $_POST['shipState'] : ''?>">
+	<select name="shipState" id="shipState">
+  	    <?php echo isset($_POST['shipState']) ? "<option>".$_POST['shipState']."</option>" : 'IL'?>
  	    <option value="AL">AL</option>
 	    <option value="AK">AK</option>
 	    <option value="AZ">AZ</option>
@@ -155,7 +155,7 @@
 	    <option value="GA">GA</option>
 	    <option value="HI">HI</option>
 	    <option value="ID">ID</option>
-	    <option value="IL" selected>IL</option>
+	    <option value="IL">IL</option>
 	    <option value="IN">IN</option>
 	    <option value="IA">IA</option>
 	    <option value="KS">KS</option>
