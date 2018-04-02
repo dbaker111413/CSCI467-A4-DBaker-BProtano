@@ -46,6 +46,11 @@ table th {
   <span name="custOrderNum"><?php echo $orderNum; ?></span>
   </div>
 
+  <div class="oNa">
+  <label for="custOrderStatus">Order Status: </label>
+  <span name="custOrderStatus"><?php echo $orderStatus; ?></span>
+  </div>
+
   <div class="oDa">
   <label for="custOrderDate">Creation Date: </label>
   <span name="custOrderDate"><?php echo $orderDate; ?></span>
@@ -53,7 +58,7 @@ table th {
 
   <div class="oDa">
   <label for="custOrderDate">Expected Date: </label>
-  <span name="custOrderDate"><?php echo $orderDate; ?></span>
+  <span name="custOrderDate"><?php echo $expectedDate; ?></span>
   </div>
 
   <div class="oLi">
@@ -67,7 +72,7 @@ table th {
 
   <div class="reportCustomerBox">
   <fieldset name="reportCustomerGroup">
-  <legend>Customer Shipping Infomation</legend>
+  <legend>Customer Shipping Infomation:</legend>
   
   <span name="custName"><?php echo $custName; ?></span><br>
 
@@ -83,7 +88,7 @@ table th {
 
   <div class="reportBillingBox">
   <fieldset name="reportBillingGroup">
-  <legend>Customer Billing Infomation</legend>
+  <legend>Customer Billing Infomation:</legend>
   
   <span name="custName"><?php echo $custName; ?></span><br>
 
@@ -97,6 +102,40 @@ table th {
   </fieldset>
   </div>
 
+  <div class="reportRepBox">
+  <fieldset name="reportRepGroup">
+  <legend>Customer Contact Infomation:</legend>
+  
+  <label for="custFname">First Name: </label>
+  <span name="custFname"><?php echo $fname; ?></span><br>
+
+  <label for="custLnamw">Last Name: </label>
+  <span name="custLname"><?php echo $lname; ?></span>
+
+  <label for="custPhone">Phone: ( </label>
+  <span name="custPhone"><?php echo $phoneArea." ) "; ?></span><br>
+  <span name="custPhone"><?php echo $phoneMid." - "; ?></span><br>
+  <span name="custPhone"><?php echo $phoneEnd." ext. "; ?></span><br>
+  <span name="custPhone"><?php echo $phoneExt; ?></span><br>
+
+  <label for="custEmail">Email: </label>
+  <span name="custEmail"><?php echo $email; ?></span>
+
+  </fieldset>
+  </div>
+ 
+  <div class="reportCommentBox">
+  <fieldset name="reportCommentGroup">
+  <legend>Customer Comments:</legend>
+  
+  <span name="custComments"><?php echo $comments; ?></span><br>
+
+  </fieldset>
+  </div>
+
+
+
+
   <table class="rTab" id="pickTable"><br>
   <thead>
   <tr> 
@@ -105,12 +144,16 @@ table th {
   <th align="left">Part Location</th>
   <th align="center">Customer Order</th>
   <th align="center">Qty</th>
+  <th align="center">Price</th>
   <th align="center">Shipping Location</th>
+  <th align="center">Line Total</th>
   </tr>
   </thead>
   <tbody> 
 
-  <?php while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+  <?php 
+    $total = 0;
+    while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
     echo '<td>';
     echo 'PR-';
@@ -136,15 +179,41 @@ table th {
     echo '</td>';
 
     echo '<td align="center">';
+    echo (round($row['price'],2));
+    echo '</td>';
+
+    echo '<td align="center">';
     echo 'Dock 1A';
     echo '</td>';
 
+    echo '<td align="center">';
+    echo (round($row['line_qty'] * $row['price'],2));
+    echo '</td>';
+
+    $total += $row['line_qty'] * $row['price'];
+
     echo '</tr>';
-  } ?>
+  } 
+    $shipHand = (round($total * .1,2)); 
+    $gTotal = (round($total + $shipHand,2));
+  ?>
   </tbody>
   </table>
 
+  <div class="reportTotBox">
+  <fieldset name="reportTotGroup">
+  <legend>Order Totals:</legend>
   
+  <label for="reportShipCost">Shipping and Handling: </label>
+  <span name="reportShipCost"><?php echo "$".$shipHand; ?></span><br>
+
+  <label for="reportGrandTot">Grand Total: </label>
+  <span name="reportGrandTot"><?php echo "$".$gTotal; ?></span><br>
+
+  </fieldset>
+  </div>
+
+
   </div>	
 
   <script>
