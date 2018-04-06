@@ -280,7 +280,7 @@
 	<div class="zip">
         <label for="shipZip">Zip </label>
 	<input type="text" disabled  name="shipZip" id="shipZip" minlength="5" maxlength="5" size="7"
-	       value="<?php echo $c->shipZip; ?>"<br><br>
+	       value="<?php echo $c->shipZip; ?>">
 	</div>
 
 	</div>
@@ -296,24 +296,30 @@
 
 
            <div class="orderSubTot">
-	     <label for="subTot", value=<?php echo $subTotal ?>><?php echo "Sub Total: $".round($subTotal,2) ?></label>
-	     <span name="subTot"></span>
+	     <label for="subTot">Sub Total: </label>
+	     <input type="text" disabled  name="subTot" id="subTot" size="11"
+                    value=<?php echo money_format('$%i',$subTotal) ?>><br><br>
 	   </div>
 
-	   <div class="orderGrandTot">
-             <label for="grandTot" value=<?php echo $shippingCost ?>><?php echo "Grand Total: $".round($totalCost,2) ?></label>
-             <span name="grandTot"></span>
-           </div>
-	   
            <div class="orderShipCost">
-             <label for="shippingCost", value=<?php echo $shippingCost ?>><?php echo "Shipping and Handling: $".round($shippingCost,2) ?></label>
-             <span name="shippingCost"></span>
+	     <label for="shippingCost">Shipping Handling: </label>
+	     <input type="text" disabled  name="shippingCost" id="shippingCost" size="11"
+                    value=<?php echo money_format('$%i',$shippingCost) ?>><br><br>
            </div>
+
+
+	   <div class="orderGrandTot">
+	     <label for="grandTot">Grand Total: </label>
+	     <input type="text" disabled  name="grandTot" id="grandTot" size="11"
+                    value=<?php echo money_format('$%i',$totalCost) ?>>
+           </div>	   
 
 
          </fieldset>
        </div>
+    </div>
 
+    <div class="containerCreateOrderDetail">
       <!-- detail lines expanding box -->
       <div class="detailBox">
         <fieldset class="detailGroup" name="detailGroup" id="detailGroup">
@@ -354,8 +360,8 @@
 	<button class="button buttonSubmit" type="submit">Submit</button>
         <input type="hidden" name="which" id="which" value="0">
       </div>
-
     </div>
+
     </form>
       <!-- Shows a confirm dialog box. Sets the value of "which" based on user's answer-->
       <script>

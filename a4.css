@@ -49,10 +49,18 @@
 }
 
 
-.exDate input, .orderShipCost span, .orderGrandTot span, .orderSubTot span {
+.exDate input {
   font-family: Helvetica, sans-serif;
   display: inline-block;
   font-size: 100%;
+}
+
+.orderShipCost input, .orderGrandTot input, .orderSubTot input {
+  font-family: Helvetica, sans-serif;
+  display: inline-block;
+  font-size: 100%;
+  text-align: right;
+  margin-right: .95em;
 }
 
 .orderCustBox select, .customerBox select {
@@ -124,10 +132,17 @@
   grid-template-areas:
     ". . . . . . . . custO custO custO custO . . . . . . . ."
     ". . . . . . . . billing billing shipping shipping . . . . . . . ."
-    ". . . . . . . . . . totes totes . . . . . . . ."
-    ". . . . . . . . det det det det . . . . . . . ."
-    ". . . . . . . . det det det det . . . . . . . ."
-    ". . . . . . . . cancel . print  submit . . . . . . . .";
+    ". . . . . . . . . . . totes . . . . . . . .";
+  grid-gap: 0px;
+  padding: 5px;
+}
+
+.containerCreateOrderDetail {
+  display: grid;
+  grid-template-areas:
+    "det det det det"
+    "det det det det"
+    "cancel . print  submit";
   grid-gap: 0px;
   padding: 5px;
 }
@@ -660,19 +675,32 @@ legend{
   float: left;
 }
 
-.orderShipCost label, .orderGrandTot label, .orderSubTot label  {
+.orderShipCost label, .orderSubTot label  {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   display: inline-block;
-  //font-size: 100%;
-  //padding-top: .1em;
-  //padding-right: .40em;
+  font-size: 100%;
+  padding-top: .1em;
+  padding-right: .40em;
   width: 15em;
   text-align: right;
   float: left;
 }
 
+.orderGrandTot label  {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 100%;
+  padding-top: .1em;
+  padding-right: .40em;
+  width: 15em;
+  text-align: right;
+  float: left;
+}
 
 
 .customerBox input, .billingBox input, .billingBox select, .shippingBox input, .shippingBox select,
