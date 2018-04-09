@@ -86,7 +86,7 @@
 	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
-	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
+	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>&#215</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
 	  </tr>";
