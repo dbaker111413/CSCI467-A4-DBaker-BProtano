@@ -855,8 +855,7 @@ legend{
  border-radius: 30px;
  font-size: 19px;
  font-weight: bold;
-
-
+ margin-top: .6em;
  margin-right: 3.35em;
  float: right;
 }
