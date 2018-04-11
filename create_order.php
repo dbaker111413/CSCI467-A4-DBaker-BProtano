@@ -16,6 +16,14 @@
   $htmlDetailLines = "";
   $items = array();
 
+  // used to control focus of the html elements
+  $customerFocus = "autofocus";
+  $dateFocus = "";
+
+  // flag values to determine whether to focus on 'select item' or 'qty' in a detail line
+  $FOCUS_ITEM = 1;
+  $FOCUS_QTY = 2;
+
   // drop down menu for item numbers
   $itemDropDownMenu = generateSelectOptions("select item_id from item", array("item_id"), $conn);
   $itemDDDMenu = generateSelectOptions("select description from item", array("description"), $conn);
@@ -28,23 +36,27 @@
   // it performs this by checking if itemnum[X] isset, if so then
   // that line exists; so an html line is appended to the string
   function generateDetailLines(){
-    global $lineCounter, $conn, $items, $totalCost, $shippingCost, $subTotal;
+    global $lineCounter, $conn, $items, $totalCost, $shippingCost, $subTotal, $FOCUS_QTY, $customerFocus;
     $outputLine = "";
     
     while(isset($_POST["itemnum".$lineCounter])){
       // create an item
       $i = new item($conn);
 
+      $focus = 0;
+      
       // set based on itemSelected post value 
       if($_POST["itemSelected".$lineCounter] == "1"){
         $i->setItem($_POST["itemdesc".$lineCounter]);
+	$focus = $FOCUS_QTY;
+	$customerFocus = "";
       }
       else {
         $i->setItem($_POST["itemnum".$lineCounter]);
       }
       
       array_push($items, $i);
-      $outputLine .= generateSingleDetailLine($i);
+      $outputLine .= generateSingleDetailLine($i, $focus);
       $lineCounter++;
     }
 
@@ -54,9 +66,11 @@
     return $outputLine;	
   }
 
-  // generates a single html detail line
-  function generateSingleDetailLine($i){
-    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost, $subTotal;
+  /*
+   * generates a single html detail line
+   */
+  function generateSingleDetailLine($i, $focus){
+    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost, $subTotal, $FOCUS_ITEM, $FOCUS_QTY;
     $deleteValue = '0';
 
     if(isset($_POST["hDelete".$lineCounter])){
@@ -69,43 +83,32 @@
     $price = $i->price != "" ? $i->price : 0.00;
     $qty = isset($_POST["qty".$lineCounter]) ? $_POST["qty".$lineCounter] : 1;
     $total = $price * $qty;
-    $date = isset($_POST["date".$lineCounter]) && $_POST["date".$lineCounter] != "mm/dd/yyyy" ? $_POST["date".$lineCounter] : date("Y-m-d"); 
+    $date = isset($_POST["date".$lineCounter]) && $_POST["date".$lineCounter] != "mm/dd/yyyy" ? $_POST["date".$lineCounter] : date("Y-m-d");
+
+    $delCheck = isset($_POST["hDelete".$lineCounter]) && $_POST["hDelete".$lineCounter] != 0 ? $_POST["hDelete".$lineCounter] : 0; 
+    $className = $delCheck == 0 ? "row".$lineCounter : "row".$lineCounter." deleted";
+
+    // for focusing on different controls in the detail line. Blank by default
+    $focusItem = $focus == $FOCUS_ITEM ? "autofocus" : "";
+    $focusQty = $focus == $FOCUS_QTY ? "autofocus" : "";
 
     if($deleteValue == 0){
       $subTotal += $total;
     }
-
-    $delCheck = isset($_POST["hDelete".$lineCounter]) && $_POST["hDelete".$lineCounter] != 0 ? $_POST["hDelete".$lineCounter] : 0; 
-    if ($delCheck == 0) {
-    return "<tr class='row".$lineCounter."' name='row".$lineCounter."' id='row".$lineCounter."'>
-	    <td><select id='itemdesc".$lineCounter."' name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'> 
+    
+    return "<tr class='".$className."' name='row".$lineCounter."' id='row".$lineCounter."'>
+	    <td><select id='itemdesc".$lineCounter."' ".$focusItem." name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'> 
                 ".$itemDesc."<option>-- Search by Item Description --</option>".$itemDDDMenu."</select></td>
             <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."' onchange='itemNumSelected(".$lineCounter.")'>
                 ".$itemNum."<option>-- Search by Item Number --</option>".$itemDropDownMenu."</select></td>
 	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$".$price."</label></td>
-	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
+	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' ".$focusQty." value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
 	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
 	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>&#215</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
 	  </tr>";
-    } else {
-    return "<tr class='row".$lineCounter." deleted' name='row".$lineCounter."' id='row".$lineCounter."'>
-	    <td><select id='itemdesc".$lineCounter."' name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'>
-                ".$itemDesc."<option>-- Select by Item Description --</option>".$itemDDDMenu."</select></td>
-            <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."' onchange='itemNumSelected(".$lineCounter.")'>
-                ".$itemNum."<option>-- Select by Item Number --</option>".$itemDropDownMenu."</select></td>
-	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$".$price."</label></td>
-	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' value='".$qty."' onfocusout='update_total(".$lineCounter.")'></td>
-	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
-	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
-	    <td><button type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>DELETE</button>
-                <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
-          <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>
-	  </tr>";
-
-    }
   }
 
   /*    <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> */
@@ -115,9 +118,11 @@
     if(isset($_POST['custSelected'])){
       if($_POST['custSelected'] == '1') {
         $c->setCustomer($_POST["selectCustomer"]);
+	$dateFocus = "autofocus";
       }
       else if($_POST['custSelected'] == '2') {
         $c->setCustomer($_POST["selectCustomerNum"]);
+	$dateFocus = "autofocus";
       }
       else if(isset($_POST['selectCustomerNum']) && $_POST['selectCustomerNum'] != "-- Search by Customer Number --"){
         $c->setCustomer($_POST["selectCustomerNum"]);
@@ -127,7 +132,12 @@
     $htmlDetailLines = generateDetailLines();
 
     if(isset($_POST["add"]) && $_POST["add"] == "1"){
-      $htmlDetailLines .= generateSingleDetailLine(new item($conn));
+      $focus = 0;
+      if($lineCounter != 0){
+        $focus = $FOCUS_ITEM;
+	$customerFocus = "";
+      }
+      $htmlDetailLines .= generateSingleDetailLine(new item($conn), $focus);
       $lineCounter++;
     }
 

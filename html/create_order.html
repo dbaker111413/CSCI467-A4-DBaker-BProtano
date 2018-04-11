@@ -70,13 +70,13 @@
 
 	        <div class="exDate">
 	           <label for="expectedDate">Expected by Date </label>
-	           <input type="date" required title="Date required" name="expectedDate" id="expectedDate"  
+	           <input type="date" <?php echo $dateFocus; ?> required title="Date required" name="expectedDate" id="expectedDate"  
 	             value="<?php echo isset($_POST['expectedDate']) ? $_POST['expectedDate'] : '' ?>">
 	        </div>
 
                 <div class="orderCustName">
                   <label for="selectCustomer">Customer Name </label>
-	          <select name="selectCustomer" id="selectCustomer" onchange="cs(this, document.expectedDate)">
+	          <select name="selectCustomer" <?php echo $customerFocus; ?> id="selectCustomer" onchange="cs(this, document.expectedDate)">
 	             <?php echo $c->customerName != "" ? "<option>".$c->customerName."</option>" : ""; ?>
 	              <option>-- Search by Customer Name --</option>
 	              <?php echo $custDropDownArray; ?>
