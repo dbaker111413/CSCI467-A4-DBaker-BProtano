@@ -60,7 +60,7 @@
   display: inline-block;
   font-size: 100%;
   text-align: right;
-  //margin-right: .95em;
+  //margin-right: 4.75em;
 }
 
 .orderCustBox select, .customerBox select {
@@ -72,13 +72,14 @@
   font-size: 100%;
 }
 
-/*
-.detailBox select, .detailBox input {
+
+.detailBox input {
   font-family: Helvetica, sans-serif;
   margin: 0;
-  display: inline-block;
+  width: 4em;
+  //display: inline-block;
   //font-size: 100%;
-}*/
+}
 
 
 
@@ -675,7 +676,7 @@ legend{
   width: 15em;
   text-align: right;
   float: left;
-  margin-left: 4.9em;
+  margin-left: 4.8em;
 }
 
 .orderGrandTot label  {
@@ -687,7 +688,7 @@ legend{
   font-size: 100%;
   padding-top: .1em;
   padding-right: .40em;
-  margin-left: 4.9em;
+  margin-left: 4.8em;
   width: 15em;
   text-align: right;
   float: left;
@@ -858,7 +859,7 @@ legend{
  font-size: 19px;
  font-weight: bold;
  margin-top: .65em;
- margin-right: 3.35em;
+ margin-right: 2.7em;
  float: right;
 }
 

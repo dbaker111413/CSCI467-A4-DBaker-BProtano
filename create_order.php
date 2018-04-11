@@ -96,7 +96,7 @@
       $subTotal += $total;
     }
     
-    return "<tr class='".$className."' name='row".$lineCounter."' id='row".$lineCounter."'>
+    return "<tr class='".$className."' name='row".$lineCounter."' id='row".$lineCounter."' align='center'>
 	    <td><select id='itemdesc".$lineCounter."' ".$focusItem." name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'> 
                 ".$itemDesc."<option>-- Search by Item Description --</option>".$itemDDDMenu."</select></td>
             <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."' onchange='itemNumSelected(".$lineCounter.")'>

@@ -42,7 +42,7 @@
     from order_header o, customer c, detail d, item i
     where c.customer_id = o.customer_id and d.order_id = o.order_id and i.item_id = d.item_id and o.order_id = ".$orderNum."
     group by d.line_id 
-    order by o.order_expected_date");
+    order by CAST( i.location AS UNSIGNED)");
 
   $sqlHead = $conn->query(
     "select o.order_id, o.order_date, c.name, c.customer_id, c.ship_address_line1, c.ship_address_line2, c.ship_city, 

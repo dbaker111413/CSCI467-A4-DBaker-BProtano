@@ -297,20 +297,20 @@
 
            <div class="orderSubTot">
 	     <label for="subTot">Sub Total: </label>
-	     <input type="text" disabled  name="subTot" id="subTot" size="11"
+	     <input type="text" disabled  name="subTot" id="subTot" size="18"
                     value=<?php echo money_format('$%i',$subTotal) ?>><br><br>
 	   </div>
 
            <div class="orderShipCost">
 	     <label for="shippingCost">Shipping Handling: </label>
-	     <input type="text" disabled  name="shippingCost" id="shippingCost" size="11"
+	     <input type="text" disabled  name="shippingCost" id="shippingCost" size="18"
                     value=<?php echo money_format('$%i',$shippingCost) ?>><br><br>
            </div>
 
 
 	   <div class="orderGrandTot">
 	     <label for="grandTot">Grand Total: </label>
-	     <input type="text" disabled  name="grandTot" id="grandTot" size="11"
+	     <input type="text" disabled  name="grandTot" id="grandTot" size="18"
                     value=<?php echo money_format('$%i',$totalCost) ?>>
            </div>	   
 
@@ -328,9 +328,9 @@
 
 	   <fieldset class="blank" name="blank" id="blank">
 
-              <table id="detailTable" class="display" style="width:100%">
+              <table id="detailTable" class="display">
                <thead>
-		  <tr><th align="left">Item Description</th><th align="left">Item Number</th><th align="right">Unit Price</th><th align="center" >Quantity</th><th  align="center">Unit of Measurement</th><th  align="right">Total </th><th  align="center">Add/Remove Line</th></tr>
+		  <tr><th align="left">&nbsp Item Description</th><th align="left">&nbsp Item Number</th><th align="right">Unit Price &nbsp &nbsp</th><th align="center" > Quantity</th><th  align="center">Unit of Measurement</th><th  align="right">Total &nbsp &nbsp</th><th  align="center">Add/Remove </th></tr>
                </thead>
               <tbody>
 
