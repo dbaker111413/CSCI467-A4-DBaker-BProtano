@@ -29,7 +29,8 @@
 .buttonPrint {
  background-color: white;
  color: black;
- border: 2px solid #008CBA;
+ //border: 2px solid #008CBA;
+ border: 2px solid #66c2ff;
  font-size: 18px;
  font-weight: 400;
  //margin-right: 9px;
@@ -38,6 +39,7 @@
 
 .buttonBack:hover {
  background-color: #ff9933;
+ border: 2px solid #ff9933;
  color: white;
 }
 
@@ -46,7 +48,8 @@
  font-size: 18px;
  font-weight: 300;
  color: black;
- border: 2px solid #c2c2d6;
+ border: 2px solid #999999;
+ //border: 2px solid #c2c2d6;
  float: left;
  //margin-left: 9px;
 }
@@ -79,7 +82,7 @@
 </style>
 <div class="pagination" name="pagination">  
 
-  <a class="selButton buttonBack" href="picker.php" >&laquo Generate Pick Report</a>
+  <a class="selButton buttonBack" href="picker.php" onclick="return confirm_reset();">&laquo Generate Pick Report</a>
 	  
 
 <?php
@@ -136,6 +139,11 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
   };
+
+function confirm_reset(){
+  return confirm("Are you sure you want to discard all reports?");
+}
+
 </script>
 
 </html>

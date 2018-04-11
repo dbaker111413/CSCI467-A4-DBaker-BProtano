@@ -38,12 +38,14 @@
  font-size: 18px;
  font-weight: 300;
  color: black;
- border: 2px solid silver;
+ border: 2px solid #595959;
+ //border: 2px solid silver;
  margin-left: 9px;
 }
 
 .buttonCancel:hover {
  background-color: #F44336;
+ border: 2px solid red;
  color: white;
 }
 
@@ -104,7 +106,7 @@
 
       <!-- cancel box -->
       <div class="cancelBox">
-	<a class="detButton buttonCancel" href="update_item.php">Cancel</a>
+	<a class="detButton buttonCancel" href="update_item.php" onclick="return confirm_reset();">Cancel</a>
       </div>
 	  
       <!-- submit box -->
@@ -129,6 +131,10 @@
 	  }
  	}
 	
+	function confirm_reset(){
+	  return confirm("Are you sure you want to discard these item changes?");
+ 	}
+
         <!-- sets a flag that let's the server know to read an item from the database and tabs to next field -->
         function itemDescSelected(current, to){
             document.getElementById("selectItem").value = "1";

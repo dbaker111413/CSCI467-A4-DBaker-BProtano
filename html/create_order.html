@@ -47,12 +47,14 @@
  font-size: 18px;
  font-weight: 300;
  color: black;
- border: 2px solid silver;
+ border: 2px solid #595959;
+ //border: 2px solid silver;
  margin-left: 9px;
 }
 
 .buttonCancel:hover {
  background-color: #F44336;
+ border: 2px solid red;
  color: white;
 }
 
@@ -312,6 +314,7 @@
 	     <label for="grandTot">Grand Total: </label>
 	     <input type="text" disabled  name="grandTot" id="grandTot" size="18"
                     value=<?php echo money_format('$%i',$totalCost) ?>>
+             <input type='hidden' name='total' id='total' value="<?php echo $totalCost; ?>">
            </div>	   
 
 
@@ -347,7 +350,7 @@
 
       <!-- cancel box -->
       <div class="cancelBox">
-	<a class="detButton buttonCancel" href="create_order.php">Cancel</a>
+	<a class="detButton buttonCancel" href="create_order.php" onclick="return confirm_reset()">Cancel</a>
       </div>
 
 
@@ -379,7 +382,11 @@
             document.getElementById("which").value = "0";
 	  }
  	}
- 
+
+	function confirm_reset(){
+	  return confirm("Are you sure you want to discard this order?");
+ 	}
+
 	function delete_line(value){
           document.getElementById("hDelete" + value).value = "1";
 	  document.getElementById("create").submit();

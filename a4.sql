@@ -45,12 +45,13 @@ create table item
         foreign key (vendor_id) references vendor(vendor_id));
 
 insert into item (description, uom, location, on_hand, price, vendor_id)
-        values ('A32 Rudder', 'Crate (8 pieces)', "Aisle 3A, Bin 2", 22, 759.99, 1),
-               ('RNAV/GNSS radar', 'Box (1 piece)', "Aisle 1C, Bin 5", 4, 1239.99, 4),
-               ('Stroboscopic Navigation Light', 'Box (12 pieces)', "Aisle 4 Row 4", 16, 159.99, 2),
-               ('1/2 inch Ball Bearings', 'Box (80 pieces)', "Aisle 1C Bin 4", 424, 30.99, 3),
-               ('B12 Hydralic Fluid', '4 Gallons', "Aisle 5 Shelf 1", 60, 290.00, 3),
-               ('C17 Yoke', 'Box (1 piece)', "Aisle 2A Row 4", 13, 890.00, 1);
+        values ('A32 Rudder', 'Crate (8 pieces)', "Aisle 1, Bin 2", 22, 759.99, 1),
+               ('1/2 inch Ball Bearings', 'Box (80 pieces)', "Aisle 1C, Bin 4", 424, 30.99, 3),
+               ('RNAV/GNSS radar', 'Box (1 piece)', "Aisle 2A, Bin 5", 4, 1239.99, 4),
+               ('Stroboscopic Navigation Light', 'Box (12 pieces)', "Aisle 2C, Row 4", 16, 159.99, 2),
+               ('C17 Yoke', 'Box (1 piece)', "Aisle 4, Row 2", 13, 890.00, 1),
+               ('C22 Yoke', 'Box (1 piece)', "Aisle 4, Row 4", 10, 1190.00, 1),
+               ('B12 Hydralic Fluid', '4 Gallons', "Aisle 5, Shelf 1", 60, 290.00, 3);
 
 create table customer
 	(customer_id int NOT NULL auto_increment,
@@ -97,18 +98,19 @@ create table order_header
        order_lines int,
        customer_id int,
        shipment_id int,
+       total double,
        primary key (order_id),
        foreign key (customer_id) references customer(customer_id));
 
-insert into order_header (order_date, order_status, order_expected_date, order_lines, customer_id)
-        values (current_timestamp, 'Released for pick', '2018-04-05', 6, 1),
-               (current_timestamp, 'Released for pick', '2018-04-16', 7, 2),
-               (current_timestamp, 'Customer Approved', '2018-04-24', 3, 2),
-               (current_timestamp, 'Customer Approved', '2018-04-27', 2, 3),
-               (current_timestamp, 'Released for pick', '2018-04-29', 5, 3),
-               (current_timestamp, 'Released for pick', '2018-05-02', 12, 4),
-               (current_timestamp, 'Customer Approved', '2018-05-03', 1, 1),
-               (current_timestamp, 'Created', '2018-08-17', 3, 4);
+insert into order_header (order_date, order_status, order_expected_date, order_lines, customer_id, total)
+        values (current_timestamp, 'Released for pick', '2018-04-05', 6, 1, 22473.86),
+               (current_timestamp, 'Released for pick', '2018-04-16', 7, 2, 49866.96),
+               (current_timestamp, 'Customer Approved', '2018-04-24', 3, 2, 21421.03),
+               (current_timestamp, 'Customer Approved', '2018-04-27', 2, 3, 15026.00),
+               (current_timestamp, 'Released for pick', '2018-04-29', 5, 3, 47720.44),
+               (current_timestamp, 'Released for pick', '2018-05-02', 12, 4, 103095.16),
+               (current_timestamp, 'Customer Approved', '2018-05-03', 1, 1, 5874.00),
+               (current_timestamp, 'Created', '2018-08-17', 3, 4, 36188.67);
 
 create table detail
        (line_id int NOT NULL auto_increment,
@@ -119,41 +121,41 @@ create table detail
        foreign key (order_id) references order_header(order_id));
 
 insert into detail (order_id, item_id, line_qty)
-        values (1, 2, 4),
-               (1, 1, 1),
+        values (1, 1, 4),
+               (1, 2, 1),
                (1, 3, 2),
                (1, 4, 15),
-               (1, 6, 6),
                (1, 5, 6),
+               (1, 6, 6),
                (3, 2, 14),
                (3, 1, 12),
                (3, 3, 8),
-               (2, 3, 15),
-               (2, 6, 6),
-               (2, 4, 18),
-               (2, 2, 4),
                (2, 1, 1),
+               (2, 2, 4),
                (2, 3, 2),
+               (2, 3, 15),
+               (2, 4, 18),
                (2, 5, 15),
-               (4, 6, 4),
+               (2, 6, 6),
                (4, 5, 10),
+               (4, 6, 4),
                (5, 1, 40),
                (5, 2, 13),
                (5, 3, 3),
                (5, 4, 22),
                (5, 5, 6),
-               (6, 5, 8),
-	       (6, 2, 9),
+               (6, 1, 1),
                (6, 1, 11),
+	       (6, 2, 9),
+	       (6, 2, 25),
                (6, 3, 24),
                (6, 4, 35),
-               (6, 6, 7),
-               (6, 5, 18),
-	       (6, 2, 25),
-               (6, 1, 1),
-               (6, 3, 4),
                (6, 4, 8),
+               (6, 5, 8),
+               (6, 5, 18),
+               (6, 6, 7),
                (6, 6, 12),
+               (6, 7, 4),
                (7, 5, 6),
                (8, 3, 1),
                (8, 4, 120),

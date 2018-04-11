@@ -55,7 +55,7 @@
   <legend>Open Customer Orders</legend>
   <fieldset name="blank" id="blank">
   <?php $sql = $conn->query(
-  "select o.order_id, c.name, o.order_status, o.order_date, o.order_expected_date, o.order_lines 
+  "select o.order_id, c.name, o.order_status, o.order_date, o.order_expected_date, o.order_lines, o.total 
   from order_header o, customer c 
   where c.customer_id = o.customer_id
   group by o.order_id 
@@ -67,9 +67,9 @@
   <th align="left">Order Number</th>
   <th align="left">Order Status</th>
   <th align="left">Customer Name</th>
-  <th align="right">Expected by Date</th>
-  <th align="right">Order Detail Lines</th>
   <th align="center">Date Created</th>
+  <th align="right">Expected by Date</th>
+  <th align="right">Order Total</th>
   <th align="center">Detail</th>
   </tr>
   </thead>
@@ -90,16 +90,16 @@
     echo $row['name'];
     echo '</td>';
 
+    echo '<td align="right">';
+    echo $row['order_date'];
+    echo '</td>';
+
     echo '<td align="center">';
     echo $row['order_expected_date'];
     echo '</td>';
 
-    echo '<td align="center">';
-    echo $row['order_lines'];
-    echo '</td>';
-
     echo '<td align="right">';
-    echo $row['order_date'];
+    echo money_format('$%i',$row['total']);
     echo '</td>';
 
     echo '<td><a class="detButton buttonDetail"  onclick="window.open(\'orderOut.php?id=';

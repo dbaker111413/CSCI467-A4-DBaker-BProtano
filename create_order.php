@@ -149,6 +149,7 @@
       $order->status = "Created";  // required by business rule
       $order->expectedDate = $_POST['expectedDate'];
       $order->customerNum = $_POST['selectCustomerNum'];
+      $order->orderTot = $_POST['total'];
 
       $details = array();
       // next create each detail line
