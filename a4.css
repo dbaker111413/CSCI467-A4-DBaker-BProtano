@@ -60,7 +60,7 @@
   display: inline-block;
   font-size: 100%;
   text-align: right;
-  margin-right: .95em;
+  //margin-right: .95em;
 }
 
 .orderCustBox select, .customerBox select {
@@ -130,9 +130,9 @@
 .containerCreateOrder {
   display: grid;
   grid-template-areas:
-    ". . . . . . . . custO custO custO custO . . . . . . . ."
-    ". . . . . . . . billing billing shipping shipping . . . . . . . ."
-    ". . . . . . . . . . . totes . . . . . . . .";
+    "custO custO custO custO"
+    "billing billing shipping shipping"
+    ". . totes totes";
   grid-gap: 0px;
   padding: 5px;
 }
@@ -675,6 +675,7 @@ legend{
   width: 15em;
   text-align: right;
   float: left;
+  margin-left: 4.9em;
 }
 
 .orderGrandTot label  {
@@ -686,6 +687,7 @@ legend{
   font-size: 100%;
   padding-top: .1em;
   padding-right: .40em;
+  margin-left: 4.9em;
   width: 15em;
   text-align: right;
   float: left;
