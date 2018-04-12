@@ -360,7 +360,7 @@
 
       <!-- submit box -->
       <div class="submitBox">
-	<button class="button buttonSubmit" type="submit">Submit</button>
+	<button class="button buttonSubmit" <?php echo $submitFocus ?> type="submit">Submit</button>
         <input type="hidden" name="which" id="which" value="0">
       </div>
     </div>
@@ -389,11 +389,6 @@
 
 	function delete_line(value){
           document.getElementById("hDelete" + value).value = "1";
-	  document.getElementById("create").submit();
-         // var delObj = document.getElementById("row" + value).children.length;
-         // alert(delObj);
-          //delObj.className = "rowDeleted";
-          document.getElementById("hDelete + value").value = "1";
 	  document.getElementById("create").submit();
 	}
 
@@ -431,9 +426,19 @@
 	  else{
             document.getElementById("hDelete" + value).value = "0";
 	  }
-	  var cost = document.getElementById("price" + value).textContent.replace("$", "");
-	  document.getElementById("total" + value).textContent = "$" + (qty * cost);
-	  document.getElementById("create").submit();
+	  var costPerItem = document.getElementById("price" + value).textContent.replace("$", "");
+	  var oldTotalCost = document.getElementById("total" + value).textContent.replace("$", "");
+	  var oldSubTotal = document.getElementById("subTot").value.replace("$", "");
+
+	  var newTotalCost = costPerItem * qty;
+	  var newSubTotal = oldSubTotal - oldTotalCost + newTotalCost;
+          var newShippingCost = newSubTotal * 0.1;
+	  var newGrandTotal = newSubTotal + newShippingCost;
+	
+	  document.getElementById("total" + value).textContent = "$" + newTotalCost.toFixed(2);
+	  document.getElementById("subTot").value = "$" + newSubTotal.toFixed(2);
+   	  document.getElementById("grandTot").value = "$" + newGrandTotal.toFixed(2);
+	  document.getElementById("shippingCost").value = "$" + newShippingCost.toFixed(2);
 	}
 
         function autoTab( current, to ){

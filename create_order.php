@@ -19,6 +19,7 @@
   // used to control focus of the html elements
   $customerFocus = "autofocus";
   $dateFocus = "";
+  $submitFocus = "";
 
   // flag values to determine whether to focus on 'select item' or 'qty' in a detail line
   $FOCUS_ITEM = 1;
@@ -70,7 +71,7 @@
    * generates a single html detail line
    */
   function generateSingleDetailLine($i, $focus){
-    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost, $subTotal, $FOCUS_ITEM, $FOCUS_QTY;
+    global $lineCounter, $itemDropDownMenu, $itemDDDMenu, $totalCost, $subTotal, $FOCUS_ITEM, $FOCUS_QTY, $submitFocus, $customerFocus;
     $deleteValue = '0';
 
     if(isset($_POST["hDelete".$lineCounter])){
@@ -95,6 +96,12 @@
     if($deleteValue == 0){
       $subTotal += $total;
     }
+    else if($deleteValue == 1){
+      $deleteValue = 2;
+      $customerFocus = "";
+      $submitFocus = "autofocus";
+    }
+
     
     return "<tr class='".$className."' name='row".$lineCounter."' id='row".$lineCounter."' align='center'>
 	    <td><select id='itemdesc".$lineCounter."' ".$focusItem." name='itemdesc".$lineCounter."' onchange='itemDescSelected(".$lineCounter.")'> 
