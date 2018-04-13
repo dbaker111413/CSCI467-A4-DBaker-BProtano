@@ -1,6 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" type="text/css" href="a4.css">
+
+<style>
+.selButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  //display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonPrint:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonPrint {
+ background-color: white;
+ color: black;
+ //border: 2px solid #008CBA;
+ border: 2px solid #66c2ff;
+ font-size: 18px;
+ font-weight: 400;
+ //margin-right: 9px;
+ float: right;
+}
+
+.buttonBack:hover {
+ background-color: #ff9933;
+ border: 2px solid #ff9933;
+ color: white;
+}
+
+.buttonBack {
+ background-color: white;
+ font-size: 18px;
+ font-weight: 300;
+ color: black;
+ border: 2px solid #999999;
+ //border: 2px solid #c2c2d6;
+ float: left;
+ //margin-left: 9px;
+}
+
+.orderReportHeader {
+  //overflow: hidden;
+  //background-color: #000000;
+  //background-size: 13%;
+  //background-size: 13em 6em;
+  //background-position: left top;
+  //padding: 15px 5px;
+  //font-size: 75%;
+  //background-color: #000022;
+}
+</style>
+<div class="orderReportHeader">
+<a class="selButton buttonBack" onclick="window.close();">&laquo Generate Order Report</a>
+<a class="selButton buttonPrint" onclick="window.print();return false;">Print Current Report</a>
+<br><br><br><hr>
+</div>
+<br><br>
+
 <body class="reportBody">
 <form method="post" action="#" id="printJS-form">  
 <style>

@@ -74,7 +74,6 @@
 
  */
 
-
   // include any html files required for the layout
   $page_title = "Select Pick Report";
   include ("html/orderOut.html");
