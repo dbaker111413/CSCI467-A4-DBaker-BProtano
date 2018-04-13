@@ -805,7 +805,7 @@ legend{
   grid-area: staff;
 }
 
-.containerCreatePick {
+.containerCreatePick, .containerOrderReport {
   //margin-top: 35px;
   display: grid;
   grid-template-areas:
@@ -819,7 +819,7 @@ legend{
   grid-gap: 0px;
   padding: 0px;
 }
-
+/*
 .containerOrderReport {
   //margin-top: 35px;
   display: grid;
@@ -835,7 +835,7 @@ legend{
   margin-right: 50px;
   padding: 0px;
 }
-
+*/
 .containerCreateCustomer > div {
   /*background-color: rgba(255, 255, 255, 0.8);*/
 }
