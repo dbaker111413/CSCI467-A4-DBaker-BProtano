@@ -259,6 +259,18 @@
   background-repeat: no-repeat;
   //background-size: 5%;
   background-size: 9.5em 6.5em;
+  background-position: left top;
+  padding: 25px 10px;
+}
+
+.reportBodyOrder {
+  //overflow: scroll;
+  //background-color: #515151;
+  //background-color: #000000;
+  background-image: url("http://students.cs.niu.edu/~z1772315/CSCI467-A4-DBaker-BProtano/logo_bw.png");
+  background-repeat: no-repeat;
+  //background-size: 5%;
+  background-size: 9.5em 6.5em;
   background-position: left 6em;
   padding: 25px 10px;
 }
