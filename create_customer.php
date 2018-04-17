@@ -6,9 +6,19 @@
   require_once ("customer.php");
   require_once ("globalFunctions.php");
 
+  $ILDefaultBill = "selected";
+  $ILDefaultShip = "selected";
+
   // handles a post request to create an item when the submit button is clicked in customer.html
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    if(isset($_POST['billState'])){
+      $ILDefaultBill = "";
+    }
+
+    if(isset($_POST['shipState'])){
+      $ILDefaultShip = "";
+    }
     // if 'which' is '0', that means the user does not want to create the customer
     if (isset($_POST['which']) && $_POST['which'] == '0') {
         //exit;
