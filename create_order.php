@@ -108,10 +108,10 @@
                 ".$itemDesc."<option>-- Search by Item Description --</option>".$itemDDDMenu."</select></td>
             <td><select id='itemnum".$lineCounter."' name='itemnum".$lineCounter."' onchange='itemNumSelected(".$lineCounter.")'>
                 ".$itemNum."<option>-- Search by Item Number --</option>".$itemDropDownMenu."</select></td>
-	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>$".$price."</label></td>
+	    <td><label id='price".$lineCounter."' name='price".$lineCounter."'>".money_format('$%i',$price)."</label></td>
 	    <td><input type='number' id='qty".$lineCounter."' name='qty".$lineCounter."' ".$focusQty." value='".$qty."' onfocusout='update_total(".$lineCounter.")' step='1' min='0'></td>
 	    <td><label id='uom".$lineCounter."' name='uom".$lineCounter."'>".$uom."</label></td>
-	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>$".round($total, 2)."</label></td>
+	    <td><label id='total".$lineCounter."' name='total".$lineCounter."'>".money_format('$%i',$total)."</label></td>
 	    <td align='center' ><button class='button buttonDelete' type='button' id='delete".$lineCounter."' name='delete".$lineCounter."' onclick='delete_line(".$lineCounter.")'>&#215</button>
                 <input type='hidden' name='hDelete".$lineCounter."' id='hDelete".$lineCounter."' value='".$deleteValue."'></td> 
           <input type='hidden' name='itemSelected".$lineCounter."' id='itemSelected".$lineCounter."' value='0'>

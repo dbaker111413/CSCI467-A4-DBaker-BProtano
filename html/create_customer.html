@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+ 
+<style>
+.detButton {
+  padding: 2px 16px;
+  font-family: Helvetica, sans-serif;
+  background-color: white;
+  border: none;
+  color: black;
+  //padding 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 0px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.buttonDetail:hover {
+ background-color: #66c2ff;
+ color: white;
+}
+
+.buttonDetail {
+ background-color: white;
+ color: black;
+ border: 2px solid #008CBA;
+ font-size: 18px;
+ font-weight: 400;
+ margin-right: 9px;
+ float: right;
+}
+
+.buttonCancel {
+ background-color: white;
+ font-size: 18px;
+ font-weight: 300;
+ color: black;
+ border: 2px solid #595959;
+ //border: 2px solid silver;
+ margin-left: 9px;
+}
+
+.buttonCancel:hover {
+ background-color: #F44336;
+ border: 2px solid red;
+ color: white;
+}
+
+</style>
+
+
   <body>
     <!-- container object for css and customer info box-->
      
@@ -272,7 +323,8 @@
 
       <!-- cancel box -->
       <div class="cancelBox">
-	<button class="button buttonReset" type="reset" onclick="return confirm_reset();">Cancel</button>
+        <a class="detButton buttonCancel" href="create_customer.php" onclick="return confirm_reset();">Cancel</a>
+	<!--	<button class="button buttonReset" type="reset" onclick="return confirm_reset();">Cancel</button> -->
       </div>
 	  
       <!-- submit box -->
