@@ -266,7 +266,7 @@ table th {
     echo '</td>';
 
     echo '<td align="center">';
-    echo (round($row['price'],2));
+    echo money_format('$%i',$row['price']);
     echo '</td>';
 
     echo '<td align="center">';
@@ -274,7 +274,7 @@ table th {
     echo '</td>';
 
     echo '<td align="center">';
-    echo (round($row['line_qty'] * $row['price'],2));
+    echo money_format('$%i',($row['line_qty'] * $row['price']));
     echo '</td>';
 
     $total += $row['line_qty'] * $row['price'];
@@ -283,6 +283,7 @@ table th {
   } 
     $shipHand = (round($total * .1,2)); 
     $gTotal = (round($total + $shipHand,2));
+    $subTotal = $gTotal - $shipHand
   ?>
   </tbody>
   </table>
@@ -290,12 +291,15 @@ table th {
   <div class="reportTotBox">
   <fieldset name="reportTotGroup">
   <legend>Order Totals:</legend>
-  
+ 
+  <label for="reportShipCost">Subtotal: </label>
+  <span name="reportShipCost"><?php echo money_format('$%i',$subTotal) ?></span><br><br>
+
   <label for="reportShipCost">Shipping and Handling: </label>
-  <span name="reportShipCost"><?php echo "$".$shipHand; ?></span><br><br>
+  <span name="reportShipCost"><?php echo money_format('$%i',$shipHand) ?></span><br><br>
 
   <label for="reportGrandTot">Grand Total: </label>
-  <span name="reportGrandTot"><?php echo "$".$gTotal; ?></span>
+  <span name="reportGrandTot"><?php echo money_format('$%i',$gTotal) ?></span>
 
   </fieldset>
   </div>
