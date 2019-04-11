@@ -1,4 +1,4 @@
 # Daniel Baker + Bradley Protano
-# CSCI 467
-# Spring 2018
-# Assignment 4
+# The Yin and Yang (of Toyota Corollas)
+# Demo System
+# Uses: PHP, HTML, CSS, JAVASCRIPT
